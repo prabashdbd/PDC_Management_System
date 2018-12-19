@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use View;
 use App\batch_detail;
+use App\student;
 
 class StudentController extends Controller
 {
@@ -40,7 +42,41 @@ class StudentController extends Controller
 
     public function add_single(Request $request)
     {
-       return $request;     
+        $student = new student;
+        $student->student_initials=$request->student_initials;
+        $student->student_lastname=$request->student_lastname;
+        $student->index_num=$request->index_num;
+        $student->reg_num=$request->reg_num;
+        $student->nic_no=$request->nic_num;
+        $student->email=$request->email;
+        $student->batch_id=$request->batch_id;
+        $student->username=$request->reg_num;
+        $student->password=Hash::make($request['nic_num']);
+        //$request->Hash::make($student['nic_num']);
+
+
+        $student->save();
+
+        // return $student;
+        // return $request;
         
     }
+
+
+    // public function add_Single(array $request)
+    // {
+        
+
+    //     return student::create([
+    //         'student_initials' => $request['student_initials'],
+    //         'student_lastname' => $request['student_lastname'],
+    //         'index_num' => $request['index_num'],
+    //         'reg_num' => $request['reg_num'],
+    //         'nic_no' => $request['nic_num'],
+    //         'email' => $request['email'],
+    //         'batch_id' => $request['batch_id'],
+    //         'username' => $request['reg_num'],
+    //         'password' => Hash::make($request['nic_num']),
+    //     ]);
+    // }
 }

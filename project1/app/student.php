@@ -4,10 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Foundation\Auth\student as Authenticatable; 
+use Illuminate\Contracts\Auth\MustVerifyEmail; 
 
-class student extends Authenticatable
+
+class student extends Model
 {
     //
     use Notifiable;
@@ -17,7 +17,7 @@ class student extends Authenticatable
      *
      * @var array
      */
-    protected table = 'students';
+    protected $table = 'students';
     protected $fillable = [
     	
         'batch_id',

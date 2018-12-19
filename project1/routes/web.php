@@ -67,7 +67,7 @@ Route::POST('/students/add/addByList', 'StudentController@add_by_list');
 Route::POST('/students/add/addSingle', 'StudentController@add_single');
 // Route::view('/form777',"student/student_add");
 Route::get('/students/add','StudentController@index_add');
-// Route::get('/students/view','StudentController@index_view');
+Route::get('/students/view','StudentController@index_view');
 Route::view('/form999', "Messaging/msg_cmp");
 Route::view('/form1111', "Messaging/msg_stu");
 Route::view('/form3333', "Messaging/msg_out");

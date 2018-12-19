@@ -15,7 +15,8 @@
                 <th>Address</th>
                 <th>Est. Date</th>
                 <th>Website</th>
-                <th>Technologies</th>
+                <th>Placement Areas</th>
+                <th>Number of Vacancies</th>
                 <th>Actions</th>
                 
             </tr>
@@ -27,6 +28,7 @@
                 <td>Address1</td>
                 <td>Est. Date1</td>
                 <td>Website1</td>
+                <td>1</td>
                 <td>AAA,BBB,CCC</td>
                 {{-- <td>$86,000</td> --}}
                 <td><button class="btn btn-primary btn-sm" data-toggle="modal" href="#myModal">View</button>
@@ -41,40 +43,84 @@
 
   <div class="container">
     
-  <!-- Modal -->
+  <!-- Modals -->
   <div class="modal fade bd-example-modal-lg" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+        <div class="modal-header">          
+          <h4 class="modal-title"><span>Company Name</span></h4>
         </div>
         <div class="modal-body">
-          {{-- <p>Some text in the modal.</p> --}}
-          <center>
-            <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
-            <h3 class="media-heading">Joe Sixpack <small>USA</small></h3>
-            <span><strong>Skills: </strong></span>
-              <span class="label label-warning">HTML5/CSS</span>
-              <span class="label label-info">Adobe CS 5.5</span>
-              <span class="label label-info">Microsoft Office</span>
-              <span class="label label-success">Windows XP, Vista, 7</span>
-          </center>
-          <hr>
-          <center>
-          <p class="text-left"><strong>Bio: </strong><br>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, tempor sit amet commodo a, vulputate vel tellus.</p>
-          <br>
-          </center>
+          <div class="row">
+            <div class="col-md-4">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                  <center><h5>Contact details</h5></center>
+                </div>
+                <div class="panel-body">
+                  <label>Name</label><br>
+                  <label>Email</label><br>
+                  <label>Tel (Land)</label><br>
+                  <label>Tel (Mobile)</label><br>
+
+
+
+                </div> 
+              </div>
+
+
+            </div>
+            <div class="col-md-8">
+              <div class="panel panel-info">
+                <div class="panel-heading">
+                    <center><h5>Company details</h5></center>
+                </div>
+                <div class="panel-body">
+                    <label>Parent Organization</label><br>
+                    <label>Address</label><br>
+                    <label>Website</label><br>
+                    <label>Placement Areas</label><br>
+                    <label>Available Vanancies</label>
+
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
         
         <div class="modal-footer">
+          <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" href="#myModal1">See Adverts</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
+    </div>
+  </div>
+
+
+  <div class="modal fade bd-example-modal-lg" id="myModal1" role="dialog">
+    <div class="modal-dialog modal-lg">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+            <h4 class="modal-title"><span>Adverts from Company Name</span></h4>
+        </div>
+        <div class="modal-body">
+
+
+          {{-- <body> --}}
+
+        </div>
+        <div class="modal-footer">            
+            <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" href="#myModal">Close</button>
+          </div>
+      </div>
+
     </div>
   </div>
   

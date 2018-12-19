@@ -147,7 +147,7 @@
 	       	   	</div>
 	       	   	<div class="col-md-6">	       	   		
 	    			<label>Select Group </label>
-			       	<select name="group_id" id="group_id" class="form-control" style="width: 200px;">
+			       	<select name="batch_id" id="batch_id" class="form-control" style="width: 200px;">
 		 				@foreach($batch as $data)
 		 					<option value="{{$data->batch_id}}" >{{$data->batch_name}}</option>
 		 				@endforeach                                
