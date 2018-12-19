@@ -35,5 +35,14 @@ class student extends Model
         'password','remember_token',
     ];	
 
+    public function batch_detail()
+	{
+        return $this->belongsTo('App\batch_detail','batch_id','batch_id');
+        
+    }
+    
+    
+
+
 
 }

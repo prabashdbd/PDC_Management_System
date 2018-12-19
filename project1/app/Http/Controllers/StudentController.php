@@ -15,12 +15,15 @@ class StudentController extends Controller
     public function index_add(Request $request)
     {
         $batch = batch_detail::all();
-        return view('student.student_add',compact('batch'));
+        $stu = student::all();        
+        return view('student.student_add',compact('batch','stu'));
     }
     public function index_view(Request $request)
     {
         
-        return view('student.student_view');
+        $stu = student::all();        
+        return view('student.student_view',compact('stu'));
+        
     }
 
 

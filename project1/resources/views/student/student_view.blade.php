@@ -14,10 +14,11 @@
   <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Initials</th>
+                <th>Last Name</th>
                 <th>Email</th>
                 <th>Index Number</th>
-                <th>Registration Number</th>
+                <th>Reg: Number</th>
                 <th>Batch</th>
                 <th>Actions</th>
                 
@@ -26,16 +27,21 @@
         <tbody>
             
             <tr>
-                <td>Name1</td>
-                <td>Email1</td>
-                <td>Index Number1</td>
-                <td>Registration Number1</td>
-                <td>Batch1</td>
-                
+              @foreach($stu as $student)
+                <td>{{$student->student_initials}}</td>
+                <td>{{$student->student_lastname}}</td>
+                <td>{{$student->email}}</td>
+                <td>{{$student->index_num}}</td>
+                <td>{{$student->reg_num}}</td>
+                <td>{{$student->batch_detail->batch_name}}</td>
+
+
+
                 <td><button class="btn btn-primary btn-sm" data-toggle="modal" href="#myModal">View</button>
                 <button class="btn btn-info btn-sm" data-toggle="modal" href="#myModal">Edit</button>
                 <button class="btn btn-danger btn-sm" data-toggle="modal" href="#myModal">Delete</button></td>
-            </tr>
+              </tr>
+              @endforeach
             
           </tbody>
             

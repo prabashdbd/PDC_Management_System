@@ -14,5 +14,9 @@ class batch_detail extends Model
     	'intern_period_start',
     	'intern_period_end',
 
-    ];
+	];
+	public function student()
+	{
+		return $this->hasMany('App\student','batch_id','batch_id');
+	}
 }
