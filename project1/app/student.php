@@ -25,7 +25,8 @@ class student extends Model
     	'username',    	
     	'reg_num',
     	'index_num',
-    	'student_initials',
+        'student_initials',
+        'name_initials',
         'student_surname',
         'nic_no',
     	'email',
@@ -40,9 +41,9 @@ class student extends Model
         return $this->belongsTo('App\batch_detail','batch_id','batch_id');
         
     }
-    
-    
-
-
-
+    public function getName()
+    {
+        
+        return "{$this->student_initials} {$this->student_lastname}";
+    }
 }

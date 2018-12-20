@@ -37,31 +37,31 @@
 
 
 
-                <td><button class="btn btn-primary btn-sm" data-toggle="modal" href="#myModal">View</button>
-                <button class="btn btn-info btn-sm" data-toggle="modal" href="#myModal">Edit</button>
-                <button class="btn btn-danger btn-sm" data-toggle="modal" href="#myModal">Delete</button></td>
+                <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#{{$student->student_id}}">View</button>
+                <button class="btn btn-info btn-sm" data-toggle="modal">Edit</button>
+                <button class="btn btn-danger btn-sm" data-toggle="modal">Delete</button></td>
               </tr>
               @endforeach
             
           </tbody>
-            
-            
-            
+          <tfoot>   
         </tfoot>
     </table>
+	</div>
 
 
   <div class="container">
     
   <!-- Modal -->
-  <div class="modal fade bd-example-modal-lg" id="myModal" role="dialog">
+  @foreach($stu as $student)
+  <div class="modal fade bd-example-modal-lg" id="{{$student->student_id}}" aria-labelledby="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Modal Header</h4>
+          <h4 class="modal-title">{{$student->student_initials.' '.$student->student_lastname}}</h4>
         </div>
         <div class="modal-body">
           {{-- <p>Some text in the modal.</p> --}}
@@ -81,7 +81,7 @@
           <br>
           </center>
         </div>
-        </div>
+        
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
@@ -89,6 +89,7 @@
       
     </div>
   </div>
+  @endforeach
   
   </div>
 

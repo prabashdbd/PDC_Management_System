@@ -3,10 +3,22 @@
 @section('styles')
     <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
      
-    {{-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}
+	{{-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}
+	<style>
+	.inputfile
+	 {
+		width: 0.1px;
+		height: 0.1px;
+		opacity: 0;
+		overflow: hidden;
+		position: absolute;
+		z-index: -1;
+	}
+	</style>
     
 @endsection
 @section('content')
+	@include('layouts.success')
   <div class="container-fluid">
   <h3>Add Students</h3>
   <ul class="nav nav-tabs">

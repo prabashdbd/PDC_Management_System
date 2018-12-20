@@ -31,9 +31,10 @@ class StudentController extends Controller
     {
         // $batch = new batch_detail;
         batch_detail::create($request->all());
+        return redirect()->back()->with(['success'=>'Student group added successfully']);
 
 
-        return $request;
+        
     }
 
     public function add_by_list(Request $request)
@@ -55,10 +56,8 @@ class StudentController extends Controller
         $student->batch_id=$request->batch_id;
         $student->username=$request->reg_num;
         $student->password=Hash::make($request['nic_num']);
-        //$request->Hash::make($student['nic_num']);
-
-
         $student->save();
+        return redirect()->back()->with(['success'=>'Student record added successfully']);
 
         // return $student;
         // return $request;
