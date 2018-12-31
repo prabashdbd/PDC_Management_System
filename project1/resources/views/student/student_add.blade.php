@@ -78,7 +78,7 @@
 	       <div class="panel-heading">Add students by a list<small style="color: white">&nbsp(Name, Reg: NO, Index NO, Email, NIC)</small>
 		   </div>
 	       <div class="panel-body">
-	       	<form >
+	       	<form method="POST" id="addbylist" action="{{ URL::to('/students/add/addByList')}}">
 	       		{{csrf_field()}}
 	       	  <div class="form-inline">
 	       	   <label>Select Group&nbsp </label>
@@ -91,8 +91,8 @@
                </div><br>
 
                <div class="form-inline">
-               	<label>Choose file</label>
-               	<input type="file" class="form-control-file" id="group_id"><br>
+               	<label for="upload-file">Choose file</label>
+               	<input type="file" class="form-control-file" name="upload-file"><br>
                	
                </div>
                <br><br>
@@ -100,7 +100,7 @@
 	       	   <div align="right">
 
 	       	   	<button name="btn_cancel" id="btn_cancel" class="btn btn-warning btn-sm">Abort</button>
-	       	   	<button name="btn_Upload" id="btn_Upload" class="btn btn-success btn-sm">Upload</button>
+	       	   	<button type="submit "btn_Upload" id="btn_Upload" class="btn btn-success btn-sm">Upload</button>
 
 	       	   </div>
        	</form>

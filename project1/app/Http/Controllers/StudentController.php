@@ -42,6 +42,12 @@ class StudentController extends Controller
     public function add_by_list(Request $request)
     {
 
+        $upload = $request->file('upload-file');
+        $filePath = $upload->getRealPath();
+        $file = fopen($filePath,'r');
+        $header = fgetcsv($file);
+        dd($header);
+
         return $request;
     }
 
