@@ -48,7 +48,7 @@
             </li>
             
             <li class="btn btn-primary">
-              <a class="nav-link" href="{{ route('login') }}"><p style="color: white">Login</p></a>
+              <a class="nav-link" href="{{ route('login') }}">Login</a>
             </li>
             
           </ul>
@@ -72,7 +72,7 @@
               <div class="carousel-caption text-left">
                 <h1>Professional Development Center.</h1>
                 <p style="font-style: italic;">The Professional Development Centre (PDC) is one of the centers at UCSC, established to ensure the quality of career competencies of UCSC undergraduates by enhancing professional skills, morality, ethical awareness and ethical behaviour</p>
-                <p><a class="btn btn-lg btn-primary" href="{{url('/form_test1')}}" role="button">Register today</a></p>
+                <p><a class="btn btn-lg btn-primary" href="{{url('/form_test1')}}" role="button">Register Now</a></p>
               </div>
             </div>
           </div>

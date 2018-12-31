@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Hash;
 use View;
 use App\batch_detail;
 use App\student;
+use Illuminate\Support\Facades\DB;
+use Session;
 
 class StudentController extends Controller
 {
@@ -49,6 +51,7 @@ class StudentController extends Controller
         $student = new student;
         $student->student_initials=$request->student_initials;
         $student->student_lastname=$request->student_lastname;
+        $student->name_initials=$request->name_initials;
         $student->index_num=$request->index_num;
         $student->reg_num=$request->reg_num;
         $student->nic_no=$request->nic_num;
@@ -81,4 +84,29 @@ class StudentController extends Controller
     //         'password' => Hash::make($request['nic_num']),
     //     ]);
     // }
+
+    public function readStudent(){
+        $id = $_GET['id'];
+        
+        $student = DB::table('students')
+        ->select('students.*')
+        ->where('student_id','=',$id)
+        ->get();       
+        
+        return response($student);
+    }
+
+    public function studentUpdate(Request $request){
+
+        if($request->ajax() && $student = student::find($request->id)){ 
+            
+            return $request;
+            //$student->update();
+
+                    /* for success message*/
+            // Session::flash('success', 'Vehicle Service Updated successfully !');
+            // return View::make('layouts/success');
+        }
+
+    }
 }

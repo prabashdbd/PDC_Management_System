@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" type="text/css" href="/bower_components/Ionicons/css/ionicons.min.css">
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Theme style -->
   <link rel="stylesheet"  type="text/css" href="/dist/css/AdminLTE.min.css">
@@ -256,13 +257,13 @@ desired effect
 
       <!-- search form (Optional) -->
       <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
+        {{-- <div class="input-group">
           <input type="text" name="q" class="form-control" placeholder="Search...">
           <span class="input-group-btn">
               <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
               </button>
             </span>
-        </div>
+        </div> --}}
       </form>
       <!-- /.search form -->
 

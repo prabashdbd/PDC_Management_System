@@ -70,7 +70,9 @@ Route::get('/students/add','StudentController@index_add');
 Route::get('/students/view','StudentController@index_view');
 Route::view('/form999', "Messaging/msg_cmp");
 Route::view('/form1111', "Messaging/msg_stu");
-Route::view('/form3333', "Messaging/msg_out");
+Route::view('/form3333', "Messaging/msg_out"); 
+Route::get('/student/readStudent/{id}', "StudentController@readStudent");
+Route::post('/student/add/update', 'StudentController@studentUpdate');
 
 
 // Route::get('/', function(){

@@ -45,7 +45,7 @@
        	   
 
        	   <div class="form-group">
-       	   	<label>Intership Period</label>
+       	   	<label>Internship Period</label>
        	   	<br>
     		<div class="form-inline">
     			<label><p style="font-style: italic;: "> &nbspFrom: </p></label>
@@ -75,7 +75,7 @@
     <div id="menu2" class="tab-pane fade">
       <div id="menu1" class="tab-pane fade in active">
 	    <div class="panel panel-primary col-sm-8">
-	       <div class="panel-heading">Add students by a list<small style="color: white">&nbsp(Name, Reg: NO, Index NO, Email)</small>
+	       <div class="panel-heading">Add students by a list<small style="color: white">&nbsp(Name, Reg: NO, Index NO, Email, NIC)</small>
 		   </div>
 	       <div class="panel-body">
 	       	<form >
@@ -127,8 +127,16 @@
     		<div class="col-md-8">
 	    		<label>Lastname </label>
 	    		<input type="text" name="student_lastname" class="form-control" id="student_lastname">
-       	   </div>
-       	</div>
+       	   	</div>
+			</div>
+			
+			<div class="form-group">
+				<label>Name denoted by initials </label>
+				<input type="text" name="name_initials" class="form-control" id="name_initials">
+
+
+			</div>
+			  
 
        	   <div class="form-group">
 	       	   <div class="row">
@@ -194,6 +202,7 @@
     </div>
   </div>
 </div>
+
 
 @endsection
 
