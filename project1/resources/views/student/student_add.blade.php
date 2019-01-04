@@ -1,9 +1,9 @@
 @extends('layouts.adminlte')
 
 @section('styles')
-    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
-     
-	{{-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 	<style>
 	.inputfile
 	 {
@@ -75,14 +75,15 @@
     <div id="menu2" class="tab-pane fade">
       <div id="menu1" class="tab-pane fade in active">
 	    <div class="panel panel-primary col-sm-8">
-	       <div class="panel-heading">Add students by a list<small style="color: white">&nbsp(Name, Reg: NO, Index NO, Email, NIC)</small>
+	       <div class="panel-heading">Add students by a list<small style="color: white">&nbsp(Reg: NO, Index NO, Initials, Name by initials, Lastname, NIC, Email)</small>
 		   </div>
 	       <div class="panel-body">
-	       	<form method="POST" id="addbylist" action="{{ URL::to('/students/add/addByList')}}">
-	       		{{csrf_field()}}
+	       	<form method="POST" id="addbylist" enctype="multipart/form-data" action="{{URL::to('/students/add/addByList')}}">
+				   {{csrf_field()}}
+				   
 	       	  <div class="form-inline">
 	       	   <label>Select Group&nbsp </label>
-	       	   <select name="group_id" id="group_id" class="form-control" style="width: 200px;">
+	       	   <select name="batch_id" id="group_id" class="form-control" style="width: 200px;">
 		 				@foreach($batch as $data)
 		 					<option value="{{$data->batch_id}}" >{{$data->batch_name}}</option>
 		 				@endforeach                                
@@ -99,8 +100,10 @@
 
 	       	   <div align="right">
 
-	       	   	<button name="btn_cancel" id="btn_cancel" class="btn btn-warning btn-sm">Abort</button>
-	       	   	<button type="submit "btn_Upload" id="btn_Upload" class="btn btn-success btn-sm">Upload</button>
+					<button type="reset" name="btn_cancel" id="btn_cancel" class="btn btn-warning btn-sm">Abort</button>
+					<button type="button" name="btn_proceed" id="btn_proceed" class="btn btn-primary btn-sm">Proceed</button>
+					<button type="submit" name="btn_upload" id="btn_upload" class="btn btn-success btn-sm">Upload</button>
+	       	   		
 
 	       	   </div>
        	</form>
@@ -190,29 +193,91 @@
 
 
        	</form>
-
-
-
-
-
-
        </div>
-   </div>
+    </div>
       
     </div>
+  </div>
   </div>
 </div>
 
 
+<div class="container">
+    
+		<!-- Modal -->
+		
+	<div class="modal fade bd-example-modal-lg" id="csv-modal" aria-labelledby="csvModal" role="dialog">
+		<div class="modal-dialog modal-lg">
+		
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>test</h4>
+			</div>
+			<div class="modal-body">
+				
+				<div style="overflow: auto">
+					<form>
+
+					<table id="csv-table" class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Reg No</th>
+								<th>Index No</th>
+								<th>Initials</th>
+								<th>Names</th>
+								<th>NIC No</th>
+								<th>Email</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							
+
+
+
+						</tbody>
+					</table>
+					</form>
+				</div>
+				
+			
+			</div>
+			
+			<div class="modal-footer">
+			
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<button type="submit" name="btn_upload" id="btn_upload" class="btn btn-success btn-sm">Upload</button>
+			</div>
+		</div>
+		
+		</div>
+	</div>
+</div>
 @endsection
 
 @section('script')
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script>
+	$(document).ready(function() {
+	$('#csv-table').DataTable();
+	});
+</script>
 <script>
 $(document).ready(function(){
+	$.noConflict();
     $(".nav-tabs a").click(function(){
         $(this).tab('show');
     });
+
+
+	$("#btn_proceed").click(function(){        
+		$('#csv-modal').modal('show');
+    });
 });
+
 </script>
 
 @endsection

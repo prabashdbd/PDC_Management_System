@@ -10,6 +10,7 @@ use App\batch_detail;
 use App\student;
 use Illuminate\Support\Facades\DB;
 use Session;
+use Excel;
 
 class StudentController extends Controller
 {
@@ -41,14 +42,28 @@ class StudentController extends Controller
 
     public function add_by_list(Request $request)
     {
-
+        
         $upload = $request->file('upload-file');
+        $batch = $request->batch_id;
         $filePath = $upload->getRealPath();
         $file = fopen($filePath,'r');
-        $header = fgetcsv($file);
-        dd($header);
-
-        return $request;
+        while(! feof($file)){
+            $fields = fgetcsv($file);
+            $student = new student;
+            $student->reg_num=$fields[0];
+            $student->index_num=$fields[1];
+            $student->student_initials=$fields[2];
+            $student->name_initials=$fields[3];
+            $student->student_lastname=$fields[4];
+            $student->nic_no=$fields[5];
+            $student->email=$fields[6];
+            $student->username=$fields[0];
+            $student->password=Hash::make($fields[5]);
+            $student->batch_id=$batch;
+            $student->save();
+        }
+        return redirect()->back()->with(['success'=>'Student list added successfully']);
+        
     }
 
 
