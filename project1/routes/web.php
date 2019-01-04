@@ -75,6 +75,9 @@ Route::get('/student/readStudent/{id}', "StudentController@readStudent");
 Route::post('/student/add/update', 'StudentController@studentUpdate');
 
 
+Route::view('/test3', "test3");
+
+
 // Route::get('/', function(){
 // $user = Auth::user();
 
