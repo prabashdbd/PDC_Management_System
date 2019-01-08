@@ -38,8 +38,9 @@
 
 
 
-                <td><button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#{{$student->student_id}}">View</button>
-                <button class="btn btn-info btn-sm" id="edit"data-toggle="modal" data-id="{{$student->student_id}}">Edit</button>
+                <td>
+                <button class="btn btn-primary btn-sm" id ="view" data-toggle="modal" data-id="{{$student->student_id}}">View</button>
+                <button class="btn btn-info btn-sm" id="edit" data-toggle="modal" data-id="{{$student->student_id}}">Edit</button>
                 <button class="btn btn-danger btn-sm" data-toggle="modal">Delete</button></td>
               </tr>
               @endforeach
@@ -55,14 +56,13 @@
     
   <!-- Modal -->
   @foreach($stu as $student)
-  <div class="modal fade bd-example-modal-lg" id="{{$student->student_id}}" aria-labelledby="myModal" role="dialog">
+  <div class="modal fade bd-example-modal-lg" id="view-modal" aria-labelledby="myModal" role="dialog">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">{{$student->student_initials.' '.$student->student_lastname}}</h4>
+            <h3 id="student_name"> Title </h3>
         </div>
         <div class="modal-body">
           {{-- <p>Some text in the modal.</p> --}}
@@ -90,9 +90,9 @@
           <div class="modal-content">
               <div class="modal-header">
                   <h3 id="edit_title"> Title </h3>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  {{-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
-                  </button>
+                  </button> --}}
               </div>
               <div class="modal-body">
 
@@ -174,6 +174,26 @@
 
     $(document).ready(function() {
       $('#example').DataTable();
+    });
+
+    $(document).on('click','#view',function(e){
+        var id = $(this).data('id');
+        $('#student_id').val(id);
+        console.log(id);
+        
+        $.ajax({
+            url: '/student/viewStudent/{id}',
+            type: 'GET',
+            data: { id: id },
+            success: function(data)
+            { 
+
+                $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname);
+
+            }, 
+        });
+        $("#view-modal").modal('show'); 
+
     });
 
     $(document).on('click','#edit',function(e){

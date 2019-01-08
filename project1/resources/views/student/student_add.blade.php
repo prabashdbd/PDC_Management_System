@@ -92,7 +92,7 @@
                </div><br>
 
                <div class="form-inline">
-               	<label for="upload-file">Choose file</label>
+               	<label for="upload-file">Choose a CSV file</label>
                	<input type="file" class="form-control-file" name="upload-file"><br>
                	
                </div>
@@ -226,6 +226,7 @@
 								<th>Index No</th>
 								<th>Initials</th>
 								<th>Names</th>
+								<th>Lastname</th>
 								<th>NIC No</th>
 								<th>Email</th>
 								
