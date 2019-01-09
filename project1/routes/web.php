@@ -74,6 +74,7 @@ Route::view('/form3333', "Messaging/msg_out");
 Route::get('/student/readStudent/{id}', "StudentController@readStudent");
 Route::get('/student/viewStudent/{id}', "StudentController@readStudent");
 Route::post('/student/add/update', 'StudentController@studentUpdate');
+Route::post('/addcv', 'StudentController@addCV');
 
 
 Route::view('/test3', "test3");

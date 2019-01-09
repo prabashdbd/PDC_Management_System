@@ -130,4 +130,18 @@ class StudentController extends Controller
         }
 
     }
+
+
+    public function addCV(Request $request)
+    {
+        $cv_file = $request->file('cv-file');
+        $extension =  '.'.$cv_file->getClientOriginalExtension();
+        $oName = $cvfile->getClientOriginalName();
+        $name = $oName.md5($oName.Carbon::now()).$extension;
+        $path =  $cv_file->move('cv_documents/',$name);
+        $cv_file = new cvDoc;
+        $cv_file->cv_path = $path;
+        $cv_file->cv_name = $oName;
+        $cv_file->save();
+    }
 }

@@ -71,7 +71,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">PDC</span>
       <!-- logo for regular state and mobile devices -->
@@ -353,7 +353,16 @@ desired effect
     
 
     <!-- Main content -->
-    <section class="content container-fluid">      
+    <section class="content container-fluid">
+    <form method="POST" id="addcv" enctype="multipart/form-data" action="{{URL::to('/addcv')}}">
+      {{csrf_field()}}    
+      <div class="form-group">
+          <label for="cv-file">Choose a CSV file</label>          
+          <input type="file" class="form-control-file" name="cv-file"><br>
+          <button type="submit" class="btn btn-success" id="cv_upload" >Upload</button>
+            
+        </div> 
+    </form>    
       @yield('content')
 
 
