@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use View;
 use App\batch_detail;
 use App\student;
+use App\cvDoc;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Session;
 use Excel;
@@ -15,6 +18,7 @@ use Excel;
 class StudentController extends Controller
 {
     //
+    
     public function index_add(Request $request)
     {
         $batch = batch_detail::all();
@@ -109,12 +113,13 @@ class StudentController extends Controller
     public function readStudent(){
         $id = $_GET['id'];
         
-        $student = DB::table('students')
-        ->select('students.*')
-        ->where('student_id','=',$id)
+        $student = DB::table('students')->join('cvdoc', 'students.student_id', '=', 'cvdoc.student_id')
+        ->select('students.*','cvdoc.cv_path')
+        ->where('students.student_id','=',$id)
         ->get();       
         
         return response($student);
+        
     }
 
     public function studentUpdate(Request $request){
@@ -136,12 +141,14 @@ class StudentController extends Controller
     {
         $cv_file = $request->file('cv-file');
         $extension =  '.'.$cv_file->getClientOriginalExtension();
-        $oName = $cvfile->getClientOriginalName();
-        $name = $oName.md5($oName.Carbon::now()).$extension;
-        $path =  $cv_file->move('cv_documents/',$name);
+        $oName = $cv_file->getClientOriginalName();
+        $path =  $cv_file->move('cv_documents/',$oName);
+        $name = $oName.md5($oName.Carbon::now()).$extension;        
         $cv_file = new cvDoc;
         $cv_file->cv_path = $path;
-        $cv_file->cv_name = $oName;
+        $cv_file->cv_name = $name;
         $cv_file->save();
+        
+        return redirect()->back()->with(['success'=>'CV added successfully']);
     }
 }

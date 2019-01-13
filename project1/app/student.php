@@ -46,4 +46,10 @@ class student extends Model
         
         return "{$this->student_initials} {$this->student_lastname}";
     }
+
+    public function cvDoc()
+	{
+        return $this-hasOne('App\cvDoc','student_id');
+        
+    }
 }

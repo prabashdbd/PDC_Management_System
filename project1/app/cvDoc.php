@@ -15,11 +15,21 @@ class cvDoc extends Model
      *
      * @var array
      */
-    protected $table = 'cvDoc';
+    protected $table = 'cvdoc';
     protected $fillable = [
     	
         'cv_name',
         'cv_path',
     ];
+
+
+    
+    
+    
+    public function student()
+	{
+        return $this->belongsTo('App\student','student_id');
+        
+    }
     
 }

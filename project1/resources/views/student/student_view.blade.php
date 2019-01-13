@@ -68,13 +68,14 @@
           {{-- <p>Some text in the modal.</p> --}}
           <center>
             
-          <hr>
+            <iframe src="" id="cv"
+            frameborder="0" width="100%" height="400px"></iframe>
           
           </center>
         </div>
         
         <div class="modal-footer">
-          
+          <button type="button" class="btn btn-primary">Download</button>
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -162,7 +163,8 @@
 @section('script')
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
 
 <script>
@@ -189,9 +191,11 @@
             { 
 
                 $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname);
+                $('#cv').attr("src","/"+data[0].cv_path);               
 
             }, 
         });
+        
         $("#view-modal").modal('show'); 
 
     });
@@ -254,3 +258,4 @@
  </script>
 
 @endsection
+{{-- https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.js --}}
