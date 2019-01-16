@@ -1,0 +1,78 @@
+@extends('layouts.adminlte')
+@section('styles')
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+@endsection
+
+@section('content')
+    <section class="content">
+        <h3>Profile Management</h3>
+        <div>
+            <button class='btn btn-primary'>Edit details</button>
+            <button class='btn btn-primary'>Add CV</button>
+            
+        </div><br>
+        <div class="row">
+            <div class="col-md-3">
+
+                <!-- Profile Image -->
+                <div class="box box-primary">
+                    <div class="box-body box-profile">
+                        <img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture">
+
+                        <h3 class="profile-username text-center"></h3>
+
+                        <p class="text-muted text-center"></p>
+
+                        <ul class="list-group list-group-unbordered">
+                            <li class="list-group-item">
+                                <b>Email</b> <a class="pull-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Mobile Number</b> <a class="pull-right"></a>
+                            </li>
+                            <li class="list-group-item">
+                                <b>Land Line Number</b> <a class="pull-right"></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+            </div>
+            <!-- /.col -->
+            <div class="col-md-6">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#activity" data-toggle="tab">Employee</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="active tab-pane" id="activity">
+                            <!-- Post -->
+                            <div class="post">
+                                <div class="user-block">
+                                    <img class="img-circle img-bordered-sm" src="" alt="user image">
+                                    <span class="username">
+                                        <a href="#"></a>
+                                    </span>
+                                    <span class="description">Joined date - </span>
+                                    <h5>Date Of Birth - </h5>
+                                    <h5>NIC Number - </h5>
+                                    <h5>Gender - </h5>
+                                    <h5>Marital Status - </h5>
+                                    <h5>Address - </h5>
+                                    <h5>Division - </h5>
+                                    <h5>Designation - </h5>
+                                    <h5>Date Of Join - </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+@endsection

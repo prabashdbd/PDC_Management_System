@@ -57,25 +57,24 @@
   <!-- Modal -->
   @foreach($stu as $student)
   <div class="modal fade bd-example-modal-lg" id="view-modal" aria-labelledby="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-            <h3 id="student_name"> Title </h3>
+            <h3 id="student_name">Title</h3>
         </div>
         <div class="modal-body">
           {{-- <p>Some text in the modal.</p> --}}
           <center>
-            
-            <iframe src="" id="cv"
-            frameborder="0" width="100%" height="400px"></iframe>
+            <div id ='cv_frame'>
+                <iframe src="" id="cv" frameborder="0" width="100%" height="400px"></iframe>
+            </div>
           
           </center>
         </div>
         
-        <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Download</button>
+        <div class="modal-footer">          
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -189,9 +188,19 @@
             data: { id: id },
             success: function(data)
             { 
-
-                $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname);
-                $('#cv').attr("src","/"+data[0].cv_path);               
+                
+                if(data[0].cv_path != null){
+                    $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname+" "+" (Curriculum Vitae)");
+                    $('#cv_frame').show();
+                    $('#cv').attr("src","/"+data[0].cv_path);
+                    
+                }
+                else{
+                    $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname+" "+" (Curriculum Vitae)");
+                    $('#cv_frame').hide();
+                    
+                }
+                
 
             }, 
         });
