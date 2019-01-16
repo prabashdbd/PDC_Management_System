@@ -93,30 +93,17 @@ class StudentController extends Controller
     }
 
 
-    // public function add_Single(array $request)
-    // {
-        
-
-    //     return student::create([
-    //         'student_initials' => $request['student_initials'],
-    //         'student_lastname' => $request['student_lastname'],
-    //         'index_num' => $request['index_num'],
-    //         'reg_num' => $request['reg_num'],
-    //         'nic_no' => $request['nic_num'],
-    //         'email' => $request['email'],
-    //         'batch_id' => $request['batch_id'],
-    //         'username' => $request['reg_num'],
-    //         'password' => Hash::make($request['nic_num']),
-    //     ]);
-    // }
+    
 
     public function readStudent(){
         $id = $_GET['id'];
+               
         
-        $student = DB::table('students')->join('cvdoc', 'students.student_id', '=', 'cvdoc.student_id')
+        $student = DB::table('students')
+        ->leftJoin('cvdoc', 'students.student_id', '=', 'cvdoc.student_id')
         ->select('students.*','cvdoc.cv_path')
         ->where('students.student_id','=',$id)
-        ->get();       
+        ->get();
         
         return response($student);
         
@@ -147,8 +134,7 @@ class StudentController extends Controller
         $cv_file = new cvDoc;
         $cv_file->cv_path = $path;
         $cv_file->cv_name = $name;
-        $cv_file->save();
-        
+        $cv_file->save();        
         return redirect()->back()->with(['success'=>'CV added successfully']);
     }
 }
