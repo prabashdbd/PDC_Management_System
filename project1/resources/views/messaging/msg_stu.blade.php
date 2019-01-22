@@ -1,9 +1,9 @@
 @extends('layouts.adminlte')
 
-@section('styles3')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  
+@section('styles3')      
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.css" />
   	<link href='https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
@@ -18,15 +18,23 @@
   <div class="panel panel-primary col-sm-8">
   	<div class="panel-body">
   		<form>
-  			<div class="form-inline">
+			{{csrf_field()}}
+  			<div class="form-group">
        	   	<label>Recipient</label><br>
-    		<select class="selectpicker form-control" id="p1" multiple data-live-search="true">
-			    <option>Select All...</option>
-			    <option value="Bootstrap">Comapny 1</option>
-			    <option value="HTML">Comapny 2</option>
-			    <option value="CSS">Comapny 3</option>
-			    <option value="angular">Comapny 4</option>
+    		<select class="selectpicker form-control dynamic" name="batch_id" id="batch_id" data-live-search="true" data-dependent="student">
+				<option  value="">Select Batch</option>
+				@foreach($batch as $data)					
+					<option value="{{$data->batch_id}}" >{{$data->batch_name}}</option>
+				@endforeach
 			</select>
+			</div><br>
+			  
+			<div class="form-group">
+			<select class="selectpicker form-control" name="student_list" id="student_list" multiple data-live-search="true" data-none-selected-text="Select Recipient">
+			   
+			</select>
+			
+			
        	   </div><br>
        	   <div class="panel panel-default">
        	   	<div class="panel-body">
@@ -57,12 +65,38 @@
 <script>
   $(function() {
     $('textarea#message').froalaEditor({
-
     height: 150
-    
-
     })
     
+  });
+  $('.dynamic').change(function(){
+	$.noConflict();
+	if($(this).val() !='')	{
+		
+		var value = $(this).val();
+		var dependent = $(this).data('dependent');
+		var _token = $('input[name="_token"]').val();
+		$.ajax({
+			url:"{{route('messageController.fetch')}}",
+			method:"POST",
+			data:{value:value,_token:_token,
+			dependent:dependent},
+			success:function(data)
+			{
+				console.log(data);
+				$('#student_list').html(data);
+				$('#student_list').selectpicker('refresh')
+				
+			}
+
+
+		})
+
+	}
+
+
+
+
   });
 </script>
 @endsection    

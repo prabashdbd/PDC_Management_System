@@ -300,9 +300,9 @@ desired effect
                   </span>
                </a>
               <ul class="treeview-menu">
-                <li><a href="{{url('/form999')}}">Company</a></li>
-                <li><a href="{{url('/form1111')}}">Student</a></li>
-                <li><a href="{{url('form3333')}}">Outsider</a></li>           
+                <li><a href="{{url('/message/company')}}">Company</a></li>
+                <li><a href="{{url('/message/student')}}">Student</a></li>
+                <li><a href="{{url('message/outsider')}}">Outsider</a></li>           
               </ul>
             </li>
             <li class="treeview">
@@ -341,15 +341,7 @@ desired effect
 
     <!-- Main content -->
     <section class="content container-fluid">
-    <form method="POST" id="addcv" enctype="multipart/form-data" action="{{URL::to('/addcv')}}">
-      {{csrf_field()}}    
-      <div class="form-group">
-          <label for="cv-file">Choose a CSV file</label>          
-          <input type="file" class="form-control-file" name="cv-file"><br>
-          <button type="submit" class="btn btn-success" id="cv_upload" >Upload</button>
-            
-        </div> 
-    </form>    
+        
       @yield('content')
 
 
