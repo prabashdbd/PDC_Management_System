@@ -53,7 +53,7 @@ class messageController extends Controller
         }
 
         echo $output;
-        
+        // <option value="ALL" id="target">Select All</option>
         
 
     }

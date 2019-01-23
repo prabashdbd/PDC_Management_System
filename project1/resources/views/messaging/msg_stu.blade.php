@@ -18,25 +18,29 @@
 
   <div class="panel panel-primary col-sm-8">
   	<div class="panel-body">
-  		<form>
+  		<form method="POST" id="student_message">
 			{{csrf_field()}}
   			<div class="form-group">
        	   	<label>Recipient</label><br>
-    		<select class="selectpicker form-control dynamic" name="batch_id" id="batch_id" data-live-search="true" data-dependent="student">
-				<option  value="">Select Batch</option>
+    		<select class="selectpicker form-control dynamic" name="batch_id" id="batch_id" data-live-search="true" data-dependent="student" title='Select Batch'>
+				
 				@foreach($batch as $data)					
 					<option value="{{$data->batch_id}}" >{{$data->batch_name}}</option>
 				@endforeach
 			</select>
 			</div><br>
 			  
-			<div class="form-group">
-			<select class="selectpicker form-control" name="student_list" id="student_list" multiple data-live-search="true" data-none-selected-text="Select Recipient">
-			   
-			</select>
-			
-			
-       	   </div><br>
+			<div class="row">
+				<div class="form-group col-md-10">
+					<select class="selectpicker form-control" name="student_list" id="student_list" multiple data-live-search="true" data-selected-text-format="count" title="Select Recipient">
+						
+					</select>			
+				</div><div class="col-md-2">
+					<button type="button" id="select_all" class="btn btn-primary">Select All</button>
+					<button type="button" id="deselect_all" class="btn btn-primary" style="display: none";>Clear All</button>
+				</div>
+			</div>
+			  <br>
        	   <div class="panel panel-default">
        	   	<div class="panel-body">
        	   		<form>
@@ -70,9 +74,27 @@
 	
     $('textarea#message').froalaEditor({
     height: 150
-    })
+    });
     
   });
+  
+//   $(function() {  
+//  	$('.selectpicker').selectpicker('selectAll');
+//   });
+	// select_all
+	$("#select_all").click(function(){        
+		$('#student_list').selectpicker('selectAll');
+		$('#select_all').hide();		
+		$('#deselect_all').show();
+    });
+	$("#deselect_all").click(function(){        
+		$('#student_list').selectpicker('deselectAll');
+		$('#deselect_all').hide();		
+		$('#select_all').show();
+    });
+
+
+
   $('.dynamic').change(function(){
 	
 	if($(this).val() !='')	{
@@ -90,12 +112,12 @@
 				console.log(data);
 				$('#student_list').html(data);
 				$('#student_list').selectpicker('refresh');
-				
-				
 			}
-		})
+		});
 
 	}
-  });
+  });  
+  
+
 </script>
 @endsection    

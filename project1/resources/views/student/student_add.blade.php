@@ -277,6 +277,7 @@ $(document).ready(function(){
 	$("#btn_proceed").click(function(){        
 		$('#csv-modal').modal('show');
     });
+	
 });
 
 </script>
