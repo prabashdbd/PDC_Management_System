@@ -1,13 +1,14 @@
 @extends('layouts.adminlte')
 
-@section('styles3')      
+@section('styles')      
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+	
 
+	<link href='https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
+	<link href='https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_style.min.css' rel='stylesheet' type='text/css' />
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.css" />
-  	<link href='https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
-	<link href='https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_style.min.css' rel='stylesheet' type='text/css' />
+  	
 
 @endsection
 
@@ -61,16 +62,19 @@
 
 @endsection
 @section('script')
-<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.min.js'></script>  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+<script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.min.js'></script>
+  
 <script>
-  $(function() {
+  $(document).ready(function() {
+	
     $('textarea#message').froalaEditor({
     height: 150
     })
     
   });
   $('.dynamic').change(function(){
-	$.noConflict();
+	
 	if($(this).val() !='')	{
 		
 		var value = $(this).val();
@@ -85,18 +89,13 @@
 			{
 				console.log(data);
 				$('#student_list').html(data);
-				$('#student_list').selectpicker('refresh')
+				$('#student_list').selectpicker('refresh');
+				
 				
 			}
-
-
 		})
 
 	}
-
-
-
-
   });
 </script>
 @endsection    

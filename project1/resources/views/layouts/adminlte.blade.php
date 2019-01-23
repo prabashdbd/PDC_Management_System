@@ -22,7 +22,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet"  type="text/css" href="/dist/css/AdminLTE.min.css">
   @yield('styles')
   @yield('styles1')
-  @yield('styles3')
+  
 
 
 
