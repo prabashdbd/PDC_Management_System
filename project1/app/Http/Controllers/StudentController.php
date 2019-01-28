@@ -112,7 +112,6 @@ class StudentController extends Controller
     public function studentUpdate(Request $request){
 
         if($request->ajax() && $student = student::find($request->id)){ 
-            
             return $request;
             //$student->update();
 

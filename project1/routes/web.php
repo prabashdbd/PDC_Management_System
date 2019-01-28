@@ -68,15 +68,25 @@ Route::POST('/students/add/addSingle', 'StudentController@add_single');
 // Route::view('/form777',"student/student_add");
 Route::get('/students/add','StudentController@index_add');
 Route::get('/students/view','StudentController@index_view');
+
+//-----Messages-----
 Route::get('/message/company', 'messageController@msg_cmp');
 Route::get('/message/student', 'messageController@msg_stu');
 Route::get('/message/outsider', 'messageController@msg_out');
-Route::post('/message/fetch', 'messageController@fetch')->name('messageController.fetch');
+Route::post('/message/send', 'messageController@msg_send');
+Route::post('/message/fetch', 'messageController@stu_fetch')->name('messageController.fetch');
+//-----Messages-----
+
 Route::get('/student/readStudent/{id}', "StudentController@readStudent");
 Route::get('/student/viewStudent/{id}', "StudentController@readStudent");
 Route::post('/student/add/update', 'StudentController@studentUpdate');
 Route::post('/addcv', 'StudentController@addCV');
 Route::view('/profile',"Student/student_profile_view");
+
+
+
+
+Route::view('/log1',"auth/login1");
 
 
 Route::view('/test3', "test3");

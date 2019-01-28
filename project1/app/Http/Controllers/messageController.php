@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 use Session;
 use App\batch_detail;
 use App\student;
+use App\company_detail;
+use Mail;
+use App\Mail\SendMail;
 
 class messageController extends Controller
 {
@@ -20,18 +23,40 @@ class messageController extends Controller
         return view('messaging.msg_stu',compact('batch','stu'));
     }
     public function msg_cmp(Request $request)
-    {
-        return view('messaging.msg_cmp');
+    {        
+        $cmp = company_detail::all();
+        return view('messaging.msg_cmp',compact('cmp'));
     }
     public function msg_out(Request $request)
     {
         return view('messaging.msg_out');
     }
+
+    public function msg_send(Request $request)
+    {
+        // $this->validate($request, [
+        // // 'name'     =>  'required',
+        // 'email'  =>  'required|email',
+        // 'message' =>  'required',
+        // 'title' =>'required'
+        // ]); 
+        
+        $email = $request->email;
+        $body = $request->message;
+        $title = $request->title;
+        
+        
+        
+        Mail::send(new SendMail($email,$body,$title));   
+        // Mail::to($request->email)->send(new SendMail($data));        
+        return redirect()->back()->with(['success'=>'Your email has been sent']);
+    }
+
     public function msg_view(Request $request)
     {
         
     }
-    function fetch(Request $request){
+    function stu_fetch(Request $request){
         
         
         $value = $request->get('value');
@@ -48,7 +73,7 @@ class messageController extends Controller
         // return response($group_students);
         foreach($group_students as $row)
         {
-            $output .= '<option value="'.$row->email.'">'.$row->student_lastname.'</option>';
+            $output .= '<option id="email" value="'.$row->email.'">'.$row->student_lastname.'</option>';
             
         }
 

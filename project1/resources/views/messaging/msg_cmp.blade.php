@@ -1,9 +1,9 @@
 @extends('layouts.adminlte')
 
-@section('styles3')
+@section('styles')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+	
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.css" />
   	<link href='https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/css/froala_editor.min.css' rel='stylesheet' type='text/css' />
@@ -18,15 +18,22 @@
   <div class="panel panel-primary col-sm-8">
   	<div class="panel-body">
   		<form>
+					{{csrf_field()}}
   			<div class="form-inline">
-       	   	<label>Recipient</label><br>
-    		<select class="selectpicker form-control" id="p1" multiple data-live-search="true">
-			    <option>Select All...</option>
-			    <option value="Bootstrap">Comapny 1</option>
-			    <option value="HTML">Comapny 2</option>
-			    <option value="CSS">Comapny 3</option>
-			    <option value="angular">Comapny 4</option>
-			</select>
+							<label>Recipient</label><br>
+				<div class="row">			
+					<div class="col-md-10">
+						<select class="selectpicker form-control" id="company_list" multiple data-live-search="true" data-selected-text-format="count" title='Select Company/Companies'>
+							@foreach($cmp as $data)					
+								<option value="{{$data->company_id}}" >{{$data->comp_name}}</option>
+							@endforeach
+						</select>
+					</div>
+					<div class="col-md-2">
+						<button type="button" id="select_all" class="btn btn-primary">Check All</button>
+						<button type="button" id="deselect_all" class="btn btn-primary" style="display: none";>Uncheck All</button>
+					</div>
+				</div>
        	   </div><br>
        	   <div class="panel panel-default">
        	   	<div class="panel-body">
@@ -53,16 +60,27 @@
 
 @endsection
 @section('script')
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
 <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.min.js'></script>  
 <script>
-  $(function() {
+$(document).ready(function() {
     $('textarea#message').froalaEditor({
 
     height: 150
+    });
     
+  
+	$("#select_all").click(function(){        
+		$('#company_list').selectpicker('selectAll');
+		$('#select_all').hide();		
+		$('#deselect_all').show();
+    });
+	$("#deselect_all").click(function(){        
+		$('#company_list').selectpicker('deselectAll');
+		$('#deselect_all').hide();		
+		$('#select_all').show();
+    });
+});
 
-    })
-    
-  });
 </script>
 @endsection    

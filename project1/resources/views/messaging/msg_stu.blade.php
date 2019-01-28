@@ -36,28 +36,33 @@
 						
 					</select>			
 				</div><div class="col-md-2">
-					<button type="button" id="select_all" class="btn btn-primary">Select All</button>
-					<button type="button" id="deselect_all" class="btn btn-primary" style="display: none";>Clear All</button>
+					<button type="button" id="select_all" class="btn btn-primary">Check All</button>
+					<button type="button" id="deselect_all" class="btn btn-primary" style="display: none";>Uncheck All</button>
 				</div>
 			</div>
 			  <br>
        	   <div class="panel panel-default">
        	   	<div class="panel-body">
-       	   		<form>
-       	   			<div class="form-group">
-       	   				<label>Title</label><br>
-       	   				<input type="text" class="form-control">
-       	   			</div>
-       	   			<div class="form-group">
-       	   				<label>Message</label><br>
-       	   				<textarea id="message" class="form-control" id="message-text"></textarea>
-       	   			</div>
+       	   		
+							<div class="form-group">
+								<label>Title</label><br>
+								<input type="text" id="title" class="form-control">
+							</div>
+							{{-- <div class="form-group">
+								<label>Name</label><br>
+								<input type="text" id="name" class="form-control">
+							</div> --}}
+								
+							<div class="form-group">
+								<label>Message</label><br>
+								<textarea type="text" id="message" class="form-control" id="message-text"></textarea>
+							</div>
 
-       	   			<div align="right">
-	       	   			<button name="btn_cancel" id="btn_cancel" class="btn btn-warning btn-sm">Cancel</button>
-	       	   			<button name="btn_send" id="btn_send" class="btn btn-success btn-sm">Send</button>
-	       	   		</div>
-       	   		</form>
+							<div align="right">
+								<button type="reset" name="btn_cancel" id="btn_cancel" class="btn btn-warning btn-sm">Cancel</button>
+								<button type="submit" name="btn_send" id="btn_send" class="btn btn-success btn-sm">Send</button>
+							</div>
+       	   		
        	   </div>
   		</form>
   	</div>
