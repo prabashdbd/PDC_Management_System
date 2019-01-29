@@ -13,7 +13,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
 use Session;
-use Excel;
+use Mail;
+use App\Mail\StudentAddMail;
 
 class StudentController extends Controller
 {
@@ -85,7 +86,16 @@ class StudentController extends Controller
         $student->username=$request->reg_num;
         $student->password=Hash::make($request['nic_num']);
         $student->save();
-        return redirect()->back()->with(['success'=>'Student record added successfully']);
+
+        $email = $request->email;
+        $name = $request->student_initials.' '.$request->student_lastname;
+        $username = $request->email;
+        $password = $request->nic_num;
+
+        Mail::send(new StudentAddMail($email,$name,$username,$password));
+
+        return redirect()->back()->with(['success'=>'Student record added successfully & the credentials were sent']);
+    
 
         // return $student;
         // return $request;

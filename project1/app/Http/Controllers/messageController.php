@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use View;
 use Session;
 use App\batch_detail;
 use App\student;
@@ -73,7 +74,7 @@ class messageController extends Controller
         // return response($group_students);
         foreach($group_students as $row)
         {
-            $output .= '<option id="email" value="'.$row->email.'">'.$row->student_lastname.'</option>';
+            $output .= '<option id="email" name="email" value="'.$row->email.'">'.$row->student_lastname.'</option>';
             
         }
 

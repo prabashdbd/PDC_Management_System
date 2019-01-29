@@ -9,7 +9,7 @@
 
     <body>
         <div>
-            {{$body}}
+            {!!$body!!}
         </div>
     </body>
 </html>

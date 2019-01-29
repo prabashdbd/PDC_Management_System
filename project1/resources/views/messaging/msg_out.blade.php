@@ -13,6 +13,7 @@
 @endsection
 
 @section('content')
+@include('layouts.success')
 <div class="container-fluid">
   <h3>Send message to an outsider</h3><br>
 
