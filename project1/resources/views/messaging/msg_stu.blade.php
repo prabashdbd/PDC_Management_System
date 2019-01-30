@@ -19,7 +19,7 @@
 
   <div class="panel panel-primary col-sm-8">
   	<div class="panel-body">
-  		<form method="POST" id="student_message">
+  		<form method="POST" id="student_message" action="{{url('/message/send/student')}}">
 			{{csrf_field()}}
   			<div class="form-group">
        	   	<label>Recipient</label><br>
@@ -33,7 +33,7 @@
 			  
 			<div class="row">
 				<div class="form-group col-md-10">
-					<select class="selectpicker form-control" name="student_list" id="student_list" multiple data-live-search="true" data-selected-text-format="count" title="Select Recipient">
+					<select class="selectpicker form-control" name="student_list[]" id="student_list" multiple data-live-search="true" data-selected-text-format="count" title="Select Recipient">
 						
 					</select>			
 				</div><div class="col-md-2">
@@ -47,7 +47,7 @@
        	   		
 							<div class="form-group">
 								<label>Title</label><br>
-								<input type="text" id="title" class="form-control">
+								<input type="text" id="title" name="title" class="form-control">
 							</div>
 							{{-- <div class="form-group">
 								<label>Name</label><br>
@@ -56,7 +56,7 @@
 								
 							<div class="form-group">
 								<label>Message</label><br>
-								<textarea type="text" id="message" class="form-control" id="message-text"></textarea>
+								<textarea type="text" name="message" id="message" class="form-control" id="message-text"></textarea>
 							</div>
 
 							<div align="right">

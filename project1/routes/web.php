@@ -74,8 +74,11 @@ Route::get('/message/company', 'messageController@msg_cmp');
 Route::get('/message/student', 'messageController@msg_stu');
 Route::get('/message/outsider', 'messageController@msg_out');
 Route::post('/message/send', 'messageController@msg_send');
+Route::post('/message/send/student', 'messageController@msg_send_stu');
 Route::post('/message/fetch', 'messageController@stu_fetch')->name('messageController.fetch');
 //-----Messages-----
+
+
 
 Route::get('/student/readStudent/{id}', "StudentController@readStudent");
 Route::get('/student/viewStudent/{id}', "StudentController@readStudent");

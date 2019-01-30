@@ -45,13 +45,29 @@ class messageController extends Controller
         $email = $request->email;
         $body = $request->message;
         $title = $request->title;
-        
-        
-        
-        Mail::send(new SendMail($email,$body,$title));   
-        // Mail::to($request->email)->send(new SendMail($data));        
+        Mail::send(new SendMail($email,$body,$title)); 
         return redirect()->back()->with(['success'=>'Your email has been sent']);
     }
+
+    //-------------------------------------------------------
+    public function msg_send_stu(Request $request)
+    {
+        // $this->validate($request, [
+        // // 'name'     =>  'required',
+        // 'email'  =>  'required|email',
+        // 'message' =>  'required',
+        // 'title' =>'required'
+        // ]); 
+        $student_email_list = $request->input('student_list');
+        $email_list = implode(',', $student_email_list);
+        return $email_list;
+        // $email = $request->email;        
+        $body = $request->message;
+        $title = $request->title;
+        // Mail::send(new SendMail($email,$body,$title)); 
+        // return redirect()->back()->with(['success'=>'Your email has been sent']);
+    }
+    //-------------------------------------------------------s
 
     public function msg_view(Request $request)
     {
@@ -74,7 +90,7 @@ class messageController extends Controller
         // return response($group_students);
         foreach($group_students as $row)
         {
-            $output .= '<option id="email" name="email" value="'.$row->email.'">'.$row->student_lastname.'</option>';
+            $output .= '<option type="email" name="email" value="'.$row->email.'">'.$row->student_initials.' '.$row->student_lastname.'</option>';
             
         }
 
