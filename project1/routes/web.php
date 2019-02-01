@@ -15,7 +15,9 @@ use App\Role;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	// return view('welcome');
+	return view('details_test');
+	
 });
 
 Route::get("reg","reg_test@index");
@@ -62,12 +64,9 @@ Route::view('/adminlte', "layouts/adminlte");
 Route::view('/form111', "Company/company_add");
 Route::view('/form333', "Company/company_view");
 // Route::view('/form555', "Student/student_view");
-Route::POST('/students/add/addGroup', 'StudentController@add_group');
-Route::POST('/students/add/addByList', 'StudentController@add_by_list');
-Route::POST('/students/add/addSingle', 'StudentController@add_single');
+
 // Route::view('/form777',"student/student_add");
-Route::get('/students/add','StudentController@index_add');
-Route::get('/students/view','StudentController@index_view');
+
 
 //-----Messages-----
 Route::get('/message/company', 'messageController@msg_cmp');
@@ -78,8 +77,11 @@ Route::post('/message/send/student', 'messageController@msg_send_stu');
 Route::post('/message/fetch', 'messageController@stu_fetch')->name('messageController.fetch');
 //-----Messages-----
 
-
-
+Route::POST('/students/add/addGroup', 'StudentController@add_group');
+Route::POST('/students/add/addByList', 'StudentController@add_by_list');
+Route::POST('/students/add/addSingle', 'StudentController@add_single');
+Route::get('/students/add','StudentController@index_add');
+Route::get('/students/view','StudentController@index_view');
 Route::get('/student/readStudent/{id}', "StudentController@readStudent");
 Route::get('/student/viewStudent/{id}', "StudentController@readStudent");
 Route::post('/student/add/update', 'StudentController@studentUpdate');

@@ -13,6 +13,7 @@ use App\student;
 use App\company_detail;
 use Mail;
 use App\Mail\SendMail;
+use App\Mail\SendMailStu;
 
 class messageController extends Controller
 {
@@ -52,20 +53,15 @@ class messageController extends Controller
     //-------------------------------------------------------
     public function msg_send_stu(Request $request)
     {
-        // $this->validate($request, [
-        // // 'name'     =>  'required',
-        // 'email'  =>  'required|email',
-        // 'message' =>  'required',
-        // 'title' =>'required'
-        // ]); 
-        $student_email_list = $request->input('student_list');
-        $email_list = implode(',', $student_email_list);
-        return $email_list;
-        // $email = $request->email;        
+        
+        // $student_email_list = $request->input('student_list');
+        $email_list = $request->input('student_list');
+        // $email_list = implode(',', $student_email_list);
         $body = $request->message;
         $title = $request->title;
-        // Mail::send(new SendMail($email,$body,$title)); 
-        // return redirect()->back()->with(['success'=>'Your email has been sent']);
+
+        Mail::send(new SendMailStu($email_list,$body,$title));
+        return redirect()->back()->with(['success'=>'Your email has been sent']);
     }
     //-------------------------------------------------------s
 

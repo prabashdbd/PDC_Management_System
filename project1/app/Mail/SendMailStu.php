@@ -7,10 +7,10 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendMail extends Mailable
+class SendMailStu extends Mailable
 {
     use Queueable, SerializesModels;
-    public $email;
+    public $email_list;
     public $body;
     public $title;
 
@@ -19,10 +19,10 @@ class SendMail extends Mailable
         
      * @return void
      */
-    public function __construct($email,$body,$title)
+    public function __construct($email_list,$body,$title)
     {
         //
-        $this->email = $email;
+        $this->email_list = $email_list;
         $this->body = $body;
         $this->title = $title;      
         
@@ -34,9 +34,7 @@ class SendMail extends Mailable
      * @return $this
      */
     public function build()
-    {
-        // return $this->view('view.name');       
-        
-        return $this->view('messaging.email_template',['message'=>$this->body])->to($this->email)->subject($this->title);
+    {        
+        return $this->view('messaging.email_template',['message'=>$this->body])->to($this->email_list)->subject($this->title);
     }
 }
