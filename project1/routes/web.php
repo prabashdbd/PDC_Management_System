@@ -75,6 +75,8 @@ Route::get('/message/outsider', 'messageController@msg_out');
 Route::post('/message/send', 'messageController@msg_send');
 Route::post('/message/send/student', 'messageController@msg_send_stu');
 Route::post('/message/fetch', 'messageController@stu_fetch')->name('messageController.fetch');
+Route::get('/message/view', 'messageController@msg_view');
+
 //-----Messages-----
 
 Route::POST('/students/add/addGroup', 'StudentController@add_group');
@@ -87,6 +89,10 @@ Route::get('/student/viewStudent/{id}', "StudentController@readStudent");
 Route::post('/student/add/update', 'StudentController@studentUpdate');
 Route::post('/addcv', 'StudentController@addCV');
 Route::view('/profile',"Student/student_profile_view");
+// Route::post('/students/fetch', 'StudentController@student_view')->name('StudentController.fetch');
+
+
+Route::post('/csv/view', 'StudentController@csv_process')->name('StudentController.csv');
 
 
 

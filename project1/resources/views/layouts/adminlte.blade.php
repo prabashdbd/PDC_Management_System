@@ -306,15 +306,14 @@ desired effect
               </ul>
             </li>
             <li class="treeview">
-                <a href="#"><i class="fa fa-eye"></i> <span>View</span>
+                <a href="{{url('/message/view')}}"><i class="fa fa-eye"></i> <span>View</span>
                   <span class="pull-right-container">
-                    <i class="fa fa-angle-left pull-right"></i>
+                    {{-- <i class="fa fa-angle-left pull-right"></i> --}}
                   </span>
                </a>
-              <ul class="treeview-menu">
-                <li><a href="#">Sent</a></li>
-                <li><a href="#">Recieved</a></li>           
-              </ul>
+              {{-- <ul class="treeview-menu">
+                <li><a href="#">Sent</a></li>           
+              </ul> --}}
             </li>
         </ul>
       </li>

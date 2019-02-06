@@ -10,6 +10,7 @@ use View;
 use Session;
 use App\batch_detail;
 use App\student;
+use App\messages;
 use App\company_detail;
 use Mail;
 use App\Mail\SendMail;
@@ -30,14 +31,14 @@ class messageController extends Controller
         return view('messaging.msg_cmp',compact('cmp'));
     }
     public function msg_out(Request $request)
+    // outsider
     {
         return view('messaging.msg_out');
     }
 
     public function msg_send(Request $request)
     {
-        // $this->validate($request, [
-        // // 'name'     =>  'required',
+        // $this->validate($request, [        
         // 'email'  =>  'required|email',
         // 'message' =>  'required',
         // 'title' =>'required'
@@ -46,28 +47,43 @@ class messageController extends Controller
         $email = $request->email;
         $body = $request->message;
         $title = $request->title;
-        Mail::send(new SendMail($email,$body,$title)); 
+        Mail::send(new SendMail($email,$body,$title));       
+        
+        $message = new messages;
+        $message->email = $request->email;
+        $message->title = $request->title;
+        $message->message =strip_tags($request->message);
+        $message->save();
+
         return redirect()->back()->with(['success'=>'Your email has been sent']);
     }
 
     //-------------------------------------------------------
     public function msg_send_stu(Request $request)
     {
+               
         
-        // $student_email_list = $request->input('student_list');
         $email_list = $request->input('student_list');
-        // $email_list = implode(',', $student_email_list);
         $body = $request->message;
         $title = $request->title;
 
         Mail::send(new SendMailStu($email_list,$body,$title));
+
+            
+        // $message = new messages;
+        // $message->email = $request->email;
+        // $message->title = $request->title;
+        // $message->message =strip_tags($request->message);
+        // $message->save();
+
         return redirect()->back()->with(['success'=>'Your email has been sent']);
     }
     //-------------------------------------------------------s
 
-    public function msg_view(Request $request)
+    public function msg_view()
     {
-        
+        $msg = messages::all();
+        return view('messaging.msg_view',compact('msg'));
     }
     function stu_fetch(Request $request){
         

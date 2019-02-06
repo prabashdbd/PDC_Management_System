@@ -28,12 +28,11 @@ class StudentController extends Controller
     }
     public function index_view(Request $request)
     {
-        
+        $batch = batch_detail::all();
         $stu = student::all();        
-        return view('student.student_view',compact('stu'));
+        return view('student.student_view',compact('batch','stu'));
         
     }
-
 
     public function add_group(Request $request)
     {
@@ -44,6 +43,26 @@ class StudentController extends Controller
 
         
     }
+
+    // public function csv_process(Request $request)
+    // {
+    //     $upload = $request->file('upload-file');
+    //     $batch = $request->batch_id;
+    //     $filePath = $upload->getRealPath();
+    //     $file = fopen($filePath,'r');
+    //     fgetcsv($file);
+    //     while($row = fgetcsv($file))
+    //     {
+    //         $data[] = array(
+    //         'student_id'  => $row[0],
+    //         'student_name'  => $row[1],
+    //         'student_phone'  => $row[2]
+    //         );
+    //     }
+    //     echo json_encode($data);
+    // }
+
+
 
     public function add_by_list(Request $request)
     {
@@ -70,6 +89,9 @@ class StudentController extends Controller
         return redirect()->back()->with(['success'=>'Student list added successfully']);
         
     }
+
+
+
 
 
     public function add_single(Request $request)

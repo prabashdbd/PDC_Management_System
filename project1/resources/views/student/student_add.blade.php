@@ -15,6 +15,7 @@
 		z-index: -1;
 	}
 	</style>
+	<meta name="csrf-token" content="{{ csrf_token() }}">
     
 @endsection
 @section('content')
@@ -88,12 +89,12 @@
 		 					<option value="{{$data->batch_id}}" >{{$data->batch_name}}</option>
 		 				@endforeach                                
 						   
-		            </select>
+		        </select>
                </div><br>
 
                <div class="form-inline">
                	<label for="upload-file">Choose a CSV file</label>
-               	<input type="file" class="form-control-file" name="upload-file"><br>
+               	<input type="file" id="upload-file" accept=".csv" class="form-control-file" name="upload-file"><br>
                	
                </div>
                <br><br>
@@ -212,7 +213,7 @@
 		<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4>test</h4>
+			
 			</div>
 			<div class="modal-body">
 				
@@ -231,6 +232,12 @@
 								<th>Email</th>
 								
 							</tr>
+							{{-- <tr>
+								<th>Student ID</th>
+								<th>Student Name</th>
+								<th>Student Phone</th>						
+									
+							</tr> --}}
 						</thead>
 						<tbody>
 							
@@ -268,8 +275,18 @@
 </script>
 <script>
 $(document).ready(function(){
+	$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+	
+	
 	$.noConflict();
-    $(".nav-tabs a").click(function(){
+    
+	
+	
+	$(".nav-tabs a").click(function(){
         $(this).tab('show');
     });
 
@@ -277,8 +294,46 @@ $(document).ready(function(){
 	$("#btn_proceed").click(function(){        
 		$('#csv-modal').modal('show');
     });
+
+
+
+// 	$('#btn_proceed').click(function(){
+//   	$.ajax({
+// 		url:"{{route('StudentController.csv')}}",
+// 		method:"POST",
+// 		data:new FormData(this),
+// 		dataType:'json',
+// 		contentType:false,
+// 		cache:false,
+// 		processData:false,
+// 		success:function(jsonData)
+// 		{
+// 			console.log(jsonData);
+// 			$('#upload-file').val('');
+// 			$('#csv-table').DataTable({
+// 			data  :  jsonData,
+// 			columns :  [
+// 			{ data : "student_id" },
+// 			{ data : "student_name" },
+// 			{ data : "student_phone" }
+// 			]
+// 			});
+			
+// 		}		
+// 	});
+// 	$('#csv-modal').modal('show');
+//  });
 	
 });
+
+
+
+
+
+
+
+
+
 
 </script>
 

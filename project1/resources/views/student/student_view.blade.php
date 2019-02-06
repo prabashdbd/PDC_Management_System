@@ -3,6 +3,7 @@
 @section('styles')
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css"> 
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}  
 
@@ -10,9 +11,11 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script> --}}
 @endsection
 @section('content')
-  <h3>View Student Details</h3>
-	<div>
-  <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
+  <h3>View Student Details</h3><br>
+  
+  
+  <div>
+  <table id="studentViewtable" name="studentViewtable" class="table table-striped table-bordered table-hover" style="width:100%">
         <thead>
             <tr>
                 <th>Initials</th>
@@ -27,8 +30,9 @@
         </thead>
         <tbody>
             
-            <tr>
-              @foreach($stu as $student)
+            
+            @foreach($stu as $student)
+                <tr>
                 <td>{{$student->student_initials}}</td>
                 <td>{{$student->student_lastname}}</td>
                 <td>{{$student->email}}</td>
@@ -42,8 +46,8 @@
                 <button class="btn btn-primary btn-sm" id ="view" data-toggle="modal" data-id="{{$student->student_id}}">View</button>
                 <button class="btn btn-info btn-sm" id="edit" data-toggle="modal" data-id="{{$student->student_id}}">Edit</button>
                 <button class="btn btn-danger btn-sm" data-toggle="modal">Delete</button></td>
-              </tr>
-              @endforeach
+                </tr>
+            @endforeach
             
           </tbody>
           <tfoot>   
@@ -174,7 +178,7 @@
     });
 
     $(document).ready(function() {
-      $('#example').DataTable();
+      $('#studentViewtable').DataTable();
     });
 
     $(document).on('click','#view',function(e){
@@ -264,7 +268,8 @@
 
       });
 
+   
+
  </script>
 
 @endsection
-{{-- https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.1.1/pdfobject.js --}}
