@@ -29,7 +29,8 @@ class student extends Model
         'name_initials',
         'student_surname',
         'nic_no',
-    	'email',
+        'email',
+        'student_contact',
     ];
 
     protected $hidden = [

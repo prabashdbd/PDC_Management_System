@@ -81,6 +81,7 @@ class StudentController extends Controller
             $student->student_lastname=$fields[4];
             $student->nic_no=$fields[5];
             $student->email=$fields[6];
+            $student->student_contact=$fields[7];
             $student->username=$fields[0];
             $student->password=Hash::make($fields[5]);
             $student->batch_id=$batch;
@@ -153,6 +154,20 @@ class StudentController extends Controller
         }
 
     }
+
+    public function studentProfile(Request $request){
+
+        return view('student.student_edit_profile');
+    }
+
+
+    public function placements(Request $request){
+
+        return view('student.student_placements');
+    }
+
+
+
 
 
     public function addCV(Request $request)

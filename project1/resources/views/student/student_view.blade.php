@@ -21,6 +21,7 @@
                 <th>Initials</th>
                 <th>Last Name</th>
                 <th>Email</th>
+                <th>Contact Number</th>
                 <th>Index Number</th>
                 <th>Reg: Number</th>
                 <th>Batch</th>
@@ -36,6 +37,7 @@
                 <td>{{$student->student_initials}}</td>
                 <td>{{$student->student_lastname}}</td>
                 <td>{{$student->email}}</td>
+                <td>{{$student->student_contact}}</td>
                 <td>{{$student->index_num}}</td>
                 <td>{{$student->reg_num}}</td>
                 <td>{{$student->batch_detail->batch_name}}</td>
@@ -90,7 +92,7 @@
   </div>
   <!-- Student edit modal   --->
   <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="editModal" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div class="modal-content">
               <div class="modal-header">
                   <h3 id="edit_title"> Title </h3>
@@ -115,14 +117,17 @@
                         </div>
                       </div>
                       <div class="form-group row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <label>Lastname </label>
                           <input type="text" name="student_lastname" class="form-control" id="edit_student_lastname">
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <label>Email</label>
-                          <input type="text" name="email" class="form-control" id="edit_email">
-                          
+                          <input type="text" name="email" class="form-control" id="edit_email">                          
+                        </div>
+                        <div class="col-md-4">
+                            <label>Contact Number </label>
+                            <input type="text" name="student_contact" class="form-control" id="edit_student_contact">
                         </div>
 
                       </div>
@@ -231,6 +236,7 @@
                 $('#edit_student_initials').val(data[0].student_initials);
                 $('#edit_student_lastname').val(data[0].student_lastname);
                 $('#edit_email').val(data[0].email);
+                $('#edit_student_contact').val(data[0].student_contact);                
                 $('#edit_index_num').val(data[0].index_num);
                 $('#edit_reg_num').val(data[0].reg_num);
                 $('#edit_nic_no').val(data[0].nic_no);

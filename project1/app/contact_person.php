@@ -10,11 +10,12 @@ class contact_person extends Model
     protected $table = 'contact_person';
     public $fillable=[
 
-
+        'company_id',
     	'person_name',
     	'email',
-    	'tel',
-    	'fax'
+        'tel',
+        'designation'
+    	
 
     ];
 

@@ -76,7 +76,7 @@
     <div id="menu2" class="tab-pane fade">
       <div id="menu1" class="tab-pane fade in active">
 	    <div class="panel panel-primary col-sm-8">
-	       <div class="panel-heading">Add students by a list<small style="color: white">&nbsp(Reg: NO, Index NO, Initials, Name by initials, Lastname, NIC, Email)</small>
+	       <div class="panel-heading">Add students by a list<small style="color: white">&nbsp(Reg: NO, Index NO, Initials, Name by initials, Lastname, NIC, Email,Contact Number)</small>
 		   </div>
 	       <div class="panel-body">
 	       	<form method="POST" id="addbylist" enctype="multipart/form-data" action="{{URL::to('/students/add/addByList')}}">
@@ -135,10 +135,17 @@
 			</div>
 			
 			<div class="form-group">
-				<label>Name denoted by initials </label>
-				<input type="text" name="name_initials" class="form-control" id="name_initials">
-
-
+				<div class="row">
+					<div class="col-md-8">
+						<label>Name denoted by initials </label>
+						<input type="text" name="name_initials" class="form-control" id="name_initials">
+					</div>
+					<div class="col-md-4">
+						<label>Contact Number </label>
+						<input type="text" name="student_contact" class="form-control" id="student_contact">	
+						
+					</div>
+				</div>
 			</div>
 			  
 

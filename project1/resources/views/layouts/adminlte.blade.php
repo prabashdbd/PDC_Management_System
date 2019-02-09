@@ -269,6 +269,7 @@ desired effect
             <li><a href="{{url('/form111')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li>
             <li><a href="#"><i class="fa fa-check"></i><span>Approve</span></a></li>
             <li><a href="{{url('/form333')}}"><i class="fa fa-eye"></i><span>View</span></a></li>
+            <li><a href="{{url('/form333')}}"><i class="fa fa-bullhorn"></i><span>Publish Advert</span></a></li>
           </ul>
         </li>
 
@@ -279,7 +280,8 @@ desired effect
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="{{url('/students/add')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li>            
+            <li><a href="{{url('/students/add')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li> 
+            <li><a href="{{url('/student/placements')}}"><i class="fa fa-vcard"></i><span>Placements</span></a></li>            
             <li><a href="{{url('/students/view')}}"><i class="fa fa-eye"></i><span>View</span></a></li>
           </ul>
         </li>

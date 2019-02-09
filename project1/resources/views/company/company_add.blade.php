@@ -10,9 +10,13 @@
 
 @endsection
 @section('content')  
+
+@include('layouts.success')
+
 <div class="container-fluid">
    <br />
-   <form {{-- method="post" --}} id="register_form">
+<form method="post" action="{{url('/company/registration')}}" id="register_form">
+  {{csrf_field()}}
     <ul class="nav nav-tabs">
      <li class="nav-item">
       <a class="nav-link active_tab1" style="border:1px solid #ccc" id="list_login_details">Company Details</a>
@@ -89,7 +93,7 @@
             </div>
             <div class="col-md-3">
               <label>Registration Number</label>
-              <input type="text" name="comp_reg_date" id="comp_reg_date" class="form-control" />
+              <input type="text" name="comp_reg_num" id="comp_reg_date" class="form-control" />
               <!-- <span id="error_email" class="text-danger"></span> -->
             </div>
 
@@ -111,11 +115,7 @@
         </div>
 
 
-
-
-
-
-        <div class="form-group">
+        {{-- <div class="form-group">
          <label>Enter Email Address</label>
          <input type="text" name="email" id="email" class="form-control" />
          <span id="error_email" class="text-danger"></span>
@@ -125,7 +125,8 @@
          <input type="password" name="password" id="password" class="form-control" />
          <span id="error_password" class="text-danger"></span>
         </div>
-        <br />        
+        <br />         --}}
+
         <div align="right">
             <button type="button" name="btn_reset" id="btn_reset_details" class="btn btn-warning btn-lg">Reset</button>
             {{-- <button type="button" name="btn_company_details" id="btn_company_details" class="btn btn-primary btn-lg">Next</button> --}}
@@ -146,7 +147,7 @@
           <div class="row">
             <div class="col-md-3">
              <label>Name</label>
-             <input type="text" name="first_name" id="first_name" class="form-control" />
+             <input type="text" name="person_name" id="first_name" class="form-control" />
              <span id="error_first_name" class="text-danger"></span>
             </div>
             {{-- <div class="col-md-3">
@@ -161,7 +162,7 @@
             </div>
             <div class="col-md-3">
              <label>Email</label>
-             <input type="text" name="fax" id="fax" class="form-control" />
+             <input type="text" name="email" id="email" class="form-control" />
              <!-- <span id="error_first_name" class="text-danger"></span> -->
             </div>
             <div class="col-md-3">
@@ -176,8 +177,8 @@
               
         <!-- hadanna -->        
         <div class="form-group">          
-          <label>Position</label>
-          <input type="text" name="position" id="position" class="form-control"/>       
+          <label>Designation</label>
+          <input type="text" name="designation" id="designation" class="form-control"/>       
           
         </div>
         {{-- <div class="form-group">
@@ -228,7 +229,7 @@
           <div class="col-md-8" >
             <div class="form-group">
              <label>Select Fields(Please mention if Other is selected)</label><br>
-             <select class="selectpicker form-control" style="width: auto;" multiple data-live-search="true">
+             <select name="no_of_placem" class="selectpicker form-control" style="width: auto;" multiple data-live-search="true">
                
               <option>Software Engineering(Java/J2EE)</option><option>Software Engineering(.NET/C#)</option><option>Software Engineering(C++)</option>
               <option>Web Development(PHP, Python, Ruby, JavaScript)</option>
@@ -267,7 +268,7 @@
           
           <div class="col-md-6" align="right">
             <button type="button" name="btn_reset" id="btn_reset_details" class="btn btn-warning btn-lg">Reset</button>
-            <button type="button" name="btn_contact_details" id="btn_contact_details" class="btn btn-success btn-lg">Register</button>
+            <button type="submit" name="btn_contact_details" id="btn_contact_details" class="btn btn-success btn-lg">Register</button>
           </div>
         </div>
         
@@ -283,31 +284,31 @@ $(document).ready(function(){
  
  $('#btn_login_details').click(function(){
   
-  var error_email = '';
-  var error_password = '';
-  var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  //var error_email = '';
+  // var error_password = '';
+  // var filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
   
-  if($.trim($('#email').val()).length == 0)
-  {
-   error_email = 'Email is required';
-   $('#error_email').text(error_email);
-   $('#email').addClass('has-error');
-  }
-  else
-  {
-   if (!filter.test($('#email').val()))
-   {
-    error_email = 'Invalid Email';
-    $('#error_email').text(error_email);
-    $('#email').addClass('has-error');
-   }
-   else
-   {
-    error_email = '';
-    $('#error_email').text(error_email);
-    $('#email').removeClass('has-error');
-   }
-  }
+  // if($.trim($('#email').val()).length == 0)
+  // {
+  //  error_email = 'Email is required';
+  //  $('#error_email').text(error_email);
+  //  $('#email').addClass('has-error');
+  // }
+  // else
+  // {
+  //  if (!filter.test($('#email').val()))
+  //  {
+  //   error_email = 'Invalid Email';
+  //   $('#error_email').text(error_email);
+  //   $('#email').addClass('has-error');
+  //  }
+  //  else
+  //  {
+  //   error_email = '';
+  //   $('#error_email').text(error_email);
+  //   $('#email').removeClass('has-error');
+  //  }
+  // }
   
   // if($.trim($('#password').val()).length == 0)
   // {
@@ -322,12 +323,7 @@ $(document).ready(function(){
   //  $('#password').removeClass('has-error');
   // }
 
-  if(error_email != '' || error_password != '')
-  {
-   return false;
-  }
-  else
-  {
+  
    $('#list_login_details').removeClass('active active_tab1');
    $('#list_login_details').removeAttr('href data-toggle');
    $('#login_details').removeClass('active');
@@ -337,7 +333,7 @@ $(document).ready(function(){
    $('#list_personal_details').attr('href', '#personal_details');
    $('#list_personal_details').attr('data-toggle', 'tab');
    $('#personal_details').addClass('active in');
-  }
+  
  });
  
  $('#previous_btn_personal_details').click(function(){
@@ -412,56 +408,56 @@ $(document).ready(function(){
   $('#personal_details').addClass('active in');
  });
  
- $('#btn_contact_details').click(function(){
-  var error_address = '';
-  var error_mobile_no = '';
-  var mobile_validation = /^\d{10}$/;
-  if($.trim($('#address').val()).length == 0)
-  {
-   error_address = 'Address is required';
-   $('#error_address').text(error_address);
-   $('#address').addClass('has-error');
-  }
-  else
-  {
-   error_address = '';
-   $('#error_address').text(error_address);
-   $('#address').removeClass('has-error');
-  }
+//  $('#btn_contact_details').click(function(){
+//   var error_address = '';
+//   var error_mobile_no = '';
+//   var mobile_validation = /^\d{10}$/;
+//   if($.trim($('#address').val()).length == 0)
+//   {
+//    error_address = 'Address is required';
+//    $('#error_address').text(error_address);
+//    $('#address').addClass('has-error');
+//   }
+//   else
+//   {
+//    error_address = '';
+//    $('#error_address').text(error_address);
+//    $('#address').removeClass('has-error');
+//   }
   
-  if($.trim($('#mobile_no').val()).length == 0)
-  {
-   error_mobile_no = 'Mobile Number is required';
-   $('#error_mobile_no').text(error_mobile_no);
-   $('#mobile_no').addClass('has-error');
-  }
-  else
-  {
-   if (!mobile_validation.test($('#mobile_no').val()))
-   {
-    error_mobile_no = 'Invalid Mobile Number';
-    $('#error_mobile_no').text(error_mobile_no);
-    $('#mobile_no').addClass('has-error');
-   }
-   else
-   {
-    error_mobile_no = '';
-    $('#error_mobile_no').text(error_mobile_no);
-    $('#mobile_no').removeClass('has-error');
-   }
-  }
-  if(error_address != '' || error_mobile_no != '')
-  {
-   return false;
-  }
-  else
-  {
-   $('#btn_contact_details').attr("disabled", "disabled");
-   $(document).css('cursor', 'prgress');
-   $("#register_form").submit();
-  }
+//   if($.trim($('#mobile_no').val()).length == 0)
+//   {
+//    error_mobile_no = 'Mobile Number is required';
+//    $('#error_mobile_no').text(error_mobile_no);
+//    $('#mobile_no').addClass('has-error');
+//   }
+//   else
+//   {
+//    if (!mobile_validation.test($('#mobile_no').val()))
+//    {
+//     error_mobile_no = 'Invalid Mobile Number';
+//     $('#error_mobile_no').text(error_mobile_no);
+//     $('#mobile_no').addClass('has-error');
+//    }
+//    else
+//    {
+//     error_mobile_no = '';
+//     $('#error_mobile_no').text(error_mobile_no);
+//     $('#mobile_no').removeClass('has-error');
+//    }
+//   }
+//   if(error_address != '' || error_mobile_no != '')
+//   {
+//    return false;
+//   }
+//   else
+//   {
+//    $('#btn_contact_details').attr("disabled", "disabled");
+//    $(document).css('cursor', 'prgress');
+//    $("#register_form").submit();
+//   }
   
- });
+//  });
  
 });
 </script>

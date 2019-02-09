@@ -7,14 +7,14 @@
     <section class="content">
         <h3>Profile Management</h3><br>
         <div class="row col-md-6">
-            <button class='btn btn-primary'>Edit details</button>
+            <p><a class="btn btn-lg btn-primary" href="{{url('/student/profile/edit')}}" role="button">Edit details</a></p>
             
         </div>
         <div class="col-md-6">
             <form method="POST" id="addcv" enctype="multipart/form-data" action="{{URL::to('/addcv')}}">
                 {{csrf_field()}}    
                 <div class="form-group">
-                    <label for="cv-file">Choose a CSV file</label>          
+                    <label for="cv-file">Choose a PDF file</label>          
                     <input type="file" class="form-control-file" name="cv-file"><br>
                     <button type="submit" class="btn btn-success" id="cv_upload" >Upload</button>
                     

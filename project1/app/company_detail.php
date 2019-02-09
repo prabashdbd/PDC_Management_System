@@ -17,14 +17,16 @@ class company_detail extends Model
 
     	'username',
         'password',
+        'company_id',
         'comp_name',
-    	'comp_website',
+        'comp_website',
+        'comp_parent',
     	'comp_est_date',
-    	'comp_reg_name',
-    	'comp_reg_date',
-    	'comp_address',
-    	'comp_tel',
-    	'comp_fax',
+    	'comp_reg_num',
+        'comp_add_no',
+        'comp_add_street1',
+        'comp_add_street2',
+        'comp_add_city',
         'num_employees',
         'num_techleads'
     ];
@@ -37,7 +39,7 @@ class company_detail extends Model
 
     public function contact(){
 
-        return $this->hasMany('App/contact_person','person_id','company_id');
+        return $this->hasMany('App/contact_person','person_id','id');
     }
 
 

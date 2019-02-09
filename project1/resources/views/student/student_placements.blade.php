@@ -11,7 +11,7 @@
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script> --}}
 @endsection
 @section('content')
-  <h3>Company Requests</h3><br>
+  <h3>Placement Vacancies</h3><br>
   
   
   <div>
