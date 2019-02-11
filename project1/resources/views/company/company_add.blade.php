@@ -21,10 +21,10 @@
      <li class="nav-item">
       <a class="nav-link active_tab1" style="border:1px solid #ccc" id="list_login_details">Company Details</a>
      </li>
-     <li class="nav-item">
+     <li class="nav-item"><a href="#"></a>
       <a class="nav-link inactive_tab1" id="list_personal_details" style="border:1px solid #ccc">Contact Details</a>
      </li>
-     <li class="nav-item">
+     <li class="nav-item"><a href="#"></a>
       <a class="nav-link inactive_tab1" id="list_contact_details" style="border:1px solid #ccc">Placement Details</a>
      </li>
     </ul>

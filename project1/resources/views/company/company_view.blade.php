@@ -23,18 +23,24 @@
         </thead>
         <tbody>
             
-            <tr>
-                <td>Name1</td>
-                <td>Address1</td>
-                <td>Est. Date1</td>
-                <td>Website1</td>
-                <td>1</td>
-                <td>AAA,BBB,CCC</td>
-                {{-- <td>$86,000</td> --}}
-                <td><button class="btn btn-primary btn-sm" data-toggle="modal" href="#myModal">View</button>
-                <button class="btn btn-info btn-sm" data-toggle="modal" href="#myModal">Edit</button>
-                <button class="btn btn-danger btn-sm" data-toggle="modal" href="#myModal">Delete</button></td>
-            </tr>
+          @foreach($company as $data)
+              <tr>
+                <td>{{$data->comp_name}}</td>
+                <td>{{$data->comp_add_no.','.$data->comp_add_street1.','.$data->comp_add_street2.','.$data->comp_add_city}}</td>
+                <td>{{$data->comp_est_date}}</td>
+                <td>{{$data->comp_website}}</td>
+                <td>Placement Areas</td>
+                <td>Number of Vacancies</td>
+                
+
+
+
+                <td>
+                <button class="btn btn-primary btn-sm" id ="view" data-toggle="modal" data-id="{{$data->id}}">View</button>
+                <button class="btn btn-info btn-sm" id="edit" data-toggle="modal" data-id="{{$data->id}}">Edit</button>
+                <button class="btn btn-danger btn-sm" data-toggle="modal">Delete</button></td>
+              </tr>
+          @endforeach
             
             
         </tfoot>

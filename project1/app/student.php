@@ -18,6 +18,9 @@ class student extends Model
      * @var array
      */
     protected $table = 'students';
+
+    protected $primaryKey = 'student_id';
+
     protected $fillable = [
     	
         'batch_id',

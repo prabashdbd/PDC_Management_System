@@ -44,23 +44,34 @@ class StudentController extends Controller
         
     }
 
-    // public function csv_process(Request $request)
-    // {
-    //     $upload = $request->file('upload-file');
-    //     $batch = $request->batch_id;
-    //     $filePath = $upload->getRealPath();
-    //     $file = fopen($filePath,'r');
-    //     fgetcsv($file);
-    //     while($row = fgetcsv($file))
-    //     {
-    //         $data[] = array(
-    //         'student_id'  => $row[0],
-    //         'student_name'  => $row[1],
-    //         'student_phone'  => $row[2]
-    //         );
-    //     }
-    //     echo json_encode($data);
-    // }
+    public function csv_process(Request $request)
+    {
+        if($request->hasFile('upload-file')) {
+            //return $request;
+
+            $upload = $request->file('upload-file');
+            $batch = $request->batch_id;
+            $filePath = $upload->getRealPath();
+            $file = fopen($filePath,'r');
+            fgetcsv($file);
+            while($row = fgetcsv($file))
+            {
+                $data[] = array(
+                'student_id'  => $row[0],
+                'student_name'  => $row[1],
+                'student_phone'  => $row[2]
+                );
+            }
+            echo json_encode($data);
+            //return response($data);
+            //return json_encode($data);
+        }
+        else{
+            return "error";
+        }
+        
+        
+    }
 
 
 
@@ -143,10 +154,27 @@ class StudentController extends Controller
     }
 
     public function studentUpdate(Request $request){
+        
+        if($request->ajax()){
 
-        if($request->ajax() && $student = student::find($request->id)){ 
-            return $request;
-            //$student->update();
+            $id = $request->id ;
+            //student::where('students.student_id',$id)->first()->update($request->all());
+
+            $student = student::where('students.student_id','=',$id)->first();
+
+
+            $student->student_initials=$request->student_initials;
+            $student->student_lastname=$request->student_lastname;
+            $student->name_initials=$request->name_initials;
+            $student->index_num=$request->index_num;
+            $student->reg_num=$request->reg_num;
+            $student->nic_no=$request->nic_num;
+            $student->student_contact=$request->student_contact;
+            $student->email=$request->email;
+        
+            $student->update();
+
+            return $student;
 
                     /* for success message*/
             // Session::flash('success', 'Vehicle Service Updated successfully !');

@@ -51,18 +51,18 @@
             <div class="col-md-6">
                 <div class="nav-tabs-custom">
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activity" data-toggle="tab">Employee</a></li>
+                        <li class="active"><a href="#activity" data-toggle="tab">Personal</a></li>
                     </ul>
                     <div class="tab-content">
                         <div class="active tab-pane" id="activity">
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="" alt="user image">
+                                    {{-- <img class="img-circle img-bordered-sm" src="" alt="user image">
                                     <span class="username">
                                         <a href="#"></a>
-                                    </span>
-                                    <span class="description">Joined date - </span>
+                                    </span> --}}
+                                    {{-- <span class="description">Joined date - </span>
                                     <h5>Date Of Birth - </h5>
                                     <h5>NIC Number - </h5>
                                     <h5>Gender - </h5>
@@ -70,7 +70,7 @@
                                     <h5>Address - </h5>
                                     <h5>Division - </h5>
                                     <h5>Designation - </h5>
-                                    <h5>Date Of Join - </h5>
+                                    <h5>Date Of Join - </h5> --}}
                                 </div>
                             </div>
                         </div>

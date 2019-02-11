@@ -16,6 +16,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="stylesheet" type="text/css" href="/bower_components/font-awesome/css/font-awesome.min.css">
   <!-- Ionicons -->
   <link rel="stylesheet" type="text/css" href="/bower_components/Ionicons/css/ionicons.min.css">
+  
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <!-- Theme style -->
@@ -71,7 +72,7 @@ desired effect
   <header class="main-header">
 
     <!-- Logo -->
-    <a class="logo">
+    <a href={{url('/adminlte')}} class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">PDC</span>
       <!-- logo for regular state and mobile devices -->
@@ -89,7 +90,7 @@ desired effect
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
-          <li class="dropdown messages-menu">
+          {{-- <li class="dropdown messages-menu">
             <!-- Menu toggle button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-envelope-o"></i>
@@ -183,7 +184,7 @@ desired effect
                 <a href="#">View all tasks</a>
               </li>
             </ul>
-          </li>
+          </li> --}}
           <!-- User Account Menu -->
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
@@ -259,17 +260,25 @@ desired effect
         <li class="header"><i class="fa fa-home"></i><span>Home</span></li>
         <!-- Optionally, you can add icons to the links -->       
 
-        <li class="treeview active">
+        <li class="treeview">
           <a href="#"><i class="fa fa-building"></i><span>Companies</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('/form111')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li>
-            <li><a href="#"><i class="fa fa-check"></i><span>Approve</span></a></li>
-            <li><a href="{{url('/form333')}}"><i class="fa fa-eye"></i><span>View</span></a></li>
-            <li><a href="{{url('/form333')}}"><i class="fa fa-bullhorn"></i><span>Publish Advert</span></a></li>
+          <ul class="treeview-menu
+          {{
+            url()->current() == url('/form111')||
+            url()->current() == url('/vehicle/create')||
+            url()->current() == url('/company/view')||
+            url()->current() == url('/form333')?'active':''
+          }}
+
+          ">
+            <li class="{{url()->current() == url('/form111')?'active':''}}"><a href="{{url('/form111')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li>
+            <li class="{{url()->current() == url('/#')?'active':''}}"><a href="#"><i class="fa fa-check"></i><span>Approve</span></a></li>
+            <li class="{{url()->current() == url('/company/view')?'active':''}}"><a href="{{url('/company/view')}}"><i class="fa fa-eye"></i><span>View</span></a></li>
+            <li class="{{url()->current() == url('/form333')?'active':''}}"><a href="{{url('/form333')}}"><i class="fa fa-bullhorn"></i><span>Publish Advert</span></a></li>
           </ul>
         </li>
 
@@ -279,10 +288,17 @@ desired effect
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="{{url('/students/add')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li> 
-            <li><a href="{{url('/student/placements')}}"><i class="fa fa-vcard"></i><span>Placements</span></a></li>            
-            <li><a href="{{url('/students/view')}}"><i class="fa fa-eye"></i><span>View</span></a></li>
+          <ul class="treeview-menu
+          {{
+            url()->current() == url('/students/add')||
+            url()->current() == url('/student/placements')||            
+            url()->current() == url('/students/view')?'active':''
+          }}
+          
+          ">
+            <li class="{{url()->current() == url('/students/add')?'active':''}}"><a href="{{url('/students/add')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li> 
+            <li class="{{url()->current() == url('/student/placements')?'active':''}}"><a href="{{url('/student/placements')}}"><i class="fa fa-vcard"></i><span>Placements</span></a></li>            
+            <li class="{{url()->current() == url('/students/view')?'active':''}}"><a href="{{url('/students/view')}}"><i class="fa fa-eye"></i><span>View</span></a></li>
           </ul>
         </li>
 
@@ -301,10 +317,17 @@ desired effect
                     <i class="fa fa-angle-left pull-right"></i>
                   </span>
                </a>
-              <ul class="treeview-menu">
-                <li><a href="{{url('/message/company')}}">Company</a></li>
-                <li><a href="{{url('/message/student')}}">Student</a></li>
-                <li><a href="{{url('message/outsider')}}">Outsider</a></li>           
+              <ul class="treeview-menu
+              {{
+                url()->current() == url('/message/company')||
+                url()->current() == url('/message/student')||            
+                url()->current() == url('/message/outsider')?'active':''
+              }}
+              
+              ">
+                <li class="{{url()->current() == url('/message/company')?'active':''}}"><a href="{{url('/message/company')}}">Company</a></li>
+                <li class="{{url()->current() == url('/message/student')?'active':''}}"><a href="{{url('/message/student')}}">Student</a></li>
+                <li class="{{url()->current() == url('/message/outsider')?'active':''}}"><a href="{{url('/message/outsider')}}">Outsider</a></li>           
               </ul>
             </li>
             <li class="treeview">
@@ -319,7 +342,7 @@ desired effect
             </li>
         </ul>
       </li>
-      <li class="treeview">
+      {{-- <li class="treeview">
           <a href="#"><i class="fa fa-key"></i><span>Credentials</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -329,7 +352,16 @@ desired effect
             <li><a href="#"><i class="fa fa-plus"></i><span>Add</span></a></li>            
             <li><a href="#"><i class="fa fa-refresh"></i><span>Reset</span></a></li>
           </ul>
+        </li> --}}
+
+
+        <li class="treeview">
+            <a href="#"><i class="fa fa-file"></i><span>Reports</span>
+              <span class="pull-right-container">
+                <i class="fa fa-angle-left pull-right"></i>
+              </span>
         </li>
+
       <!-- /.sidebar-menu -->
     </section>
     <!-- /.sidebar -->

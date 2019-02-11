@@ -5,14 +5,18 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css"> 
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    {{-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> --}}  
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>  
 
     {{-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script> --}}
 @endsection
 @section('content')
+
+@include('layouts.success')
+
+  <span id="message" class="text-success"></span>
+    
   <h3>View Student Details</h3><br>
-  
   
   <div>
   <table id="studentViewtable" name="studentViewtable" class="table table-striped table-bordered table-hover" style="width:100%">
@@ -102,9 +106,9 @@
               </div>
               <div class="modal-body">
 
-                  <form action="{{ URL::to('/student/add/update')}}" method="POST" id="edit_student_form"> 
+                  <form action="{{ url('/student/add/update')}}" method="POST" id="edit_student_form"> 
                       {{csrf_field()}}
-                      <input type="hidden" name="id" id="student_id">
+                      <input hidden type="text" name="id" id="student_id">
                       <div class="form-group row">
        	   	
                         <div class="col-md-4">
@@ -223,6 +227,7 @@
         $('#student_id').val(id);
         console.log(id);
            /* getting existing data to modal */
+
         $.ajax({
             url: '/student/readStudent/{id}',
             type: 'GET',
@@ -256,20 +261,32 @@
             $.ajax({
                 url: url,
                 type: 'POST',
-                data: data,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
+                data: data, //contentType: "application/json; charset=utf-8",
+                //dataType: "json",
                 success: function(data)
                 {     
-                    console.log(data);        
-                    $('#edit-modal').modal('hide');  
-                    //$('#flash-message').html(data);
+                    console.log(data);
+                    
+                          
+                    // $('#edit-modal').modal('hide'); 
+                    // $('#flash-message').html(data);  
+
+                    // $('#studentViewtable').DataTable().ajax.reload();
+                    
                           
                 },
-                error: function(xhr, textStatus, error){
-                    console.log(xhr.statusText);
+                error: (error) => {
+                     console.log(JSON.stringify(error));
                 }
-            });     
+            });
+            $('#edit-modal').modal('hide');
+             
+            $('#message').html("Details updated successfully");  
+            setTimeout(function(){  
+                $('#message').fadeOut("Slow");  
+            }, 2000);
+            location.reload();                       
+            
         });
 
       });

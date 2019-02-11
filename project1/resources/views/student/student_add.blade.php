@@ -22,11 +22,13 @@
 	@include('layouts.success')
   <div class="container-fluid">
   <h3>Add Students</h3>
+
   <ul class="nav nav-tabs">
-    
-    <li class="active"><a href="#menu1">Add Groups</a></li>
-    <li><a href="#menu2">Add by list</a></li>
-    <li><a href="#menu3">Add a single</a></li>
+	<li><a href=""></a></li>
+	<li class="active"><a href="#menu1">Add Groups</a></li>
+	<li><a href="#menu2">Add by list</a></li>
+	<li><a href="#menu3">Add a single</a></li>
+	
   </ul>
 
   <div class="tab-content" style="margin-top:16px;">
@@ -40,7 +42,7 @@
        	<form method="POST" id="add_group" action="{{ URL::to('/students/add/addGroup')}}">
        		{{csrf_field()}}
        	   <div class="form-group">
-       	   	<label>Group Name </label>
+       	   	<label>Group Name</label>
     		<input type="text" name="batch_name" class="form-control" id="batch_name">
        	   </div>
        	   
@@ -103,8 +105,7 @@
 
 					<button type="reset" name="btn_cancel" id="btn_cancel" class="btn btn-warning btn-sm">Abort</button>
 					<button type="button" name="btn_proceed" id="btn_proceed" class="btn btn-primary btn-sm">Proceed</button>
-					<button type="submit" name="btn_upload" id="btn_upload" class="btn btn-success btn-sm">Upload</button>
-	       	   		
+					<button type="submit" name="btn_upload" id="btn_upload" class="btn btn-success btn-sm">Upload</button>      	   		
 
 	       	   </div>
        	</form>
@@ -229,7 +230,7 @@
 
 					<table id="csv-table" class="table table-striped table-bordered">
 						<thead>
-							<tr>
+							{{-- <tr>
 								<th>Reg No</th>
 								<th>Index No</th>
 								<th>Initials</th>
@@ -238,13 +239,13 @@
 								<th>NIC No</th>
 								<th>Email</th>
 								
-							</tr>
-							{{-- <tr>
+							</tr> --}}
+							<tr>
 								<th>Student ID</th>
 								<th>Student Name</th>
 								<th>Student Phone</th>						
 									
-							</tr> --}}
+							</tr>
 						</thead>
 						<tbody>
 							
@@ -304,44 +305,34 @@ $(document).ready(function(){
 
 
 
-// 	$('#btn_proceed').click(function(){
-//   	$.ajax({
-// 		url:"{{route('StudentController.csv')}}",
-// 		method:"POST",
-// 		data:new FormData(this),
-// 		dataType:'json',
-// 		contentType:false,
-// 		cache:false,
-// 		processData:false,
-// 		success:function(jsonData)
-// 		{
-// 			console.log(jsonData);
-// 			$('#upload-file').val('');
-// 			$('#csv-table').DataTable({
-// 			data  :  jsonData,
-// 			columns :  [
-// 			{ data : "student_id" },
-// 			{ data : "student_name" },
-// 			{ data : "student_phone" }
-// 			]
-// 			});
-			
-// 		}		
-// 	});
-// 	$('#csv-modal').modal('show');
-//  });
+	$('#btn_proceed').click(function(){
+		$.ajax({
+			url:"{{route('StudentController.csv')}}",
+			method:"POST",
+			data:new FormData(this),
+			dataType:'json',
+			contentType:false,
+			cache:false,
+			processData:false,
+			success:function(jsonData)
+			{
+				console.log(jsonData);
+				// $('#upload-file').val('');
+				// $('#csv-table').DataTable({
+				// data  :  jsonData,
+				// columns :  [
+				// { data : "student_id" },
+				// { data : "student_name" },
+				// { data : "student_phone" }
+				// ]
+				// });
+				
+			}		
+		});
+		$('#csv-modal').modal('show');
+ 	});
 	
 });
-
-
-
-
-
-
-
-
-
-
 </script>
 
 @endsection

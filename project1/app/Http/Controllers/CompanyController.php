@@ -13,11 +13,11 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         
-          $company = company_detail::where('company_id','=','1')->get();//->toArray();         
+          $company = company_detail::all();         
 
-          $contact = contact_person::where('company_id','=','1')->get();
+        //   $contact = contact_person::where('company_id','=','1')->get();
           //$contact = $company->contact()->all();
-          return view ('profile_view', compact('company','contact'));
+          return view ('company.company_view', compact('company'));
     }
 
 
@@ -58,7 +58,7 @@ class CompanyController extends Controller
        
         $contactPerson->save();
 
-        return redirect()->back()->with(['success'=>'Company Registration successfully !']);
+        return redirect()->back()->with(['success'=>'Company Registered successfully !']);
 
     }
 }
