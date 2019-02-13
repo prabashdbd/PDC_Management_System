@@ -34,7 +34,9 @@ Route::group(['middleware'=>'web'],function(){
 
 Auth::routes();
 
-
+//-----dashboard------
+Route::view('/adminlte/dash', "layouts/dashboard");
+//-----dashboard------
 
 
 
@@ -77,6 +79,23 @@ Route::post('/csv/view', 'StudentController@csv_process')->name('StudentControll
 Route::post('/company/registration', 'CompanyController@CompanyReg');
 //-----Company-----
 
+
+//-----Report-----
+Route::get('/reports/student_with', 'ReportController@student_table');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 Route::view('/log1',"auth/login1");
 
 
@@ -93,6 +112,7 @@ Route::view('/sidebar', "sidebar_test");
 Route::view('/form_test1', "test");
 Route::view('/adminlte', "layouts/adminlte");
 Route::view('/form111', "Company/company_add");
+Route::view('/csv-to-table', "profile_view");
 Route::get('/company/view', 'CompanyController@index');
 
 

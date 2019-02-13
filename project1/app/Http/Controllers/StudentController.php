@@ -46,31 +46,47 @@ class StudentController extends Controller
 
     public function csv_process(Request $request)
     {
-        if($request->hasFile('upload-file')) {
-            //return $request;
+        // if($request->hasFile('upload-file')) {
+        //     //return $request;
 
-            $upload = $request->file('upload-file');
-            $batch = $request->batch_id;
-            $filePath = $upload->getRealPath();
-            $file = fopen($filePath,'r');
-            fgetcsv($file);
-            while($row = fgetcsv($file))
-            {
-                $data[] = array(
-                'student_id'  => $row[0],
-                'student_name'  => $row[1],
-                'student_phone'  => $row[2]
-                );
-            }
-            echo json_encode($data);
-            //return response($data);
-            //return json_encode($data);
+        //     $upload = $request->file('upload-file');
+        //     $batch = $request->batch_id;
+        //     $filePath = $upload->getRealPath();
+        //     $file = fopen($filePath,'r');
+        //     fgetcsv($file);
+        //     while($row = fgetcsv($file))
+        //     {
+        //         $data[] = array(
+        //         'student_id'  => $row[0],
+        //         'student_name'  => $row[1],
+        //         'student_phone'  => $row[2]
+        //         );
+        //     }
+        //     echo json_encode($data);
+        //     //return response($data);
+        //     //return json_encode($data);
+        // }
+        // else{
+        //     return "error";
+        // }
+        //--------------------------------------------------------
+        $upload = $request->file('csv_file');
+        $filePath = $upload->getRealPath();
+        $file_data = fopen($filePath,'r');
+        // while(! feof($file_data)){
+        //     $data = fgetcsv($file_data);
+        //     echo json_encode($data);
+        // }
+        while($row = fgetcsv($file_data))
+        {
+            $data[] = array(
+            'student_id'  => $row[0],
+            'student_name'  => $row[1],
+            'student_phone'  => $row[2]
+            );
         }
-        else{
-            return "error";
-        }
-        
-        
+        $jsondata = json_encode($data);
+        echo ($jsondata);
     }
 
 

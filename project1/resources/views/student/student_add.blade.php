@@ -87,9 +87,9 @@
 	       	  <div class="form-inline">
 	       	   <label>Select Group&nbsp </label>
 	       	   <select name="batch_id" id="group_id" class="form-control" style="width: 200px;">
-		 				@foreach($batch as $data)
-		 					<option value="{{$data->batch_id}}" >{{$data->batch_name}}</option>
-		 				@endforeach                                
+					@foreach($batch as $data)
+						<option value="{{$data->batch_id}}" >{{$data->batch_name}}</option>
+					@endforeach                                
 						   
 		        </select>
                </div><br>
@@ -109,8 +109,8 @@
 
 	       	   </div>
        	</form>
-	       </div>
-	   	</div>
+	    </div>
+	  </div>
       
     </div>
       

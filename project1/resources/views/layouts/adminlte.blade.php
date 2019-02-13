@@ -200,8 +200,8 @@ desired effect
                 <img src="/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  User
+                  <small>User</small>
                 </p>
               </li>
               <!-- Menu Body -->
@@ -260,21 +260,24 @@ desired effect
         <li class="header"><i class="fa fa-home"></i><span>Home</span></li>
         <!-- Optionally, you can add icons to the links -->       
 
-        <li class="treeview">
+        <li class="treeview
+        
+        {{
+          url()->current() == url('/form111')||
+          url()->current() == url('/vehicle/create')||
+          url()->current() == url('/company/view')||
+          url()->current() == url('/form333')?'active':''
+        }}
+        
+        
+        
+        ">
           <a href="#"><i class="fa fa-building"></i><span>Companies</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu
-          {{
-            url()->current() == url('/form111')||
-            url()->current() == url('/vehicle/create')||
-            url()->current() == url('/company/view')||
-            url()->current() == url('/form333')?'active':''
-          }}
-
-          ">
+          <ul class="treeview-menu">
             <li class="{{url()->current() == url('/form111')?'active':''}}"><a href="{{url('/form111')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li>
             <li class="{{url()->current() == url('/#')?'active':''}}"><a href="#"><i class="fa fa-check"></i><span>Approve</span></a></li>
             <li class="{{url()->current() == url('/company/view')?'active':''}}"><a href="{{url('/company/view')}}"><i class="fa fa-eye"></i><span>View</span></a></li>
@@ -282,20 +285,20 @@ desired effect
           </ul>
         </li>
 
-        <li class="treeview">
+        <li class="treeview
+        
+        {{
+          url()->current() == url('/students/add')||
+          url()->current() == url('/student/placements')||            
+          url()->current() == url('/students/view')?'active':''
+        }}
+        ">
           <a href="#"><i class="fa fa-user"></i><span>Students</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
-          <ul class="treeview-menu
-          {{
-            url()->current() == url('/students/add')||
-            url()->current() == url('/student/placements')||            
-            url()->current() == url('/students/view')?'active':''
-          }}
-          
-          ">
+          <ul class="treeview-menu">
             <li class="{{url()->current() == url('/students/add')?'active':''}}"><a href="{{url('/students/add')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li> 
             <li class="{{url()->current() == url('/student/placements')?'active':''}}"><a href="{{url('/student/placements')}}"><i class="fa fa-vcard"></i><span>Placements</span></a></li>            
             <li class="{{url()->current() == url('/students/view')?'active':''}}"><a href="{{url('/students/view')}}"><i class="fa fa-eye"></i><span>View</span></a></li>
@@ -304,27 +307,32 @@ desired effect
 
 
 
-        <li class="treeview">
+        <li class="treeview
+        {{
+          url()->current() == url('/message/company')||
+          url()->current() == url('/message/student')||            
+          url()->current() == url('/message/outsider')?'active':''
+        }}
+        ">
           <a href="#"><i class="fa fa-envelope"></i> <span>Messaging</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="treeview">
+            <li class="treeview
+            {{
+              url()->current() == url('/message/company')||
+              url()->current() == url('/message/student')||            
+              url()->current() == url('/message/outsider')?'active':''
+            }}
+            ">
                 <a href="#"><i class="fa fa-pencil-square"></i> <span>Compose</span>
                   <span class="pull-right-container">
                     <i class="fa fa-angle-left pull-right"></i>
                   </span>
                </a>
-              <ul class="treeview-menu
-              {{
-                url()->current() == url('/message/company')||
-                url()->current() == url('/message/student')||            
-                url()->current() == url('/message/outsider')?'active':''
-              }}
-              
-              ">
+              <ul class="treeview-menu">
                 <li class="{{url()->current() == url('/message/company')?'active':''}}"><a href="{{url('/message/company')}}">Company</a></li>
                 <li class="{{url()->current() == url('/message/student')?'active':''}}"><a href="{{url('/message/student')}}">Student</a></li>
                 <li class="{{url()->current() == url('/message/outsider')?'active':''}}"><a href="{{url('/message/outsider')}}">Outsider</a></li>           
@@ -355,11 +363,51 @@ desired effect
         </li> --}}
 
 
-        <li class="treeview">
+        <li class="treeview 
+        {{
+          // url()->current() == url('/message/company')||
+          // url()->current() == url('/message/student')||            
+          url()->current() == url('/reports/student_with')?'active':''
+                
+        }}
+        ">
             <a href="#"><i class="fa fa-file"></i><span>Reports</span>
               <span class="pull-right-container">
                 <i class="fa fa-angle-left pull-right"></i>
               </span>
+              <ul class="treeview-menu">
+                <li class="treeview
+                {{
+                  // url()->current() == url('/message/company')||
+                  // url()->current() == url('/message/student')||            
+                  url()->current() == url('/reports/student_with')?'active':''
+                }}
+                
+                ">
+                    <a href="#"><i class="fa fa-user"></i> <span>Students</span>
+                      <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                      </span>
+                   </a>
+                  <ul class="treeview-menu">
+                    {{-- <li class="{{url()->current() == url('/message/company')?'active':''}}"><a href="{{url('/message/company')}}">Company</a></li>
+                    <li class="{{url()->current() == url('/message/student')?'active':''}}"><a href="{{url('/message/student')}}">Student</a></li>
+                    <li class="{{url()->current() == url('/message/outsider')?'active':''}}"><a href="{{url('/message/outsider')}}">Outsider</a></li>            --}}
+                    <li class="{{url()->current() == url('/reports/student_with')?'active':''}}"><a href="{{url('/reports/student_with')}}">With Placements</a></li>
+                    <li><a href="#">Without Placements</a></li>
+                  </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-building"></i> <span>Companies</span>
+                      <span class="pull-right-container">
+                        {{-- <i class="fa fa-angle-left pull-right"></i> --}}
+                      </span>
+                   </a>
+                  {{-- <ul class="treeview-menu">
+                    <li><a href="#">Sent</a></li>           
+                  </ul> --}}
+                </li>
+            </ul>
         </li>
 
       <!-- /.sidebar-menu -->
