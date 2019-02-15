@@ -10,7 +10,7 @@
 @section('content')
     {{-- <span id="message" class="text-success"></span> --}}
 	<h3>Approve Company Requests</h3>
-  <table id="example" class="table table-striped table-bordered" style="width:100%">
+    <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
             <tr>
                 <th>Name</th>
@@ -38,16 +38,37 @@
 
 
                 <td>
-                <button class="btn btn-primary btn-success" id ="approve" data-id="{{$data->id}}">Approve</button>
-                {{-- <button class="btn btn-danger btn-sm" data-toggle="modal">Delete</button></td> --}}
+                {{-- <button class="btn btn-primary btn-success approve" value="{{$data->id}}" id ="approve" data-id="{{$data->id}}">Approve</button> --}}
+                <button class="btn btn-primary btn-success toApprove" data-toggle="modal" value="{{$data->id}}" data-id="{{$data->id}}">Approve</button>
+                
+                {{-- <button class="btn btn-danger btn-sm" data-toggle="modal">Delete</button>--}}
+                </td>
               </tr>
           @endforeach
             
             
-        </tfoot>
+        </tbody>
     </table>
 
-
+    <div class="modal fade" id="confirm_modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h3 class="modal-title">Approve company</h3>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <div class="modal-body">
+            <p>The company will be registered with PDC of UCSC</p>
+            </div>
+            <div class="modal-footer">
+            <button type="button" id="approve" value="" class="btn btn-success approve">Approve</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        </div>
+    </div>
   
 
  
@@ -63,9 +84,7 @@
       $('#example').DataTable();
     });
 
-
-
-    $('#approve').on('click',function(e){         
+    $('.approve').on('click',function(e){         
         e.preventDefault();
         var id = $(this).data('id');
         console.log(id);
@@ -79,6 +98,7 @@
             success: function(data)
             {     
                 console.log(data);
+                $('#confirm_modal').modal('hide');
                 swal("Success!", "Company Approved", "success");
             },
             error: (error) => {
@@ -92,6 +112,17 @@
                                
         
     });
+
+    $('.toApprove').on('click',function(e){
+        var id = $(this).data('id');
+        $("#approve").data("id", id);
+        $('#confirm_modal').modal('show');
+        
+        console.log(id);
+        
+    });
+
+
  </script>
 
 @endsection

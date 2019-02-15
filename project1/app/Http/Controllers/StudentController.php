@@ -154,6 +154,17 @@ class StudentController extends Controller
         
     }
 
+    // public function stu_delete()
+    // {
+
+    //     $id = $_POST['id'];   
+    //     $student_dlt = company_detail::where('company_details.id','=',$id)->first()->delete();        
+    //     // $student_dlt->update();
+    //     return $student_dlt;
+
+
+    // }
+
 
     
 

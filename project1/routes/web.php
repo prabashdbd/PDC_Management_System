@@ -66,6 +66,7 @@ Route::get('/student/profile/edit', 'StudentController@studentProfile');
 Route::post('/addcv', 'StudentController@addCV');
 Route::view('/profile',"Student/student_profile_view");
 Route::get('/student/placements','StudentController@placements');
+Route::post('/student/delete','StudentController@stu_delete');
 
 Route::post('/csv/view', 'StudentController@csv_process')->name('StudentController.csv');
 

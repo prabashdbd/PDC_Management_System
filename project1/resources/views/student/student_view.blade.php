@@ -48,7 +48,7 @@
                 <td>
                 <button class="btn btn-primary btn-sm" id ="view" data-toggle="modal" data-id="{{$student->student_id}}">View</button>
                 <button class="btn btn-info btn-sm" id="edit" data-toggle="modal" data-id="{{$student->student_id}}">Edit</button>
-                <button class="btn btn-danger btn-sm" data-toggle="modal">Delete</button></td>
+                <button class="btn btn-danger btn-sm delete" value="{{$student->student_id}}" data-toggle="modal" data-id="{{$student->student_id}}">Delete</button></td>
                 </tr>
             @endforeach
             
@@ -279,6 +279,37 @@
         });
 
       });
+
+
+    //   $('.delete').on('click',function(e){         
+    //     e.preventDefault();
+    //     // var id = $(this).data('id');
+    //     // console.log(id);
+    //     var id = $(this).val();
+    //     console.log(id);
+    //     $.ajax({
+    //         headers: {
+    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //         },
+    //         url: '/student/delete',
+    //         type: 'POST',
+    //         data: {id:id}, 
+    //         success: function(data)
+    //         {     
+    //             console.log(data);
+    //             // swal("Success!", "Company Approved", "success");
+    //         },
+    //         error: (error) => {
+    //             console.log(JSON.stringify(error));
+    //         }
+    //     });
+          
+    //     setTimeout(function(){  
+    //         location.reload();;  
+    //     }, 3000);
+                               
+        
+   
 
    
 
