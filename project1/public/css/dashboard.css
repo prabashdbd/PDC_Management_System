@@ -3,18 +3,20 @@ body{
 font-family: 'Raleway', sans-serif;
 }
 .main-section{
-width:80%;
+width:100%;
 margin:0 auto;
 text-align: center;
 padding: 0px 5px;
 }
 .dashbord{
-width:32%;
+width:25%;
 display: inline-block;
-background-color:#34495E;
+background-color:#695b91;
 color:#fff;
-margin-top: 50px; 
+margin-top: 25px;
+margin-bottom: 25px; 
 }
+
 .icon-section i{
 font-size: 30px;
 padding:10px;

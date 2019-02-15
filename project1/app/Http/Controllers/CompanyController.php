@@ -13,11 +13,25 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         
-          $company = company_detail::all();         
-
-        //   $contact = contact_person::where('company_id','=','1')->get();
-          //$contact = $company->contact()->all();
+          $company = company_detail::all();
           return view ('company.company_view', compact('company'));
+    }
+    public function approve_comp(Request $request)
+    {
+        
+          $appr_company = company_detail::where('is_approved','=','0')->get();
+          return view ('company.company_approve', compact('appr_company'));
+    }
+
+    public function approve()
+    {
+        $id = $_POST['id'];   
+        $company_to_appr = company_detail::where('company_details.id','=',$id)->first();
+        $company_to_appr->is_approved=1;
+        $company_to_appr->update();
+
+        return $company_to_appr;
+        
     }
 
 

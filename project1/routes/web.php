@@ -77,11 +77,14 @@ Route::post('/csv/view', 'StudentController@csv_process')->name('StudentControll
 
 //-----Company-----
 Route::post('/company/registration', 'CompanyController@CompanyReg');
+Route::get('/company/to_be_approved', 'CompanyController@approve_comp');
+Route::post('/company/approve', 'CompanyController@approve');
 //-----Company-----
 
 
 //-----Report-----
 Route::get('/reports/student_with', 'ReportController@student_table');
+Route::get('/reports/comapny', 'ReportController@company_table');
 
 
 

@@ -4,18 +4,19 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"> 
     <link rel="stylesheet" type="text/css" href="/css/dashboard.css">
-    <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css">
+    {{-- <link href="https://fonts.googleapis.com/css?family=Raleway:100,200,400,500,600" rel="stylesheet" type="text/css"> --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
     {{-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script>  --}}
 @endsection
 @section('content')
-<div class="main-section">
+<div class="main-section" style="border:1px solid black;">
     <div class="dashbord">
         <div class="icon-section">
             <i class="fa fa-users" aria-hidden="true"></i><br>
             <small>Users</small>
             <p>256</p>
         </div>
+        
         <div class="detail-section">
             <a href="#">More Info </a>
         </div>

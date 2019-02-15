@@ -13,9 +13,6 @@
 @section('content')
 
 @include('layouts.success')
-
-  <span id="message" class="text-success"></span>
-    
   <h3>View Student Details</h3><br>
   
   <div>
@@ -176,6 +173,7 @@
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
 
 <script>
@@ -265,26 +263,18 @@
                 success: function(data)
                 {     
                     console.log(data);
-                    
-                          
-                    // $('#edit-modal').modal('hide'); 
-                    // $('#flash-message').html(data);  
-
-                    // $('#studentViewtable').DataTable().ajax.reload();
-                    
+                    swal("Success!", "Details Updated", "success");
+                    $('#edit-modal').modal('hide');
                           
                 },
                 error: (error) => {
                      console.log(JSON.stringify(error));
                 }
-            });
-            $('#edit-modal').modal('hide');
+            });                         
              
-            $('#message').html("Details updated successfully");  
             setTimeout(function(){  
-                $('#message').fadeOut("Slow");  
-            }, 2000);
-            location.reload();                       
+                location.reload();  
+            }, 2000);               
             
         });
 

@@ -1,53 +1,43 @@
 @extends('layouts.adminlte')
+
 @section('styles')
-    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css"> 
     <link href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.bootstrap.css" rel="stylesheet" />
+     
     
 @endsection
 @section('content')
-<div class="container-fliud">
-    <h3>Students with Placements</h3><br>
-    <div>
-        <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
-            <thead>
-                <tr>
-                        <th>Initials</th>
-                        <th>Last Name</th>
-                        <th>Email</th>
-                        <th>Contact Number</th>
-                        <th>Index Number</th>
-                        <th>Reg: Number</th>
-                        <th>Batch</th>
-                        
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    
-                    @foreach($stu as $student)
-                    <tr>
-                        <td>{{$student->student_initials}}</td>
-                        <td>{{$student->student_lastname}}</td>
-                        <td>{{$student->email}}</td>
-                        <td>{{$student->student_contact}}</td>
-                        <td>{{$student->index_num}}</td>
-                        <td>{{$student->reg_num}}</td>
-                        <td>{{$student->batch_detail->batch_name}}</td>
-        
-        
-                    </tr>
-                    @endforeach
+	<h3>Companys Registered</h3>
+    <table id="example" class="table table-striped table-bordered table-hover" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Est. Date</th>
+                <th>Website</th>
+                <th>Placement Areas</th>
+                <th>Number of Vacancies</th>
+                
+            </tr>
+        </thead>
+        <tbody>
             
-            </tbody>
-            <tfoot>   
-            </tfoot>
-        </table>
-    </div>
-  </div>
+          @foreach($company as $data)
+              <tr>
+                <td>{{$data->comp_name}}</td>
+                <td>{{$data->comp_add_no.','.$data->comp_add_street1.','.$data->comp_add_street2.','.$data->comp_add_city}}</td>
+                <td>{{$data->comp_est_date}}</td>
+                <td>{{$data->comp_website}}</td>
+                <td>Placement Areas</td>
+                <td>Number of Vacancies</td>
+              </tr>
+          @endforeach
+            
+            
+        </tfoot>
+    </table>
 @endsection
-
-
 @section('script')
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
@@ -61,8 +51,8 @@
 
 
 <script>
-$(document).ready(function() {
-    var buttonCommon = {
+    $(document).ready(function() {
+        var buttonCommon = {
         exportOptions: {
             format: {
                 body: function ( data, row, column, node ) {
@@ -90,8 +80,7 @@ $(document).ready(function() {
         } )
     ]
     });
-    
 });
-</script>    
-@endsection
+ </script>
 
+@endsection

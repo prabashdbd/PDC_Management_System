@@ -46,6 +46,8 @@ class StudentController extends Controller
 
     public function csv_process(Request $request)
     {
+
+        return "test";
         // if($request->hasFile('upload-file')) {
         //     //return $request;
 
@@ -86,7 +88,7 @@ class StudentController extends Controller
             );
         }
         $jsondata = json_encode($data);
-        echo ($jsondata);
+        return response($jsondata);
     }
 
 

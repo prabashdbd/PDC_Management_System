@@ -65,16 +65,17 @@
             processData:false,
             success:function(jsonData)
             {
-                console.log(jsonData);
-                $('#csv_file').val('');
-                $('#data-table').DataTable({
-                data  :  jsonData,
-                columns :  [
-                { data : "student_id" },
-                { data : "student_name" },
-                { data : "student_phone" }
-                ]
-                });
+                var details = JSON.parse(jsonData);
+                console.log(details);
+                // $('#csv_file').val('');
+                // $('#data-table').DataTable({
+                // data  :  jsonData,
+                // columns :  [
+                // { data : "student_id" },
+                // { data : "student_name" },
+                // { data : "student_phone" }
+                // ]
+                // });
             }
         });
         });
