@@ -39,10 +39,12 @@ class company_detail extends Model
 
     public function contact(){
 
-        return $this->hasMany('App/contact_person','person_id','id');
+        return $this->hasMany('App\contact_person','person_id','id');
     }
 
-
-
-
+    public function user()
+	{
+        return $this->belongsTo('App\User','id','company_id');
+        
+    }
 }

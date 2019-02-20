@@ -209,7 +209,7 @@ desired effect
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="{{url('/profile')}}" class="btn btn-default btn-flat">Profile</a>
+                  <a href="{{url('/student/profile')}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="#" class="btn btn-default btn-flat">Sign out</a>
@@ -407,6 +407,7 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
         
+    <input type="text" name="userid" value="{{$userid}}"/>
       @yield('content')
 
 

@@ -9,14 +9,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    //protected $table = 'users';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
-    protected $fillable = [
-        'username', 'email', 'password','role_id'
+    protected $fillable = [        
+        'role_id',
+        'student_id',
+        'company_id',
+        'username',
     ];
 
     /**
@@ -36,18 +39,26 @@ class User extends Authenticatable
 
 
     }
+    public function company(){
 
-
-    public function isAdmin(){
-
-
-        if($this->role->name =='admin'){
-
-            return true;
-        }
-        return false;
-
-
+        return $this->hasMany('App\company_detail','company_id','id');
     }
+    public function student(){
+
+        return $this->hasMany('App\student','student_id','student_id');
+    }
+
+
+    // public function isAdmin(){
+
+
+    //     if($this->role->name =='admin'){
+
+    //         return true;
+    //     }
+    //     return false;
+
+
+    // }
 
 }

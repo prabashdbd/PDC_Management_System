@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\company_detail;
+use App\User;
 use App\contact_person;
+use Illuminate\Support\Facades\Hash;
 
 
 class CompanyController extends Controller
@@ -13,7 +15,7 @@ class CompanyController extends Controller
     public function index(Request $request)
     {
         
-          $company = company_detail::all();
+          $company = company_detail::where('is_approved','=','1')->get();;
           return view ('company.company_view', compact('company'));
     }
     public function approve_comp(Request $request)
@@ -71,6 +73,13 @@ class CompanyController extends Controller
         $contactPerson->designation = $request->designation;
        
         $contactPerson->save();
+
+        $user = new user;
+        $user->role_id=3;
+        $user->company_id=$company->id;
+        $user->username=$contactPerson->email;
+        $user->password=Hash::make($request['email']);
+        $user->save();
 
         return redirect()->back()->with(['success'=>'Company Registered successfully !']);
 

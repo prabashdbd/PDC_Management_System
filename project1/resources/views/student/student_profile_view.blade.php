@@ -6,9 +6,11 @@
 @section('content')
 @include('layouts.success')
     <section class="content">
-        <h3>Profile Management</h3><br>
-        <p><a class="btn btn-primary" href="{{url('/student/profile/edit')}}" role="button">Edit details</a></p>
+        <h3>Profile Management</h3>
         
+        <p><a class="btn btn-primary pull-right" href="{{url('/student/profile/edit')}}" role="button">Edit details</a></p>
+        
+        <br>
         <br>
         <div class="row">
             <div class="col-md-4">

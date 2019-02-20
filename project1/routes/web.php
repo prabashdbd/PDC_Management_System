@@ -20,6 +20,8 @@ Route::get('/', function () {
 	
 });
 
+//Route::group(['middleware'=>['authenticate']],function (){
+
 Route::get("reg","reg_test@index");
 Route::post("store","reg_test@store");
 // Route::view('/reg',"register");
@@ -37,8 +39,6 @@ Auth::routes();
 //-----dashboard------
 Route::view('/adminlte/dash', "layouts/dashboard");
 //-----dashboard------
-
-
 
 //-----Messages-----
 Route::get('/message/company', 'messageController@msg_cmp');
@@ -63,10 +63,12 @@ Route::get('/student/readStudent/{id}', "StudentController@readStudent");
 Route::get('/student/viewStudent/{id}', "StudentController@readStudent");
 Route::post('/student/add/update', 'StudentController@studentUpdate');
 Route::get('/student/profile/edit', 'StudentController@studentProfile');
+Route::get('/student/profile','StudentController@student_profile');
 Route::post('/addcv', 'StudentController@addCV');
-Route::view('/profile',"Student/student_profile_view");
+Route::post('/addimg', 'StudentController@addimg');
 Route::get('/student/placements','StudentController@placements');
 Route::post('/student/delete','StudentController@stu_delete');
+
 
 Route::post('/csv/view', 'StudentController@csv_process')->name('StudentController.csv');
 
@@ -86,19 +88,7 @@ Route::post('/company/approve', 'CompanyController@approve');
 //-----Report-----
 Route::get('/reports/student_with', 'ReportController@student_table');
 Route::get('/reports/comapny', 'ReportController@company_table');
-
-
-
-
-
-
-
-
-
-
-
-
-
+//-----Report-----
 
 Route::view('/log1',"auth/login1");
 
@@ -107,6 +97,8 @@ Route::view('/test3', "test3");
 
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
 Route::get('/comapanyhome', 'CompanyController@index_comp')->name('company');
 Route::get('/studenthome', 'StudentController@index_stu')->name('student');
 Route::view('/visitor_reg', "visitor_comp");
@@ -120,11 +112,20 @@ Route::view('/csv-to-table', "profile_view");
 Route::get('/company/view', 'CompanyController@index');
 
 
-
-
 Route::get('/admin','AdminController@index');
 // Route::view('/profile_view',"profile_view");
 Route::get('/profile_view','CompanyController@index');
+
+//});
+
+//-----Login-----
+Route::post('/verify/email', 'Auth\LoginController@validateUserEmail')->name('verify_email');
+Route::post('/verify/password', 'Auth\LoginController@validateUserPassword')->name('verify_password');
+Route::post('/verify/user', 'Auth\LoginController@userLogin')->name('user_login');
+
+Route::post('/user/login', 'Auth\LoginController@userLoginTest');
+
+//-----Login-----
 
 
 

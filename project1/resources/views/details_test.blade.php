@@ -48,7 +48,8 @@
             </li>
             
             <li class="btn btn-primary">
-              <a class="nav-link" href="{{ url('/adminlte') }}">Login</a>
+              <a class="nav-link" href="{{ url('/log1') }}">Login</a>
+              
             </li>
             
           </ul>
