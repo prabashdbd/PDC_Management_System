@@ -4,42 +4,28 @@
 @endsection
 
 @section('content')
+@include('layouts.success')
     <section class="content">
         <h3>Profile Management</h3><br>
-        <div class="row col-md-6">
-            <p><a class="btn btn-lg btn-primary" href="{{url('/student/profile/edit')}}" role="button">Edit details</a></p>
-            
-        </div>
-        <div class="col-md-6">
-            <form method="POST" id="addcv" enctype="multipart/form-data" action="{{URL::to('/addcv')}}">
-                {{csrf_field()}}    
-                <div class="form-group">
-                    <label for="cv-file">Choose a PDF file</label>          
-                    <input type="file" class="form-control-file" name="cv-file"><br>
-                    <button type="submit" class="btn btn-success" id="cv_upload" >Upload</button>
-                    
-                </div> 
-            </form>
-        </div>
+        <p><a class="btn btn-primary" href="{{url('/student/profile/edit')}}" role="button">Edit details</a></p>
+        
         <br>
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
 
                 <!-- Profile Image -->
                 <div class="box box-primary">
                     <div class="box-body box-profile">
-                        <img class="profile-user-img img-responsive img-circle" src="" alt="User profile picture">
+                        <img class="profile-user-img img-responsive img-circle" src="{{'/'.$test[0]->img_path}}" alt="User profile picture">
 
-                        <h3 class="profile-username text-center"></h3>
-
-                        <p class="text-muted text-center"></p>
+                        <h3 class="profile-username text-center">{{$test[0]->student_initials.' '.$test[0]->student_lastname}}</h3>                        
 
                         <ul class="list-group list-group-unbordered">
                             <li class="list-group-item">
-                                <b>Email</b> <a class="pull-right"></a>
+                                <b>Email</b><a class="pull-right">{{$test[0]->email}}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Mobile Number</b> <a class="pull-right"></a>
+                                <b>Mobile Number</b><a class="pull-right">{{$test[0]->student_contact}}</a>
                             </li>                            
                         </ul>
                     </div>
@@ -50,35 +36,61 @@
             <!-- /.col -->
             <div class="col-md-6">
                 <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#activity" data-toggle="tab">Personal</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="active tab-pane" id="activity">
-                            <!-- Post -->
-                            <div class="post">
-                                <div class="user-block">
-                                    {{-- <img class="img-circle img-bordered-sm" src="" alt="user image">
-                                    <span class="username">
-                                        <a href="#"></a>
-                                    </span> --}}
-                                    {{-- <span class="description">Joined date - </span>
-                                    <h5>Date Of Birth - </h5>
-                                    <h5>NIC Number - </h5>
-                                    <h5>Gender - </h5>
-                                    <h5>Marital Status - </h5>
-                                    <h5>Address - </h5>
-                                    <h5>Division - </h5>
-                                    <h5>Designation - </h5>
-                                    <h5>Date Of Join - </h5> --}}
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#personal" data-toggle="tab">Perosnal</a></li>
+                            <li><a href="#acedemic" data-toggle="tab">Academic</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="active tab-pane" id="personal">
+                                <!-- Post -->
+                                <div class="post">
+                                    <div class="user-block">
+                                        <ul class="list-group list-group-unbordered">
+                                            <li class="list-group-item">
+                                                <b>Name</b><a class="pull-right">{{$test[0]->student_initials.' '.$test[0]->student_lastname}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>NIC</b><a class="pull-right">{{$test[0]->nic_no}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Index Number</b><a class="pull-right">{{$test[0]->index_num}}</a>
+                                            </li> 
+                                            <li class="list-group-item">
+                                                <b>Registration Number</b><a class="pull-right">{{$test[0]->reg_num}}</a>
+                                            </li>
+                                                                    
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
+                            <div class="tab-pane fade" id="acedemic">
+                                <!-- Post -->
+                                <div class="post">
+                                    <div class="user-block">
+                                        <ul class="list-group list-group-unbordered">
+                                            <li class="list-group-item">
+                                                <b>Name</b><a class="pull-right">{{$test[0]->student_initials.' '.$test[0]->student_lastname}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>NIC</b><a class="pull-right">{{$test[0]->nic_no}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <b>Index Number</b><a class="pull-right">{{$test[0]->index_num}}</a>
+                                            </li> 
+                                            <li class="list-group-item">
+                                                <b>Registration Number</b><a class="pull-right">{{$test[0]->reg_num}}</a>
+                                            </li>
+                                                                    
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.tab-pane -->
                         </div>
-                        <!-- /.tab-pane -->
+                        <!-- /.tab-content -->
                     </div>
-                    <!-- /.tab-content -->
-                </div>
-                <!-- /.nav-tabs-custom -->
+                
+                
             </div>
             <!-- /.col -->
         </div>

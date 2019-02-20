@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Hash;
 use View;
 use App\batch_detail;
 use App\student;
+use App\User;
 use App\cvDoc;
+use App\imgfile;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
@@ -136,6 +138,7 @@ class StudentController extends Controller
         $student->email=$request->email;
         $student->batch_id=$request->batch_id;
         $student->username=$request->reg_num;
+        $student->student_contact=$request->student_contact;
         $student->password=Hash::make($request['nic_num']);
         $student->save();
 
@@ -143,6 +146,16 @@ class StudentController extends Controller
         $name = $request->student_initials.' '.$request->student_lastname;
         $username = $request->email;
         $password = $request->nic_num;
+        //-------------------------------------
+        $user = new user;
+        $user->role_id=4;
+        $user->student_id=$student->student_id;
+        $user->username=$request->email;
+        // $user->password=Hash::make($request['nic_num']);
+        $user->password=$request->nic_num;
+        $user->save();
+        //------------------------------------------------------
+
 
         Mail::send(new StudentAddMail($email,$name,$username,$password));
 
@@ -174,7 +187,8 @@ class StudentController extends Controller
         
         $student = DB::table('students')
         ->leftJoin('cvdoc', 'students.student_id', '=', 'cvdoc.student_id')
-        ->select('students.*','cvdoc.cv_path')
+        ->leftJoin('imgfiles', 'cvdoc.student_id', '=', 'imgfiles.student_id')
+        ->select('students.*','cvdoc.cv_path','imgfiles.img_path')
         ->where('students.student_id','=',$id)
         ->get();
         
@@ -224,7 +238,7 @@ class StudentController extends Controller
     }
 
 
-
+//----------------------Needs to get student id----------------------------------
 
 
     public function addCV(Request $request)
@@ -239,5 +253,35 @@ class StudentController extends Controller
         $cv_file->cv_name = $name;
         $cv_file->save();        
         return redirect()->back()->with(['success'=>'CV added successfully']);
+    }
+
+    public function addimg(Request $request)
+    {
+         
+        $img_file = $request->file('img_file');
+        $extension =  '.'.$img_file->getClientOriginalExtension();
+        $oName = $img_file->getClientOriginalName();
+        $path =  $img_file->move('student_images/',$oName);
+        $name = $oName.md5($oName.Carbon::now()).$extension;        
+        $img = new imgfile;
+        $img->img_path = $path;
+        $img->img_name = $name;
+        $img->save();        
+        return redirect()->back()->with(['success'=>'Image changed successfully']);
+    }
+    //----------------------Needs to get student id----------------------------------
+
+
+
+    public function student_profile(Request $request){
+
+        // $test = student::where('student_id','=','1')->get();
+        // return $test[0]->email;
+        $test = DB::table('students')
+        ->leftJoin('imgfiles', 'students.student_id', '=', 'imgfiles.student_id')
+        ->select('students.*','imgfiles.img_path')
+        ->where('students.student_id','=',1)
+        ->get();
+        return view('student.student_profile_view',compact('test'));
     }
 }
