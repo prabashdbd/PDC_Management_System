@@ -69,7 +69,12 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-            <h3 id="student_name">Title</h3>
+        <center>    
+            <h3 id="student_name">Title</h3><hr>
+            <div id="img_frame">
+                <img src="//placehold.it/100" class="avatar img-circle" alt="avatar"id="user_image" style="width:150px;height:150px;" >
+            </div>
+        </center>
         </div>
         <div class="modal-body">
           {{-- <p>Some text in the modal.</p> --}}
@@ -164,7 +169,6 @@
           </div>
       </div>
   </div>
-
   
 
 @endsection
@@ -199,14 +203,17 @@
             success: function(data)
             { 
                 // console.log(data[0]);
-                if(data[0].cv_path != null){
+                if(data[0].cv_path != null && data[0].img_path !=null){
                     $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname+" "+" (Curriculum Vitae)");
-                    $('#cv_frame').show();
+                    $('#img_frame').show();
+                    $('#cv_frame').show();                    
+                    $('#user_image').attr("src","/"+data[0].img_path);
                     $('#cv').attr("src","/"+data[0].cv_path);
                     
                 }
                 else{
                     $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname+" "+" (Curriculum Vitae)");
+                    $('#img_frame').hide();
                     $('#cv_frame').hide();
                     
                 }
