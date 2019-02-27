@@ -71,6 +71,7 @@ Route::post('/student/delete','StudentController@stu_delete');
 
 
 Route::post('/csv/view', 'StudentController@csv_process')->name('StudentController.csv');
+Route::post('/table/test', 'StudentController@table_test')->name('StudentController.csv_submit');
 
 //-----Student-----
 

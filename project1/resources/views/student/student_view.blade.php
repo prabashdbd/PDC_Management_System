@@ -192,13 +192,13 @@
         $('#student_id').val(id);
         console.log(id);
         
-        $.ajax({
+        $.ajax({            
             url: '/student/viewStudent/{id}',
             type: 'GET',
             data: { id: id },
             success: function(data)
             { 
-                
+                // console.log(data[0]);
                 if(data[0].cv_path != null){
                     $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname+" "+" (Curriculum Vitae)");
                     $('#cv_frame').show();

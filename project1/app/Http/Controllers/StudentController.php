@@ -48,49 +48,33 @@ class StudentController extends Controller
 
     public function csv_process(Request $request)
     {
-
-        return "test";
-        // if($request->hasFile('upload-file')) {
-        //     //return $request;
-
-        //     $upload = $request->file('upload-file');
-        //     $batch = $request->batch_id;
-        //     $filePath = $upload->getRealPath();
-        //     $file = fopen($filePath,'r');
-        //     fgetcsv($file);
-        //     while($row = fgetcsv($file))
-        //     {
-        //         $data[] = array(
-        //         'student_id'  => $row[0],
-        //         'student_name'  => $row[1],
-        //         'student_phone'  => $row[2]
-        //         );
-        //     }
-        //     echo json_encode($data);
-        //     //return response($data);
-        //     //return json_encode($data);
-        // }
-        // else{
-        //     return "error";
-        // }
-        //--------------------------------------------------------
+        $batch = $request->batch_id;
+        // return $batch;
         $upload = $request->file('csv_file');
         $filePath = $upload->getRealPath();
         $file_data = fopen($filePath,'r');
-        // while(! feof($file_data)){
-        //     $data = fgetcsv($file_data);
-        //     echo json_encode($data);
-        // }
+        $csv_output = '';
+        $row = fgetcsv($file_data);
         while($row = fgetcsv($file_data))
         {
-            $data[] = array(
-            'student_id'  => $row[0],
-            'student_name'  => $row[1],
-            'student_phone'  => $row[2]
-            );
+            // $data[] = array(
+            // 'student_id'  => $row[0],
+            // 'student_name'  => $row[1],
+            // 'student_phone'  => $row[2]
+            // );
+           
+            $csv_output .= '<tr><td><input type="text" name="reg_num[]" value = "'.$row[0].'">'.'</td><td><input type="text" name="index_num[]" value = "'.$row[1].'">'.'</td><td><input type="text" name="student_initials[]" value = "'.$row[2].'">'.
+            '</td><td><input type="text" name="name_initials[]" value = "'.$row[3].'">'.'</td><td><input type="text" name="student_lastname[]" value = "'.$row[4].'">'.'</td><td><input type="text" name="nic_no[]" value = "'.$row[5].'">'.
+            '</td><td><input type="text" name="email[]" value = "'.$row[6].'">'.'</td><td><input type="text" name="student_contact[]" value = "'.$row[7].'">';
+            
         }
-        $jsondata = json_encode($data);
-        return response($jsondata);
+        // echo $csv_output;
+        echo json_encode(Array(
+            'record' => $csv_output,
+            'batch' => $batch,
+        ));
+        // echo json_encode($data);
+        // return response($data);
     }
 
 
@@ -283,5 +267,40 @@ class StudentController extends Controller
         ->where('students.student_id','=',1)
         ->get();
         return view('student.student_profile_view',compact('test'));
+    }
+
+
+
+
+    public function table_test(Request $request)
+    {
+        // return $request;
+        $batch = $request->batchid;
+        $reg_list = $request->input('reg_num');
+        $index_list = $request->input('index_num');
+        $initial_list = $request->input('student_initials');
+        $ini_name_list = $request->input('name_initials');
+        $lastname_list = $request->input('student_lastname');
+        $nic_list = $request->input('nic_no');
+        $email_list = $request->input('email');
+        $contact_list = $request->input('student_contact');
+        $size = sizeof($reg_list);
+        $index = 0;        
+        for ($index = 0; $index < $size; $index++){
+            $student = new student;
+            $student->reg_num=$reg_list[$index];
+            $student->index_num=$index_list[$index];
+            $student->student_initials=$initial_list[$index];
+            $student->name_initials=$ini_name_list[$index];
+            $student->student_lastname=$lastname_list[$index];
+            $student->nic_no=$nic_list [$index];
+            $student->email=$email_list[$index];
+            $student->student_contact=$contact_list[$index];
+            $student->username=$reg_list[$index];
+            // $student->password=Hash::make($fields[5]);
+            $student->batch_id=$batch;
+            $student->save();
+        } 
+        return redirect()->back()->with(['success'=>'Student list added successfully']);           
     }
 }

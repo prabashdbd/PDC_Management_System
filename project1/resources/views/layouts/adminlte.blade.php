@@ -407,7 +407,7 @@ desired effect
     <!-- Main content -->
     <section class="content container-fluid">
         
-    <input type="text" name="userid" value="{{$userid}}"/>
+    <input hidden type="text" name="userid" value=""/>
       @yield('content')
 
 

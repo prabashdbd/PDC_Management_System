@@ -2,8 +2,9 @@
 
 @section('styles')
 	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	
 	<link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+	
+	
 	<style>
 	.inputfile
 	 {
@@ -81,36 +82,51 @@
 	       <div class="panel-heading">Add students by a list<small style="color: white">&nbsp(Reg: NO, Index NO, Initials, Name by initials, Lastname, NIC, Email,Contact Number)</small>
 		   </div>
 	       <div class="panel-body">
-	       	<form method="POST" id="addbylist" enctype="multipart/form-data" action="{{URL::to('/students/add/addByList')}}">
+	       	{{-- <form method="POST" id="addbylist" enctype="multipart/form-data" action="{{URL::to('/students/add/addByList')}}">
 				   {{csrf_field()}}
 				   
-	       	  <div class="form-inline">
-	       	   <label>Select Group&nbsp </label>
-	       	   <select name="batch_id" id="group_id" class="form-control" style="width: 200px;">
-					@foreach($batch as $data)
-						<option value="{{$data->batch_id}}" >{{$data->batch_name}}</option>
-					@endforeach                                
-						   
-		        </select>
-               </div><br>
-
-               <div class="form-inline">
-               	<label for="upload-file">Choose a CSV file</label>
-               	<input type="file" id="upload-file" accept=".csv" class="form-control-file" name="upload-file"><br>
-               	
-               </div>
-               <br><br>
+	       	  
+               {{-- <br><br>
 
 	       	   <div align="right">
 
-					<button type="reset" name="btn_cancel" id="btn_cancel" class="btn btn-warning btn-sm">Abort</button>
-					<button type="button" name="btn_proceed" id="btn_proceed" class="btn btn-primary btn-sm">Proceed</button>
-					<button type="submit" name="btn_upload" id="btn_upload" class="btn btn-success btn-sm">Upload</button>      	   		
+					 --}}
+					{{-- <button type="button" name="btn_proceed" id="btn_proceed" class="btn btn-primary btn-sm">Proceed</button> --}}
+					{{-- <button type="submit" name="btn_upload" id="btn_upload" class="btn btn-success btn-sm">Upload</button>      	   		
 
 	       	   </div>
-       	</form>
-	    </div>
-	  </div>
+		   </form> --}}
+
+		   {{-- <form method="POST" id="csv_proceed" enctype="multipart/form-data" action="{{URL::to('/csv/view')}}"> --}}
+		   <form method="POST" id="csv_proceed" enctype="multipart/form-data">
+			{{csrf_field()}}
+			<div class="form-inline">
+				<label>Select Group&nbsp </label>
+				<select name="batch_id" id="group_id" class="form-control" style="width: 200px;">
+					   @foreach($batch as $data)
+						   <option value="{{$data->batch_id}}" >{{$data->batch_name}}</option>
+					   @endforeach                                
+						 
+			  </select>
+			 </div><br>
+
+			 {{-- <div class="form-inline">
+				 <label for="upload-file">Choose a CSV file</label>
+				 <input type="file" id="upload-file" accept=".csv" class="form-control-file" name="upload-file"><br>
+				 
+			 </div> --}}
+			<div class="form-inline">
+					<label for="upload-file">Choose a CSV file</label>
+					<input type="file" id="upload-file" accept=".csv" class="form-control-file" name="csv_file"><br>
+					
+			</div>
+			<div align="right">
+				<button type="reset" name="btn_cancel" id="btn_cancel" class="btn btn-warning btn-sm">Abort</button>
+		   		<button type="submit" name="btn_proceed" id="btn_proceed" class="btn btn-primary btn-sm">Proceed</button>
+			</div>
+		  </form>
+	       </div>
+	   	</div>
       
     </div>
       
@@ -216,21 +232,20 @@
 		<!-- Modal -->
 		
 	<div class="modal fade bd-example-modal-lg" id="csv-modal" aria-labelledby="csvModal" role="dialog">
-		<div class="modal-dialog modal-lg">
+		<div class="modal-dialog modal-lg" style="width:90%;">
 		
-		<!-- Modal content-->
+		<!-- Modal content-->		
 		<div class="modal-content">
-			<div class="modal-header">
-			
+			<div class="modal-header">			
 			</div>
-			<div class="modal-body">
-				
+			<div class="modal-body">				
 				<div style="overflow: auto">
-					<form>
-
+					<form id="csv_submit" method="POST" action="{{URL::to('/table/test')}}">
+							{{csrf_field()}}
+					<input hidden type="text" name="batchid" id="batchid" value="">							
 					<table id="csv-table" class="table table-striped table-bordered">
 						<thead>
-							{{-- <tr>
+							<tr>
 								<th>Reg No</th>
 								<th>Index No</th>
 								<th>Initials</th>
@@ -238,34 +253,34 @@
 								<th>Lastname</th>
 								<th>NIC No</th>
 								<th>Email</th>
+								<th>Contact Number</th>
 								
-							</tr> --}}
-							<tr>
+							</tr>
+							{{-- <tr>
 								<th>Student ID</th>
 								<th>Student Name</th>
 								<th>Student Phone</th>						
 									
-							</tr>
+							</tr> --}}
 						</thead>
-						<tbody>
-							
-
-
-
-						</tbody>
+						<tbody></tbody>
 					</table>
+					<div align="right" id="action">	
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						<button type="submit" name="btn_upload" id="btn_upload" class="btn btn-success btn-sm">Upload</button>
+					</div>
 					</form>
+					
 				</div>
-				
-			
 			</div>
 			
 			<div class="modal-footer">
+				{{-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="submit" name="btn_upload" id="btn_upload" class="btn btn-success btn-sm">Upload</button> --}}
 			
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			<button type="submit" name="btn_upload" id="btn_upload" class="btn btn-success btn-sm">Upload</button>
 			</div>
 		</div>
+		
 		
 		</div>
 	</div>
@@ -277,60 +292,43 @@
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 <script>
-	$(document).ready(function() {
-	$('#csv-table').DataTable();
-	});
-</script>
-<script>
-$(document).ready(function(){
-	$.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
-	
-	
-	$.noConflict();
-    
-	
+$(document).ready(function(){	
 	
 	$(".nav-tabs a").click(function(){
         $(this).tab('show');
+	});
+	$.noConflict();
+
+	$.ajaxSetup({
+	headers: {
+		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+	}
     });
+	$('#csv_proceed').on('submit',function(e){
+		e.preventDefault();		
 
-
-	$("#btn_proceed").click(function(){        
-		$('#csv-modal').modal('show');
-    });
-
-
-
-	$('#btn_proceed').click(function(){
+		// var url = $(this).attr('action');
 		$.ajax({
-			url:"{{route('StudentController.csv')}}",
+			url: "{{route('StudentController.csv')}}",
 			method:"POST",
 			data:new FormData(this),
 			dataType:'json',
 			contentType:false,
 			cache:false,
 			processData:false,
-			success:function(jsonData)
+			success:function(data)
 			{
-				console.log(jsonData);
-				// $('#upload-file').val('');
-				// $('#csv-table').DataTable({
-				// data  :  jsonData,
-				// columns :  [
-				// { data : "student_id" },
-				// { data : "student_name" },
-				// { data : "student_phone" }
-				// ]
-				// });
+				// console.log(data.record);
+				$('#csv-table tbody').html(data.record);
+				$('#batchid').val(data.batch);		
 				
-			}		
-		});
+			},	
+			error: (error) => {
+                     console.log(JSON.stringify(error));
+                }	
+		});			
 		$('#csv-modal').modal('show');
- 	});
+	 });	
 	
 });
 </script>

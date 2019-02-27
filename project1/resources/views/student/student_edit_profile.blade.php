@@ -18,7 +18,7 @@
         <div class="text-center">
           <form method="POST" id="addimg" enctype="multipart/form-data" action="{{URL::to('/addimg')}}">
           {{csrf_field()}}           
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar"id="edit_user_image" >
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar"id="edit_user_image" style="width:100px;height:100px;" >
           <h6>Upload a different photo...</h6>
           
           <input type="file" class="form-control" name="img_file"><br>
@@ -200,13 +200,13 @@ $(document).ready(function() {
 });
 $("#to_acedemic_info").click(function(){        
     
-    $('#personal_info_form').hide();		
+    $('#edit_student_form').hide();		
     $('#academic_info_form').show();
 });
 $("#to_personal_info").click(function(){        
     
     $('#academic_info_form').hide();		
-    $('#personal_info_form').show();
+    $('#edit_student_form').show();
 });
 
 
@@ -230,7 +230,7 @@ $(document).ready(function(){
         success: function(data)
         {    
             console.log(data);            
-            
+            $('#edit_user_image').attr("src","/"+data[0].img_path);
             $('#edit_student_initials').val(data[0].student_initials);
             $('#edit_name_initials').val(data[0].name_initials);
             $('#edit_student_initials').val(data[0].student_initials);
