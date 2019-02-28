@@ -71,10 +71,20 @@
         <div class="modal-header">
         <center>    
             <h3 id="student_name">Title</h3><hr>
-            <div id="img_frame">
-                <img src="//placehold.it/100" class="avatar img-circle" alt="avatar"id="user_image" style="width:150px;height:150px;" >
-            </div>
         </center>
+        <div class="row">
+            <div id="img_frame" class="col-md-2">
+                <img src="//placehold.it/100" class="avatar img-circle" alt="avatar"id="user_image" style="width:130px;height:130px;" >
+            </div>
+            <div class="col-md-10">
+                <ul>
+                <li><label>Name:&nbsp&nbsp</label><label style="color:gray" id="student_name_modal"></label></li>
+                <li><label>Email:&nbsp&nbsp</label><label style="color:gray" id="student_email_modal"></label></li>
+                <li><label>Contact:&nbsp&nbsp</label><label style="color:gray" id="student_contact_modal"></label></li>
+                </ul>
+            </div>
+        </div>
+        
         </div>
         <div class="modal-body">
           {{-- <p>Some text in the modal.</p> --}}
@@ -205,15 +215,23 @@
                 // console.log(data[0]);
                 if(data[0].cv_path != null && data[0].img_path !=null){
                     $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname+" "+" (Curriculum Vitae)");
-                    $('#img_frame').show();
-                    $('#cv_frame').show();                    
                     $('#user_image').attr("src","/"+data[0].img_path);
                     $('#cv').attr("src","/"+data[0].cv_path);
+                    $('#student_name_modal').html(data[0].student_initials+" "+data[0].student_lastname);
+                    $('#student_email_modal').html(data[0].email);
+                    $('#student_contact_modal').html(data[0].student_contact);
+                    $('#img_frame').show();
+                    $('#cv_frame').show();
+                    
                     
                 }
                 else{
                     $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname+" "+" (Curriculum Vitae)");
-                    $('#img_frame').hide();
+                    $('#user_image').attr("src","/"+data[0].img_path);
+                    $('#student_name_modal').val(data[0].student_initials+" "+data[0].student_lastname);
+                    $('#student_email_modal').val(data[0].email);
+                    $('#student_contact_modal').val(data[0].student_contact);
+                    $('#img_frame').show();                    
                     $('#cv_frame').hide();
                     
                 }
