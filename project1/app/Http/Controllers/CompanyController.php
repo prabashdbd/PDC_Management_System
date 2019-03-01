@@ -27,12 +27,22 @@ class CompanyController extends Controller
 
     public function approve()
     {
-        $id = $_POST['id'];   
-        $company_to_appr = company_detail::where('company_details.id','=',$id)->first();
+        $id = $_POST['id']; 
+        return $id;   
+        $company_to_appr = company_detail::where('company_details.id','=',$id)
+        ->where('company_details.is_approved','=','0')->first();
         $company_to_appr->is_approved=1;
         $company_to_appr->update();
 
         return $company_to_appr;
+        
+    }
+    public function delete_request()
+    {
+        $id = $_POST['id'];
+        $company_to_del = company_detail::where('company_details.id','=',$id)
+        ->where('company_details.is_approved','=','0')->first();
+        $company_to_del->delete();
         
     }
 

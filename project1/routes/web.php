@@ -83,6 +83,8 @@ Route::post('/table/test', 'StudentController@table_test')->name('StudentControl
 Route::post('/company/registration', 'CompanyController@CompanyReg');
 Route::get('/company/to_be_approved', 'CompanyController@approve_comp');
 Route::post('/company/approve', 'CompanyController@approve');
+Route::post('/company/delete_request', 'CompanyController@delete_request');
+
 //-----Company-----
 
 
