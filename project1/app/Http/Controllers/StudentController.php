@@ -1,4 +1,4 @@
-<?php
+git<?php
 
 namespace App\Http\Controllers;
 
@@ -135,6 +135,7 @@ class StudentController extends Controller
         $user->role_id=4;
         $user->student_id=$student->student_id;
         $user->username=$request->email;
+        $user->active=1;
         // $user->password=Hash::make($request['nic_num']);
         $user->password=$request->nic_num;
         $user->save();

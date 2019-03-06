@@ -37,7 +37,7 @@ Route::group(['middleware'=>'web'],function(){
 Auth::routes();
 
 //-----dashboard------
-Route::view('/adminlte/dash', "layouts/dashboard");
+Route::view('/adminlte/dash', "layouts/dashboard")->name('dashboard');
 //-----dashboard------
 
 //-----Messages-----
@@ -93,7 +93,7 @@ Route::get('/reports/student_with', 'ReportController@student_table');
 Route::get('/reports/comapny', 'ReportController@company_table');
 //-----Report-----
 
-Route::view('/log1',"auth/login1");
+
 
 
 Route::view('/test3', "test3");
@@ -126,7 +126,10 @@ Route::post('/verify/email', 'Auth\LoginController@validateUserEmail')->name('ve
 Route::post('/verify/password', 'Auth\LoginController@validateUserPassword')->name('verify_password');
 Route::post('/verify/user', 'Auth\LoginController@userLogin')->name('user_login');
 
-Route::post('/user/login', 'Auth\LoginController@userLoginTest');
+Route::view('/log1',"auth/login1")->name('login_page');
+// Route::post('/user/login', 'Auth\LoginController@userLoginTest');
+Route::post('/user/login', 'Auth\LoginController@authenticate');
+
 
 //-----Login-----
 

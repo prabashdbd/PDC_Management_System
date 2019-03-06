@@ -52,9 +52,9 @@
         </div>
         <!-- /.col -->
         <div class="col-xs-4">
-          <button id="login_btn" class="btn btn-primary btn-block btn-flat">Log In&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa fa-sign-in"></i></button>          
+          <button id="login_btn" type="submit" class="btn btn-primary btn-block btn-flat">Log In&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa fa-sign-in"></i></button>          
           {{-- <p><a class="btn btn-primary btn-block btn-flat" href="{{url('/adminlte')}}" role="submit">Log In&nbsp&nbsp&nbsp<i class="fa fa-sign-in"></i></a></p> --}}
-          <input type="submit" value="LOGIN"/>
+          {{-- <input type="submit" value="LOGIN"/> --}}
         </div>
         <!-- /.col -->
       </div>
@@ -94,9 +94,16 @@
       url:"{{route('verify_email')}}",
       data:{'email':email},
       success:function(data){
-        if(data){
-          console.log(data);
-          $('#email_error').html(data);
+        
+        if (!$.trim(data)){   
+            // alert("What follows is blank: " + data);
+            $('#email_error').html(data);
+            $('#login_btn').removeAttr('disabled');
+        }
+        else{   
+            // alert("What follows is not blank: " + data);
+            $('#email_error').html(data);
+            $('#login_btn').attr('disabled', 'disabled');
         }
       },
       error: (error) => {
@@ -120,9 +127,16 @@
       url:"{{route('verify_password')}}",
       data:{'password':password,'email':email},
       success:function(data){
-        if(data){
-          console.log(data);
-          $('#password_error').html(data);         
+        
+        if (!$.trim(data)){   
+            // alert("What follows is blank: " + data);
+            $('#password_error').html(data);
+            $('#login_btn').removeAttr('disabled');
+        }
+        else{   
+            // alert("What follows is not blank: " + data);
+            $('#password_error').html(data);
+            $('#login_btn').attr('disabled', 'disabled');
         }
       },
       error: (error) => {
