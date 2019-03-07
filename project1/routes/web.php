@@ -59,7 +59,7 @@ Route::POST('/students/add/addByList', 'StudentController@add_by_list');
 Route::POST('/students/add/addSingle', 'StudentController@add_single');
 Route::get('/students/add','StudentController@index_add');
 Route::get('/students/view','StudentController@index_view');
-Route::get('/student/readStudent/{id}', "StudentController@readStudent");
+Route::get('/student/readStudent{id}', "StudentController@readStudent");
 Route::get('/student/viewStudent/{id}', "StudentController@readStudent");
 Route::post('/student/add/update', 'StudentController@studentUpdate');
 Route::get('/student/profile/edit', 'StudentController@studentProfile');
@@ -69,6 +69,7 @@ Route::post('/addimg', 'StudentController@addimg');
 Route::get('/student/placements','StudentController@placements');
 Route::post('/student/delete','StudentController@stu_delete');
 
+Route::get('/student/profile/update', "StudentController@profileStudent");
 
 Route::post('/csv/view', 'StudentController@csv_process')->name('StudentController.csv');
 Route::post('/table/test', 'StudentController@table_test')->name('StudentController.csv_submit');
@@ -99,7 +100,7 @@ Route::get('/reports/comapny', 'ReportController@company_table');
 Route::view('/test3', "test3");
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/adminlte', 'HomeController@index')->name('home');
 
 
 Route::get('/comapanyhome', 'CompanyController@index_comp')->name('company');
@@ -109,15 +110,13 @@ Route::get('/visitor_reg1', "reg_test@index");
 Route::post('/visitor_reg1/action', "reg_test@action"); // testing___ delete
 Route::view('/sidebar', "sidebar_test");
 Route::view('/form_test1', "test");
-Route::view('/adminlte', "layouts/adminlte");
+Route::get('/adminlte', 'HomeController@index')->name('adminlte');
 Route::view('/form111', "Company/company_add");
 Route::view('/csv-to-table', "profile_view");
 Route::get('/company/view', 'CompanyController@index');
 
 
-Route::get('/admin','AdminController@index');
-// Route::view('/profile_view',"profile_view");
-Route::get('/profile_view','CompanyController@index');
+
 
 //});
 
@@ -129,6 +128,7 @@ Route::post('/verify/user', 'Auth\LoginController@userLogin')->name('user_login'
 Route::view('/log1',"auth/login1")->name('login_page');
 // Route::post('/user/login', 'Auth\LoginController@userLoginTest');
 Route::post('/user/login', 'Auth\LoginController@authenticate');
+Route::get('/user/logout', 'Auth\LoginController@logout');
 
 
 //-----Login-----

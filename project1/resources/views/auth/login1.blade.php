@@ -15,13 +15,13 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/bower_components/login/AdminLTE.min.css">
   <!-- iCheck -->
-  <link rel="stylesheet" href="/bower_components/login/blue.css">
+  {{-- <link rel="stylesheet" href="/bower_components/login/blue.css"> --}}
 
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 <body class="hold-transition login-page">
-
+  
 <div class="login-box">
   <div class="login-logo">
     <a href="#"><b>PDC</b>@UCSC</a>
@@ -43,15 +43,13 @@
         <span id="password_error" style="color:red"></span>
       </div>      
       <div class="row">
-        <div class="col-xs-8">
-          {{-- <div class="checkbox icheck">
-            <label>
-              <input type="checkbox"> Remember Me
-            </label>
-          </div> --}}
+        <div class="col-md-8">
+          <div class="checkbox">
+            <label><input type="checkbox" value="">Remember Me</label>
+          </div>
         </div>
         <!-- /.col -->
-        <div class="col-xs-4">
+        <div class="col-md-4">
           <button id="login_btn" type="submit" class="btn btn-primary btn-block btn-flat">Log In&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<i class="fa fa-sign-in"></i></button>          
           {{-- <p><a class="btn btn-primary btn-block btn-flat" href="{{url('/adminlte')}}" role="submit">Log In&nbsp&nbsp&nbsp<i class="fa fa-sign-in"></i></a></p> --}}
           {{-- <input type="submit" value="LOGIN"/> --}}
@@ -72,16 +70,10 @@
 <!-- Bootstrap 3.3.7 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- iCheck -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script>
+{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/iCheck/1.0.2/icheck.min.js"></script> --}}
 
 <script>
-  $(function () {
-    $('input').iCheck({
-      checkboxClass: 'icheckbox_square-blue',
-      radioClass: 'iradio_square-blue',
-      increaseArea: '20%' /* optional */
-    });
-  });  
+   
 
   $('#email').change(function(){
     

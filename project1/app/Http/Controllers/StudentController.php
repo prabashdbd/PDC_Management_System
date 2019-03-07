@@ -1,4 +1,4 @@
-git<?php
+<?php
 
 namespace App\Http\Controllers;
 
@@ -152,19 +152,18 @@ class StudentController extends Controller
         
     }
 
-    public function stu_delete()    {
+    // public function stu_delete()    {
 
-        $id = $_POST['id'];   
-        $student_dlt = student::where('student.student_id','=',$id)->first()->delete(); 
+    //     $id = $_POST['id'];   
+    //     $student_dlt = student::where('student.student_id','=',$id)->first()->delete(); 
 
-    }
+    // }
 
 
     
 
     public function readStudent(){
         $id = $_GET['id'];
-               
         
         $student = DB::table('students')
         ->leftJoin('cvdoc', 'students.student_id', '=', 'cvdoc.student_id')
@@ -209,7 +208,8 @@ class StudentController extends Controller
 
     public function studentProfile(Request $request){
 
-        return view('student.student_edit_profile');
+        $sid = auth()->user()->student_id;
+        return view('student.student_edit_profile',compact('sid'));
     }
 
 
@@ -225,6 +225,7 @@ class StudentController extends Controller
     public function addCV(Request $request)
     {
         $cv_file = $request->file('cv-file');
+        $student = $request->cv_student_id;
         $extension =  '.'.$cv_file->getClientOriginalExtension();
         $oName = $cv_file->getClientOriginalName();
         $path =  $cv_file->move('cv_documents/',$oName);
@@ -232,21 +233,27 @@ class StudentController extends Controller
         $cv_file = new cvDoc;
         $cv_file->cv_path = $path;
         $cv_file->cv_name = $name;
+        $cv_file->student_id = $student;
         $cv_file->save();        
         return redirect()->back()->with(['success'=>'CV added successfully']);
     }
 
     public function addimg(Request $request)
     {
-         
+        $this->validate($request, [
+            'img_file' => 'image|required|mimes:jpeg,png,jpg,gif,svg'
+         ]);
+        $student = $request->img_student_id;
         $img_file = $request->file('img_file');
         $extension =  '.'.$img_file->getClientOriginalExtension();
         $oName = $img_file->getClientOriginalName();
         $path =  $img_file->move('student_images/',$oName);
-        $name = $oName.md5($oName.Carbon::now()).$extension;        
+        $name = $oName.md5($oName.Carbon::now()).$extension;
+                
         $img = new imgfile;
         $img->img_path = $path;
         $img->img_name = $name;
+        $img->student_id = $student;
         $img->save();        
         return redirect()->back()->with(['success'=>'Image changed successfully']);
     }
@@ -255,13 +262,12 @@ class StudentController extends Controller
 
 
     public function student_profile(Request $request){
-
-        // $test = student::where('student_id','=','1')->get();
-        // return $test[0]->email;
+        
+        $sid = auth()->user()->student_id;
         $test = DB::table('students')
         ->leftJoin('imgfiles', 'students.student_id', '=', 'imgfiles.student_id')
         ->select('students.*','imgfiles.img_path')
-        ->where('students.student_id','=',1)
+        ->where('students.student_id','=',$sid)
         ->get();
         return view('student.student_profile_view',compact('test'));
     }

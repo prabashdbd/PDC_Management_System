@@ -20,12 +20,13 @@
           {{csrf_field()}}           
           <img src="//placehold.it/100" class="avatar img-circle" alt="avatar"id="edit_user_image" style="width:100px;height:100px;" >
           <h6>Upload a different photo...</h6>
-          
+          <input hidden type="text" name="img_student_id" id="img_student_id" value="{{$sid}}">
           <input type="file" class="form-control" name="img_file"><br>
           <button type="submit" class="btn btn-primary" id="img_upload" >Upload</button>
           </form><br><br>
           <label>Upload CV (Choose a PDF file)</label>
           <form method="POST" id="addcv" enctype="multipart/form-data" action="{{URL::to('/addcv')}}">
+            <input hidden type="text" name="cv_student_id" id="cv_student_id" value="{{$sid}}">
             {{csrf_field()}}    
             <div class="form-group">         
                 <input type="file" class="form-control" name="cv-file"><br>
@@ -49,7 +50,7 @@
         <form class="form-horizontal" role="form" action="{{ url('/student/add/update')}}" method="POST" id="edit_student_form"> 
                       {{csrf_field()}}
           <h3>Personal Info</h3>
-          <input hidden type="text" name="id" id="student_id">
+          <input hidden type="text" name="id" id="student_id" value="{{$sid}}">
           <div class="form-group">
             <label class="col-lg-3 control-label">Initials:</label>
             <div class="col-lg-8">
@@ -218,13 +219,13 @@ $("#to_personal_info").click(function(){
 
 //------------------------------------------------------------
 $(document).ready(function(){
-    var id = 1;
-    $('#student_id').val(id);
+    var id = $('#student_id').val();
+    // $('#student_id').val(id);
     // console.log(id);
         /* getting existing data to modal */
 
     $.ajax({
-        url: '/student/readStudent/{id}',
+        url: '/student/readStudent{id}',
         type: 'GET',
         data: { id: id },
         success: function(data)

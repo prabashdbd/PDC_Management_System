@@ -212,7 +212,7 @@ desired effect
                   <a href="{{url('/student/profile')}}" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="{{url('/user/logout')}}  " class="btn btn-default btn-flat">Log Out</a>
                 </div>
               </li>
             </ul>
@@ -405,9 +405,10 @@ desired effect
     
 
     <!-- Main content -->
-    <section class="content container-fluid">
-        
-    <input hidden type="text" name="userid" value=""/>
+    <section class="content container-fluid"> 
+      {{-- {{$id}}
+      {{$sid}}
+      {{$cid}} --}}
       @yield('content')
 
 

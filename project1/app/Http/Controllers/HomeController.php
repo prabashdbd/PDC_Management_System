@@ -3,6 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\student;
+use App\User;
+use App\company_detail;
+use App\imgfile;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -21,10 +26,31 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    // public function index(Request $request)
+    // {
+    //     $id = auth()->user()->id;
+    //     $sid = auth()->user()->student_id;
+    //     $cid = auth()->user()->company_id;
+
+    //     if($sid!=null && $cid==null )
+    //     {
+    //         $student = DB::table('students')
+    //         ->leftJoin('imgfiles', 'students.student_id', '=', 'imgfiles.student_id')
+    //         ->select('students.*','imgfiles.img_path')
+    //         ->where('students.student_id','=',$sid)
+    //         ->get();
+    //         return view('layouts.adminlte',compact('student')); 
+    //     }
+    //     elseif($cid!=null && $sid==null)
+    //     {
+    //         $company = company_detail::where('id','=',$cid)->first();
+    //         return view('layouts.adminlte',compact('comapny'));
+    //     }
+    //     else
+    //     {
+    //         $user = user::where('id','=',$id)->first();
+    //         return view('layouts.adminlte',compact('user'));
+    //     }
         
-        //return view('home');
-        return view('layouts.adminlte');
-    }
+    // }
 }

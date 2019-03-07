@@ -213,7 +213,7 @@ $(document).on('click','#view',function(e){
         success: function(data)
         { 
             // console.log(data[0]);
-            if(data[0].cv_path != null && data[0].img_path !=null){
+            if(data[0].cv_path != null){
                 $('#student_name').html(data[0].student_initials+" "+data[0].student_lastname+" "+" (Curriculum Vitae)");
                 $('#user_image').attr("src","/"+data[0].img_path);
                 $('#cv').attr("src","/"+data[0].cv_path);
