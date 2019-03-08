@@ -1,8 +1,7 @@
 @extends('layouts.adminlte')
 
 @section('styles')
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
-     
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">     
     
     <meta name="csrf-token" content="{{ csrf_token() }}">
     
@@ -80,7 +79,7 @@
           <div class="form-group">
             <label class="col-lg-3 control-label">Contact Number:</label>
             <div class="col-lg-8">
-             <input class="form-control" name="student_contact" type="email" value="" id="edit_student_contact">
+             <input class="form-control" name="student_contact" type="text" value="" id="edit_student_contact">
             </div>
           </div>
 
@@ -125,54 +124,37 @@
 
 
 
-        <form class="form-horizontal" role="form" id="academic_info_form" hidden>
+        <form class="form-horizontal" action="{{ url('/student/add/update/academic')}}" method="POST" role="form" id="academic_info_form" hidden>
+            {{csrf_field()}}
             <h3>Academic Info</h3>
+            <input hidden type="text" name="id" value="{{$sid}}">
             <div class="form-group">
-                <label class="col-lg-3 control-label">Initials:</label>
+                <label class="col-lg-3 control-label">Degree</label>
                 <div class="col-lg-8">
-                    <input class="form-control" type="text" value="">
-                </div>
+                    {{-- <input class="form-control" type="text" name="degree"value="" id="edit_degree"> --}}
+                    <select class="form-control" name="degree" id="edit_degree">
+                        <option value="Bsc. Computer Science">Bsc. Computer Science</option>
+                        <option value="Bsc. Information Technology">Bsc. Information Technology</option>
+                    </select>
+                </div>                
             </div>
             
             <div class="form-group">
-                <label class="col-lg-3 control-label">First name:</label>
+                <label class="col-lg-3 control-label">General / Special</label>
                 <div class="col-lg-8">
-                <input class="form-control" type="text" value="">
+                {{-- <input class="form-control" type="text" name="degree_type"value="" id="edit_degree_type"> --}}
+                <select class="form-control" name="degree_type" id="edit_degree_type">
+                    <option value="General (3 Year)">General (3 Year)</option>
+                    <option value="Special (4 Year)">Special (4 Year)</option>
+                </select>
                 </div>
             </div>
-            
-            <div class="form-group">
-                <label class="col-lg-3 control-label">Last name:</label>
-                <div class="col-lg-8">
-                <input class="form-control" type="text" value="">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-3 control-label">NIC:</label>
-                <div class="col-lg-8">
-                <input class="form-control" type="text" value="">
-                </div>
-            </div>
-            
-            <div class="form-group">
-                <label class="col-lg-3 control-label">Index Number:</label>
-                <div class="col-lg-8">
-                <input class="form-control" type="text" value="">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-lg-3 control-label">Registration Number:</label>
-                <div class="col-lg-8">
-                <input class="form-control" type="text" value="">
-                </div>
-            </div>
-            
-            
+
             <div class="form-group">
                 <label class="col-lg-3 control-label"></label>
                 
                 <div class="col-md-5" align= "left">               
-                <input type="button" class="btn btn-success" value="Save Changes">
+                <input type="submit" class="btn btn-success" value="Save Changes">
                 <span></span>
                 <input type="reset" class="btn btn-default" value="Cancel">
                     
@@ -184,7 +166,7 @@
             </div>
         </form>
 
-      </div>
+    </div>
   </div>
 </div>
 <hr>
@@ -241,6 +223,8 @@ $(document).ready(function(){
             $('#edit_index_num').val(data[0].index_num);
             $('#edit_reg_num').val(data[0].reg_num);
             $('#edit_nic_no').val(data[0].nic_no);
+            $('#edit_degree').val(data[0].degree);
+            $('#edit_degree_type').val(data[0].degree_type);
 
         },
         error: function(xhr, textStatus, error){
@@ -249,7 +233,7 @@ $(document).ready(function(){
     });
     
 
-    $('#save_changes').on('click',function(e){
+    $('#edit_student_form').on('submit',function(e){
         console.log("data"); 
         e.preventDefault();
         var url = $('#edit_student_form').attr('action');
@@ -276,6 +260,36 @@ $(document).ready(function(){
         }, 2000);               
         
     });
+
+    $('#academic_info_form').on('submit',function(e){
+        console.log("data"); 
+        e.preventDefault();
+        var url = $('#academic_info_form').attr('action');
+        var data = $('#academic_info_form').serialize();
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data, //contentType: "application/json; charset=utf-8",
+            //dataType: "json",
+            success: function(data)
+            {     
+                console.log(data);
+                swal("Success!", "Details Updated", "success");
+                
+                      
+            },
+            error: (error) => {
+                  console.log(JSON.stringify(error));
+            }
+        });                         
+          
+        setTimeout(function(){  
+            location.reload();  
+        }, 2000);               
+        
+    });
+
+
 
   });
       //---------------------------------------------------------------------------

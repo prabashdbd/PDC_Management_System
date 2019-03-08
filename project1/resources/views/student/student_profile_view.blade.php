@@ -71,17 +71,11 @@
                                     <div class="user-block">
                                         <ul class="list-group list-group-unbordered">
                                             <li class="list-group-item">
-                                                <b>Name</b><a class="pull-right">{{$test[0]->student_initials.' '.$test[0]->student_lastname}}</a>
+                                                <b>Degree course</b><a class="pull-right">{{$test[0]->degree}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                <b>NIC</b><a class="pull-right">{{$test[0]->nic_no}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <b>Index Number</b><a class="pull-right">{{$test[0]->index_num}}</a>
-                                            </li> 
-                                            <li class="list-group-item">
-                                                <b>Registration Number</b><a class="pull-right">{{$test[0]->reg_num}}</a>
-                                            </li>
+                                                <b>General / Special</b><a class="pull-right">{{$test[0]->degree_type}}</a>
+                                            </li>                                                                                     
                                                                     
                                         </ul>
                                     </div>

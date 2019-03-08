@@ -53,17 +53,21 @@ class student extends Model
 
     public function cvDoc()
 	{
-        return $this-hasOne('App\cvDoc','student_id');
+        return $this->hasOne('App\cvDoc','student_id');
         
     }
     public function imgfile()
 	{
-        return $this-hasOne('App\imgfile','student_id');
+        return $this->hasOne('App\imgfile','student_id');
         
     }
+    
     public function user()
 	{
-        return $this->belongsTo('App\User','student_id','student_id');
+        return $this->hasOne('App\User');
         
-    }
+    } 
+      
+
+
 }

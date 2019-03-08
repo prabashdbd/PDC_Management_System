@@ -43,9 +43,10 @@ class User extends Authenticatable
 
         return $this->hasMany('App\company_detail','company_id','id');
     }
+    
     public function student(){
 
-        return $this->hasMany('App\student','student_id','student_id');
+        return $this->belongsTo('App\student','student_id');
     }
 
 

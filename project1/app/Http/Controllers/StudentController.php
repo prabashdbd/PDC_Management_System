@@ -57,24 +57,18 @@ class StudentController extends Controller
         $row = fgetcsv($file_data);
         while($row = fgetcsv($file_data))
         {
-            // $data[] = array(
-            // 'student_id'  => $row[0],
-            // 'student_name'  => $row[1],
-            // 'student_phone'  => $row[2]
-            // );
-           
+            
             $csv_output .= '<tr><td><input type="text" name="reg_num[]" value = "'.$row[0].'">'.'</td><td><input type="text" name="index_num[]" value = "'.$row[1].'">'.'</td><td><input type="text" name="student_initials[]" value = "'.$row[2].'">'.
             '</td><td><input type="text" name="name_initials[]" value = "'.$row[3].'">'.'</td><td><input type="text" name="student_lastname[]" value = "'.$row[4].'">'.'</td><td><input type="text" name="nic_no[]" value = "'.$row[5].'">'.
             '</td><td><input type="text" name="email[]" value = "'.$row[6].'">'.'</td><td><input type="text" name="student_contact[]" value = "'.$row[7].'">';
             
         }
-        // echo $csv_output;
+        
         echo json_encode(Array(
             'record' => $csv_output,
             'batch' => $batch,
         ));
-        // echo json_encode($data);
-        // return response($data);
+        
     }
 
 
@@ -147,8 +141,6 @@ class StudentController extends Controller
         return redirect()->back()->with(['success'=>'Student record added successfully & the credentials were sent']);
     
 
-        // return $student;
-        // return $request;
         
     }
 
@@ -193,7 +185,26 @@ class StudentController extends Controller
             $student->reg_num=$request->reg_num;
             $student->nic_no=$request->nic_num;
             $student->student_contact=$request->student_contact;
-            $student->email=$request->email;
+            $student->email=$request->email;            
+        
+            $student->update();
+
+            return $student;
+
+           
+        }
+
+    }
+
+    public function studentUpdateAcademic(Request $request){
+        
+        if($request->ajax()){
+
+            $id = $request->id ;
+            
+            $student = student::where('students.student_id','=',$id)->first();             
+            $student->degree=$request->degree;
+            $student->degree_type=$request->degree_type;          
         
             $student->update();
 
@@ -205,6 +216,8 @@ class StudentController extends Controller
         }
 
     }
+
+
 
     public function studentProfile(Request $request){
 

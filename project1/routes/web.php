@@ -62,6 +62,7 @@ Route::get('/students/view','StudentController@index_view');
 Route::get('/student/readStudent{id}', "StudentController@readStudent");
 Route::get('/student/viewStudent/{id}', "StudentController@readStudent");
 Route::post('/student/add/update', 'StudentController@studentUpdate');
+Route::post('/student/add/update/academic', 'StudentController@studentUpdateAcademic');
 Route::get('/student/profile/edit', 'StudentController@studentProfile');
 Route::get('/student/profile','StudentController@student_profile');
 Route::post('/addcv', 'StudentController@addCV');
