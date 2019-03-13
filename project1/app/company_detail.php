@@ -44,7 +44,22 @@ class company_detail extends Model
 
     public function user()
 	{
-        return $this->belongsTo('App\User','id','company_id');
+        return $this->hasOne('App\User');
+        
+    }
+    public function getName()
+	{
+        return "{$this->comp_name}";
+        
+    }
+    public function getWeb()
+	{
+        return "{$this->comp_website}";
+        
+    }
+    public function companyAdverts()
+    {
+        return $this->hasMany('App\companyAdverts');
         
     }
 }

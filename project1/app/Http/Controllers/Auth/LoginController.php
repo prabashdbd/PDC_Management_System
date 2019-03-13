@@ -141,7 +141,7 @@ class LoginController extends Controller
             }
             
             // return redirect()->route('adminlte');
-            return view('layouts.adminlte',compact('id'));
+            // return view('layouts.adminlte',compact('id'));
         } 
         else
         {

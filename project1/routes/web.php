@@ -86,13 +86,14 @@ Route::post('/company/registration', 'CompanyController@CompanyReg');
 Route::get('/company/to_be_approved', 'CompanyController@approve_comp');
 Route::post('/company/approve', 'CompanyController@approve');
 Route::post('/company/delete_request', 'CompanyController@delete_request');
+Route::get('/company/adverts', 'CompanyController@adverts');
 
 //-----Company-----
 
 
 //-----Report-----
 Route::get('/reports/student_with', 'ReportController@student_table');
-Route::get('/reports/comapny', 'ReportController@company_table');
+Route::get('/reports/company', 'ReportController@company_table');
 //-----Report-----
 
 

@@ -27,5 +27,9 @@ class imgfile extends Model
         return $this->belongsTo('App\student','student_id');
         
     }
+    public function getImage()
+    {        
+        return "{$this->img_path}";
+    }
     
 }

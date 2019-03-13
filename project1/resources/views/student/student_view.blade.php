@@ -1,16 +1,23 @@
 @extends('layouts.adminlte')
 
 @section('styles')
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css"> 
+        
     
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>  
+ 
 
     {{-- <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script> --}}
 @endsection
 @section('content')
+<?PHP 
+$isStudent = Auth::user()->isStudent();
+$isCompany = Auth::user()->isCompany();
+$isAdmin = Auth::user()->isAdmin();
+?>
 
 @include('layouts.success')
   <h3>View Student Details</h3><br>
@@ -46,10 +53,16 @@
 
 
                 <td>
-                <button class="btn btn-primary btn-sm" id ="view" data-toggle="modal" data-id="{{$student->student_id}}">View</button>
+                
+                
+                <button class="btn btn-primary btn-sm" id ="view" data-toggle="modal" data-id="{{$student->student_id}}">View</button>                
+                @if($isAdmin)
                 <button class="btn btn-info btn-sm" id="edit" data-toggle="modal" data-id="{{$student->student_id}}">Edit</button>
+                @endif
+                @if($isAdmin)
                 <button class="btn btn-danger btn-sm toDelete" data-toggle="modal" value="{{$student->student_id}}" data-id="{{$student->student_id}}">Delete</button></td>
-                </tr>
+                @endif
+            </tr>
             @endforeach
             
           </tbody>
@@ -183,12 +196,10 @@
 
 @endsection
 
-@section('script')
-
+@section('script') 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
 
 <script>
 $.ajaxSetup({

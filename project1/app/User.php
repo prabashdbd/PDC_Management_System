@@ -39,9 +39,9 @@ class User extends Authenticatable
 
 
     }
-    public function company(){
+    public function company_detail(){
 
-        return $this->hasMany('App\company_detail','company_id','id');
+        return $this->belongsTo('App\company_detail','company_id');
     }
     
     public function student(){
@@ -61,5 +61,28 @@ class User extends Authenticatable
 
 
     // }
+    public function isStudent(){
+
+        if($this->role_id == 4){
+            return true;
+        }
+        return false;
+    }
+    public function isCompany(){
+
+        if($this->role_id == 3){
+            return true;
+        }
+        return false;
+    }
+    public function isAdmin(){
+
+        if($this->role_id == 1 || $this->role_id == 2){
+            return true;
+        }
+        return false;
+    }
+
+    
 
 }

@@ -94,4 +94,8 @@ class CompanyController extends Controller
         return redirect()->back()->with(['success'=>'Company Registered successfully !']);
 
     }
+    public function adverts(Request $request)
+    {
+        return view ('company.company_advert');
+    }
 }

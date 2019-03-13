@@ -50,6 +50,12 @@ class student extends Model
         
         return "{$this->student_initials} {$this->student_lastname}";
     }
+    public function getIndex()
+    {
+        
+        return "{$this->index_num}";
+    }
+    
 
     public function cvDoc()
 	{
