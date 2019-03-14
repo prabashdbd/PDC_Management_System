@@ -322,6 +322,7 @@ desired effect
           url()->current() == url('/form111')||
           url()->current() == url('/company/to_be_approved')||
           url()->current() == url('/company/view')||
+          url()->current() == url('/company/adverts/view')||
           url()->current() == url('/company/adverts')?'active':''
         }}
         
@@ -338,11 +339,14 @@ desired effect
             <li class="{{url()->current() == url('/form111')?'active':''}}"><a href="{{url('/form111')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li>
             @endif
             @if($isAdmin)
-            <li class="{{url()->current() == url('/company/to_be_approved')?'active':''}}"><a href="{{url('/company/to_be_approved')}}"><i class="fa fa-check"></i><span>Approve</span></a></li>
+            <li class="{{url()->current() == url('/company/to_be_approved')?'active':''}}"><a href="{{url('/company/to_be_approved')}}"><i class="fa fa-check"></i><span>Approve Request</span></a></li>
             @endif
             <li class="{{url()->current() == url('/company/view')?'active':''}}"><a href="{{url('/company/view')}}"><i class="fa fa-eye"></i><span>View</span></a></li>
             @if($isCompany)
             <li class="{{url()->current() == url('/company/adverts')?'active':''}}"><a href="{{url('/company/adverts')}}"><i class="fa fa-bullhorn"></i><span>Publish Advert</span></a></li>
+            @endif
+            @if($isAdmin)
+            <li class="{{url()->current() == url('/company/adverts/view')?'active':''}}"><a href="{{url('/company/adverts/view')}}"><i class="fa fa-check"></i><span>Approve Advert</span></a></li>
             @endif
           </ul>
         </li>

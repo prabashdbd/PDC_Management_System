@@ -87,7 +87,8 @@ Route::get('/company/to_be_approved', 'CompanyController@approve_comp');
 Route::post('/company/approve', 'CompanyController@approve');
 Route::post('/company/delete_request', 'CompanyController@delete_request');
 Route::get('/company/adverts', 'CompanyController@adverts');
-
+Route::post('/company/adverts/add', 'CompanyController@add_advert');
+Route::get('/company/adverts/view', 'CompanyController@advert_view');
 //-----Company-----
 
 

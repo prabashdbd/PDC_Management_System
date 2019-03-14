@@ -116,8 +116,8 @@
 				 
 			 </div> --}}
 			<div class="form-inline">
-					<label for="upload-file">Choose a CSV file</label>
-					<input type="file" id="upload-file" accept=".csv" class="form-control-file" name="csv_file"><br>
+				<label for="upload-file">Choose a CSV file</label>
+				<input type="file" id="upload-file" accept=".csv" class="form-control-file" name="csv_file"><br>
 					
 			</div>
 			<div align="right">

@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\company_detail;
 use App\User;
+use App\companyAdverts;
 use App\contact_person;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class CompanyController extends Controller
@@ -96,6 +100,62 @@ class CompanyController extends Controller
     }
     public function adverts(Request $request)
     {
-        return view ('company.company_advert');
+        $cid = Auth::user()->company_id;
+        $advert = companyAdverts::where('comp_adverts.company_id','=',$cid)->get();
+        return view ('company.company_advert',compact('cid','advert'));
+    }
+
+    public function add_advert(Request $request)
+    {
+        if($request->ajax()){
+
+            $this->validate($request, [
+                'advert_file' => 'required|mimes:pdf|max:10240',
+                'ad_name' => 'required',
+                'ad_info' => 'required',
+             ]);
+            $cid = $request->cid ;
+
+            $advert = new companyAdverts;
+            $advert->company_id = $request->cid;
+            $advert->ad_name = $request->ad_name;
+            $advert->ad_info = strip_tags($request->ad_info);
+            $advert->no_vacancies = $request->no_vacancies;
+            $advert->is_approved = 0;
+
+
+            $advert_file = $request->file('advert_file');
+            $extension =  '.'.$advert_file->getClientOriginalExtension();
+            $adName = $advert_file->getClientOriginalName();
+            $path =  $advert_file->move('advert_documents/',$adName);
+
+            $advert->ad_path = $path;
+            $advert->save();
+
+            return $advert;                        
+            
+        }
+    }
+
+    public function advert_view(Request $request)
+    {        
+         $advert_appr = DB::table('comp_adverts')
+        ->leftJoin('company_details', 'comp_adverts.company_id', '=', 'company_details.id')
+        ->select('comp_adverts.*','company_details.comp_name')
+        ->where('comp_adverts.is_approved','=','0')
+        ->get();
+        // return $advert_appr;
+        return view ('company.company_approve_advert',compact('advert_appr'));
+    }
+
+    public function advert_approve(Request $request)
+    {        
+         $advert_appr = DB::table('comp_adverts')
+        ->leftJoin('company_details', 'comp_adverts.company_id', '=', 'company_details.id')
+        ->select('comp_adverts.*','company_details.comp_name')
+        ->where('comp_adverts.is_approved','=','0')
+        ->get();
+        // return $advert_appr;
+        return view ('company.company_approve_advert',compact('advert_appr'));
     }
 }

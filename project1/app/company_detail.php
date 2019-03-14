@@ -52,6 +52,7 @@ class company_detail extends Model
         return "{$this->comp_name}";
         
     }
+    
     public function getWeb()
 	{
         return "{$this->comp_website}";

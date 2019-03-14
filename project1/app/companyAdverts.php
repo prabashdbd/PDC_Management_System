@@ -15,7 +15,9 @@ class companyAdverts extends Model
         'ad_name',
         'ad_path',
         'ad_info',
+        'no_vacancies',
         'is_approved',
+        'approved_at',
     ];
     
     public function company_detail(){

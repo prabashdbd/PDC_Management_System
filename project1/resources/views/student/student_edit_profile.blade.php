@@ -15,6 +15,7 @@
       <!-- left column -->
       <div class="col-md-3">
         <div class="text-center">
+                
           <form method="POST" id="addimg" enctype="multipart/form-data" action="{{URL::to('/addimg')}}">
           {{csrf_field()}}           
           <img src="//placehold.it/100" class="avatar img-circle" alt="avatar"id="edit_user_image" style="width:100px;height:100px;" >
@@ -23,6 +24,8 @@
           <input type="file" class="form-control" name="img_file"><br>
           <button type="submit" class="btn btn-primary" id="img_upload" >Upload</button>
           </form><br><br>
+
+
           <label>Upload CV (Choose a PDF file)</label>
           <form method="POST" id="addcv" enctype="multipart/form-data" action="{{URL::to('/addcv')}}">
             <input hidden type="text" name="cv_student_id" id="cv_student_id" value="{{$sid}}">
@@ -191,13 +194,6 @@ $("#to_personal_info").click(function(){
     $('#academic_info_form').hide();		
     $('#edit_student_form').show();
 });
-
-
-
-
-
-
-
 
 //------------------------------------------------------------
 $(document).ready(function(){
