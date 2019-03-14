@@ -89,6 +89,8 @@ Route::post('/company/delete_request', 'CompanyController@delete_request');
 Route::get('/company/adverts', 'CompanyController@adverts');
 Route::post('/company/adverts/add', 'CompanyController@add_advert');
 Route::get('/company/adverts/view', 'CompanyController@advert_view');
+Route::get('/company/adverts/modalview', 'CompanyController@advert_view_approve');
+Route::post('/company/adverts/approve', 'CompanyController@advert_approve');
 //-----Company-----
 
 

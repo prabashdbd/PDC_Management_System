@@ -85,7 +85,7 @@
                             <div class="form-group">
                                 <label class="col-lg-3 control-label">Add file (PDF)</label>
                                 <div class="col-lg-8">
-                                    <input type="file" id="advert_file" accept="application/pdf" class="form-control" name="advert_file"><br>
+                                    <input type="file" id="advert_file" class="form-control" name="advert_file"><br>
                                 </div>
                                     
                             </div>

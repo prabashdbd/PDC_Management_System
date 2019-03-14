@@ -42,17 +42,22 @@
         <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h3 class="modal-title">Approve company</h3>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+                <center><p><h3 id="modal_heading"></h3><p></center>
+                <center><p><h5 id="modal_sub_heading"></h5><p></center>                
             </div>
             <div class="modal-body">
-            <p>The company will be registered with PDC of UCSC</p>
+                <label><u>Brief description on the advert</u></label>
+                <p id="ad_infomation"></p><br>
+                <center>
+                <div id ='ad_frame'>
+                    <iframe src="" id="advert_pdf" frameborder="0" width="100%" height="400px"></iframe>
+                </div>
+                  
+                </center>
             </div>
             <div class="modal-footer">            
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="button" id="approve" value="" class="btn btn-success approve">Approve</button>
+            <button type="button" id="approve" class="btn btn-success approve" data-id="">Approve</button>
             </div>
         </div>
         </div>
@@ -70,42 +75,62 @@
       $('#advert_approve').DataTable();
     });
 
-    // $('.approve').on('click',function(e){         
-    //     e.preventDefault();
-    //     var id = $(this).data('id');
-    //     console.log(id);
-    //     $.ajax({
-    //         headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //         },
-    //         url: '/company/approve',
-    //         type: 'POST',
-    //         data: {id:id}, 
-    //         success: function(data)
-    //         {     
-    //             console.log(data);
-    //             $('#confirm_modal').modal('hide');
-    //             swal("Success!", "Company Approved", "success");
-    //         },
-    //         error: (error) => {
-    //             console.log(JSON.stringify(error));
-    //         }
-    //     });
-          
-    //     setTimeout(function(){  
-    //         location.reload();;  
-    //     }, 3000);
-                               
-        
-    // });
-    //
-    
-    $('.toApprove').on('click',function(e){
+    $('.toApprove').on('click',function(e){         
+        e.preventDefault();
         var id = $(this).data('id');
         $("#approve").data("id", id);
-        $('#approve_modal').modal('show');
-        
         console.log(id);
+        $.ajax({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/company/adverts/modalview',
+            type: 'GET',
+            data: {id:id}, 
+            success: function(data)
+            {     
+                console.log(data);
+                $('#modal_heading').html(data[0].ad_name);
+                $('#modal_sub_heading').html("Published by"+" "+data[0].comp_name);
+                $('#ad_infomation').html(data[0].ad_info);
+                $('#advert_pdf').attr("src","/"+data[0].ad_path);
+                $('#ad_frame').show();
+            },
+            error: (error) => {
+                console.log(JSON.stringify(error));
+            }
+        });
+        $('#approve_modal').modal('show');
+          
+                                     
+        
+    });    
+    
+    $('.approve').on('click',function(e){
+        var id = $(this).data('id');
+        
+        $.ajax({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '/company/adverts/approve',
+            type: 'POST',
+            data: {id:id}, 
+            success: function(data)
+            {     
+                console.log(data);
+                swal("Success!", "Advert approved successfully", "success");
+                $('#approve_modal').modal('hide');
+                
+            },
+            error: (error) => {
+                console.log(JSON.stringify(error));
+            }
+        });
+        setTimeout(function(){  
+            location.reload();;  
+        }, 3000);        
+        
     });
  </script>
 

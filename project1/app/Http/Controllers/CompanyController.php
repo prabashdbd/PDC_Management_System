@@ -114,7 +114,7 @@ class CompanyController extends Controller
                 'ad_name' => 'required',
                 'ad_info' => 'required',
              ]);
-            $cid = $request->cid ;
+            $cid = $request->cid;
 
             $advert = new companyAdverts;
             $advert->company_id = $request->cid;
@@ -139,7 +139,7 @@ class CompanyController extends Controller
 
     public function advert_view(Request $request)
     {        
-         $advert_appr = DB::table('comp_adverts')
+        $advert_appr = DB::table('comp_adverts')
         ->leftJoin('company_details', 'comp_adverts.company_id', '=', 'company_details.id')
         ->select('comp_adverts.*','company_details.comp_name')
         ->where('comp_adverts.is_approved','=','0')
@@ -148,14 +148,33 @@ class CompanyController extends Controller
         return view ('company.company_approve_advert',compact('advert_appr'));
     }
 
-    public function advert_approve(Request $request)
+    public function advert_view_approve(Request $request)
     {        
-         $advert_appr = DB::table('comp_adverts')
+        if($request->ajax()){
+
+        $advert_id = $request->id;
+
+        $advert_appr_view = DB::table('comp_adverts')
         ->leftJoin('company_details', 'comp_adverts.company_id', '=', 'company_details.id')
         ->select('comp_adverts.*','company_details.comp_name')
-        ->where('comp_adverts.is_approved','=','0')
+        ->where('comp_adverts.id','=',$advert_id)
         ->get();
-        // return $advert_appr;
-        return view ('company.company_approve_advert',compact('advert_appr'));
+        }
+        return $advert_appr_view;
+    }
+
+    public function advert_approve(Request $request)
+    {
+        if($request->ajax()){
+        
+        $advert_id = $request->id;
+
+        $appr_advert = companyAdverts::where('comp_adverts.id','=',$advert_id)
+        ->where('comp_adverts.is_approved','=','0')->first(); 
+        $appr_advert->is_approved=1;
+        $appr_advert->approved_at=Carbon::now()->toDateTimeString();
+        $appr_advert->update();
+        return $appr_advert;
+        }
     }
 }
