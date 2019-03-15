@@ -110,7 +110,7 @@ class CompanyController extends Controller
         if($request->ajax()){
 
             $this->validate($request, [
-                'advert_file' => 'required|mimes:pdf|max:10240',
+                'advert_file' => 'required|mimes:jpeg,png,pdf|max:10240',
                 'ad_name' => 'required',
                 'ad_info' => 'required',
              ]);
@@ -172,7 +172,8 @@ class CompanyController extends Controller
         $appr_advert = companyAdverts::where('comp_adverts.id','=',$advert_id)
         ->where('comp_adverts.is_approved','=','0')->first(); 
         $appr_advert->is_approved=1;
-        $appr_advert->approved_at=Carbon::now()->toDateTimeString();
+        $d=Carbon::now();$d->addHours(5)->addMinutes(30);
+        $appr_advert->approved_at=$d->toDateTimeString();
         $appr_advert->update();
         return $appr_advert;
         }

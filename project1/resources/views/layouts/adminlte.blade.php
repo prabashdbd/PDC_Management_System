@@ -31,7 +31,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
         page. However, you can choose any other skin. Make sure you
         apply the skin class to the body tag so the changes take effect. -->
-  <link rel="stylesheet" type="text/css" href="/dist/css/skins/skin-purple.css">
+  <link rel="stylesheet" type="text/css" href="/dist/css/skins/skin-blue.css">
 
   
 
@@ -66,7 +66,7 @@ desired effect
 |               | sidebar-mini                            |
 |---------------------------------------------------------|
 -->
-<body class="hold-transition skin-purple sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini">
   <?PHP 
     $isStudent = Auth::user()->isStudent();
     $isCompany = Auth::user()->isCompany();
@@ -195,17 +195,7 @@ desired effect
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              @if($isStudent)
-              <img src="{{Auth::user()->student->imgfile->getImage()}}" class="user-image" alt="User Image">
-              @endif
-              @if($isCompany)
-              {{-- <img src="{{Auth::user()->student->imgfile->img_path}}" class="user-image" alt="User Image"> --}}
-              @endif
-              @if($isAdmin)
-              {{-- <img src="{{Auth::user()->student->imgfile->img_path}}" class="user-image" alt="User Image"> --}}
-              @endif
-
+              
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               @if($isStudent)
               <span class="hidden-xs">Student</span>
@@ -220,15 +210,17 @@ desired effect
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                @if($isStudent)
-                <img src="{{Auth::user()->student->imgfile->getImage()}}" class="img-circle" alt="User Image">
+                {{-- @if($isStudent || $image!=null)
+                <img src="{{$image}}" class="img-circle" alt="User Image">
+                @else
+                <img src="#" class="img-circle" alt="User Image">
                 @endif
                 @if($isCompany)
-                {{-- <img src="{{Auth::user()->student->imgfile->img_path}}" class="user-image" alt="User Image"> --}}
+                <img src="{{Auth::user()->student->imgfile->img_path}}" class="user-image" alt="User Image">
                 @endif
                 @if($isAdmin)
-                {{-- <img src="{{Auth::user()->student->imgfile->img_path}}" class="user-image" alt="User Image"> --}}
-                @endif
+                <img src="{{Auth::user()->student->imgfile->img_path}}" class="user-image" alt="User Image">
+                @endif --}}
 
                 <p>
                   @if($isStudent)
@@ -258,7 +250,12 @@ desired effect
               <li class="user-footer">
                 @if($isStudent || $isCompany)
                 <div class="pull-left">
+                  @if($isStudent)
                   <a href="{{url('/student/profile')}}" class="btn btn-default btn-flat">Profile</a>
+                  @endif
+                  @if($isCompany)
+                  <a href="{{url('/company/profile')}}" class="btn btn-default btn-flat">Profile</a>
+                  @endif
                 </div>
                 @endif
                 <div class="pull-right">
@@ -282,18 +279,20 @@ desired effect
     <section class="sidebar">
 
       <!-- Sidebar user panel (optional) -->
-      <div class="user-panel">
-        <div class="pull-left image">
-          @if($isStudent)
-          <img src="{{Auth::user()->student->imgfile->getImage()}}" class="img-circle" alt="User Image">
+      <div class="user-panel" style="height:70px">
+        {{-- <div class="pull-left image">
+          @if($isStudent || $image!=null)
+          <img src="{{$image}}" class="img-circle" alt="User Image">
+          @else
+          <img src="#" class="img-circle" alt="User Image">
           @endif
           @if($isCompany)
           <img src="" class="img-circle" alt="User Image">
           @endif
           @if($isAdmin)
-          {{-- <img src="{{Auth::user()->student->imgfile->img_path}}" class="img-circle" alt="User Image"> --}}
+          <img src="{{Auth::user()->student->imgfile->img_path}}" class="img-circle" alt="User Image">
           @endif
-        </div>
+        </div> --}}
         <div class="pull-left info">
           @if($isStudent)
           <p>{{Auth::user()->student->getName()}}</p>
@@ -319,7 +318,7 @@ desired effect
         <li class="treeview
         
         {{
-          url()->current() == url('/form111')||
+          url()->current() == url('/company/add')||
           url()->current() == url('/company/to_be_approved')||
           url()->current() == url('/company/view')||
           url()->current() == url('/company/adverts/view')||
@@ -329,14 +328,14 @@ desired effect
         
         
         ">
-          <a href="#"><i class="fa fa-building"></i><span>Companies</span>
+          <a href="#"><i class="fa fa-building"></i><span>Company</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
             @if($isAdmin)
-            <li class="{{url()->current() == url('/form111')?'active':''}}"><a href="{{url('/form111')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li>
+            <li class="{{url()->current() == url('/company/add')?'active':''}}"><a href="{{url('/company/add')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li>
             @endif
             @if($isAdmin)
             <li class="{{url()->current() == url('/company/to_be_approved')?'active':''}}"><a href="{{url('/company/to_be_approved')}}"><i class="fa fa-check"></i><span>Approve Request</span></a></li>
@@ -359,7 +358,7 @@ desired effect
           url()->current() == url('/students/view')?'active':''
         }}
         ">
-          <a href="#"><i class="fa fa-user"></i><span>Students</span>
+          <a href="#"><i class="fa fa-user"></i><span>Student</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -368,7 +367,7 @@ desired effect
             @if($isAdmin)
             <li class="{{url()->current() == url('/students/add')?'active':''}}"><a href="{{url('/students/add')}}"><i class="fa fa-plus"></i><span>Add new</span></a></li> 
             @endif
-            @if($isAdmin || $isAdmin )
+            @if($isStudent || $isAdmin )
             <li class="{{url()->current() == url('/student/placements')?'active':''}}"><a href="{{url('/student/placements')}}"><i class="fa fa-vcard"></i><span>Placements</span></a></li>            
             @endif
             <li class="{{url()->current() == url('/students/view')?'active':''}}"><a href="{{url('/students/view')}}"><i class="fa fa-eye"></i><span>View</span></a></li>

@@ -4,7 +4,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />  
+  {{-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />   --}}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.css" />
   <link rel="stylesheet" a href="css/company_form.css">
 
@@ -50,10 +50,10 @@
                  <label>Parent Organization</label>
                  <input type="text" name="comp_parent" id="comp_parent" class="form-control" />
               </div>
-              <div class="form-group col-md-6">
+              {{-- <div class="form-group col-md-6">
                  <label>Test</label>
                  <input type="text" name="test" id="test" class="form-control" />
-              </div>
+              </div> --}}
 
             </div>            
           </div>
@@ -167,7 +167,7 @@
             </div>
             <div class="col-md-3">
               <br>
-             <button class="btn btn-primary btn-sm add_button">Add More</button>
+             <button type="button" class="btn btn-primary btn-sm">Add More</button>
             </div>
           </div>       
         </div>

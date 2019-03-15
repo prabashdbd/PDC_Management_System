@@ -18,7 +18,7 @@
                 
           <form method="POST" id="addimg" enctype="multipart/form-data" action="{{URL::to('/addimg')}}">
           {{csrf_field()}}           
-          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar"id="edit_user_image" style="width:100px;height:100px;" >
+          <img src="//placehold.it/100" class="avatar img-circle" alt="avatar" id="edit_user_image" style="width:100px;height:100px;" >
           <h6>Upload a different photo...</h6>
           <input hidden type="text" name="img_student_id" id="img_student_id" value="{{$sid}}">
           <input type="file" class="form-control" name="img_file"><br>

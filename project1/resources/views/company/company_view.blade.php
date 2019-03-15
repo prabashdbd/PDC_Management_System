@@ -1,12 +1,18 @@
 @extends('layouts.adminlte')
 
 @section('styles')
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> 
+    {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">  --}}
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css"> 
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+     
     
 @endsection
 @section('content')
+<?PHP 
+$isStudent = Auth::user()->isStudent();
+$isCompany = Auth::user()->isCompany();
+$isAdmin = Auth::user()->isAdmin();
+?>
 	<h3>View Company Details</h3>
   <table id="example" class="table table-striped table-bordered" style="width:100%">
         <thead>
@@ -36,9 +42,13 @@
 
 
                 <td>
-                <button class="btn btn-primary btn-sm" id ="view" data-toggle="modal" data-id="{{$data->id}}">View</button>
+                <button class="btn btn-primary btn-sm view" id ="view" data-toggle="modal" data-id="{{$data->id}}">View</button>
+                @if($isAdmin)
                 <button class="btn btn-info btn-sm" id="edit" data-toggle="modal" data-id="{{$data->id}}">Edit</button>
+                @endif
+                @if($isAdmin)
                 <button class="btn btn-danger btn-sm" data-toggle="modal">Delete</button></td>
+                @endif
               </tr>
           @endforeach
             
@@ -50,7 +60,7 @@
   <div class="container">
     
   <!-- Modals -->
-  <div class="modal fade bd-example-modal-lg" id="myModal" role="dialog">
+  <div class="modal fade bd-example-modal-lg" id="comp_view_modal" role="dialog">
     <div class="modal-dialog modal-lg">
     
       <!-- Modal content-->
@@ -99,37 +109,13 @@
 
         </div>
         
-        <div class="modal-footer">
-          <button type="button" class="btn btn-info" data-dismiss="modal" data-toggle="modal" href="#myModal1">See Adverts</button>
+        <div class="modal-footer">          
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
       
     </div>
   </div>
-
-
-  <div class="modal fade bd-example-modal-lg" id="myModal1" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-            <h4 class="modal-title"><span>Adverts from Company Name</span></h4>
-        </div>
-        <div class="modal-body">
-
-
-          {{-- <body> --}}
-
-        </div>
-        <div class="modal-footer">            
-            <button type="button" class="btn btn-default" data-dismiss="modal" data-toggle="modal" href="#myModal">Close</button>
-          </div>
-      </div>
-
-    </div>
-  </div>
-  
   </div>
 
  
@@ -137,13 +123,18 @@
 @section('script')
 
 <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
+<script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
 
 <script>
-    $(document).ready(function() {
-      $('#example').DataTable();
-    });
+  $(document).ready(function() {
+    $('#example').DataTable();   
+  });
+  $('.view').on('click',function() {
+      $('#comp_view_modal').modal('show');
+  });
+  
+  
  </script>
 
 @endsection

@@ -486,7 +486,8 @@ $(document).ready(function(){
     var x = 1; //Initial field counter is 1
     
     //Once add button is clicked
-    $(addButton).click(function(){
+    $(addButton).click(function(e){
+      e.preventDefault();
         //Check maximum number of input fields
         if(x < maxField){ 
             x++; //Increment field counter

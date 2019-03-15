@@ -8,7 +8,7 @@
     <section class="content">
         <h3>Profile Management</h3>
         
-        <p><a class="btn btn-primary pull-right" href="{{url('/student/profile/edit')}}" role="button">Edit details</a></p>
+        <p><a class="btn btn-primary pull-right" href="{{url('/student/profile/edit')}}" role="button">Edit profile</a></p>
         
         <br>
         <br>

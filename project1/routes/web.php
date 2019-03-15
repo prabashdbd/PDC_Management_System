@@ -116,7 +116,7 @@ Route::post('/visitor_reg1/action', "reg_test@action"); // testing___ delete
 Route::view('/sidebar', "sidebar_test");
 Route::view('/form_test1', "test");
 Route::get('/adminlte', 'HomeController@index')->name('adminlte');
-Route::view('/form111', "Company/company_add");
+Route::view('/company/add', "Company/company_add");
 Route::view('/csv-to-table', "profile_view");
 Route::get('/company/view', 'CompanyController@index');
 

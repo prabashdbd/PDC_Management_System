@@ -14,6 +14,7 @@ use App\imgfile;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Session;
 use Mail;
 use App\Mail\StudentAddMail;
@@ -261,13 +262,27 @@ class StudentController extends Controller
         $extension =  '.'.$img_file->getClientOriginalExtension();
         $oName = $img_file->getClientOriginalName();
         $path =  $img_file->move('student_images/',$oName);
-        $name = $oName.md5($oName.Carbon::now()).$extension;
+        $name = $oName.md5($oName.Carbon::now()).$extension;               
+        
+        // $old_image = Auth::user()->student->imgfile->img_path;        
+        $old_image = DB::table('imgfiles')->select('imgfiles.img_path')->where('imgfiles.student_id','=',$student)->get();
+        
+        if(!$old_image->isEmpty())
+        {
+            $new_image = imgfile::where('imgfiles.student_id','=',$student)->first();
+            $new_image->img_path = $path;
+            $new_image->img_name = $name;
+            $new_image->update();
+        }
+        else
+        {
+            $img = new imgfile;
+            $img->img_path = $path;
+            $img->img_name = $name;
+            $img->student_id = $student;
+            $img->save();
+        }
                 
-        $img = new imgfile;
-        $img->img_path = $path;
-        $img->img_name = $name;
-        $img->student_id = $student;
-        $img->save();        
         return redirect()->back()->with(['success'=>'Image changed successfully']);
     }
     //----------------------Needs to get student id----------------------------------

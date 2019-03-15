@@ -43,7 +43,9 @@
             @endif   
             </td>         
             <td>
-            <button class="btn btn-primary btn-sm" id ="view" data-toggle="modal" data-id="{{$data->id}}">View</button></td>
+            <button class="btn btn-primary btn-sm adview" data-toggle="modal" data-id="{{$data->id}}">View</button>            
+            <button class="btn btn-danger btn-sm" data-toggle="modal" data-id="{{$data->id}}">Delete</button></td>
+
             </tr>
             @endforeach                
         </tbody>
@@ -83,7 +85,7 @@
                             </div><br><br>
                             
                             <div class="form-group">
-                                <label class="col-lg-3 control-label">Add file (PDF)</label>
+                                <label class="col-lg-3 control-label">Add file (PDF or Image)</label>
                                 <div class="col-lg-8">
                                     <input type="file" id="advert_file" class="form-control" name="advert_file"><br>
                                 </div>
@@ -110,6 +112,29 @@
             </div>
         </form>
         </div>
+    </div>
+</div>
+<div class="modal fade" id="advert_view_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <center><p><h3 id="modal_heading"></h3><p></center>
+            <center><p><h5 id="modal_sub_heading"></h5><p></center>                
+        </div>
+        <div class="modal-body">
+            <label><u>Brief description on the advert</u></label>
+            <p id="ad_infomation"></p><br>
+            <center>
+            <div id ='ad_frame'>
+                <iframe src="" id="advert_pdf" frameborder="0" width="100%" height="400px"></iframe>
+            </div>
+              
+            </center>
+        </div>
+        <div class="modal-footer">            
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+    </div>
     </div>
 </div>
 
@@ -163,6 +188,33 @@ $('#add_advert_form').on('submit',function(e){
     }, 2000);               
     
 });
+
+$('.adview').on('click',function(e){         
+    e.preventDefault();
+    var id = $(this).data('id');
+    console.log(id);
+    $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: '/company/adverts/modalview',
+        type: 'GET',
+        data: {id:id}, 
+        success: function(data)
+        {     
+            console.log(data);
+            $('#modal_heading').html(data[0].ad_name);
+            $('#modal_sub_heading').html("Published by"+" "+data[0].comp_name);
+            $('#ad_infomation').html(data[0].ad_info);
+            $('#advert_pdf').attr("src","/"+data[0].ad_path);
+            $('#ad_frame').show();
+        },
+        error: (error) => {
+            console.log(JSON.stringify(error));
+        }
+    });
+    $('#advert_view_modal').modal('show');
+}); 
 </script>
 
 
